@@ -1,10 +1,11 @@
 import "./App.css";
+import "./RandomRecipe";
 
 function App() {
   return;
   <>
     <div className="App">HeiheiheiehieFredikirjutassiia</div>
-    <div>Howdy!</div>;
+    <RandomRecipe />
   </>;
 }
 
