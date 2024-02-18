@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-export const RandomRecipes = () => {
+export const RandomDrinks = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch(
-      "https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2&apiKey=ce8f62b9c28943eeb68a1f734847059a"
-    )
+    fetch()
       .then((response) => response.json())
       .then((json) => setData(json))
       .catch((error) => console.error(error));
