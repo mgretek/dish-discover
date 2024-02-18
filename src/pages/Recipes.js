@@ -8,10 +8,13 @@ export const Recipe = () => {
     <div className="lg:px-32">
       <div className="xl:w-1/2 py-14 flex flex-col gap-4">
         <h1 className="text-5xl text-left">Recipe search</h1>
-        <input
-          placeholder="Search..."
-          className="bg-gray-50 flex border border-gray-300 text-gray-900 text-sm w-full h-10"
-        ></input>
+        <div className="flex gap-x-5">
+          <input
+            placeholder="Search..."
+            className="bg-gray-50 flex border border-gray-300 text-gray-900 text-sm w-full h-10"
+          ></input>
+          <button className="bg-gray-400 rounded-sm px-5">Search</button>
+        </div>
         <div class="flex">
           <div className="flex">
             <p className="pr-3">Filter:</p>
@@ -51,7 +54,7 @@ export const Recipe = () => {
             <div className="flex">
               <div className="bg-gray-500 w-32 h-36"></div>
               <div className="flex flex-col px-8">
-                <h2 className="text-4xl">Pancakes</h2>
+                <h2 className="text-4xl">Avocado</h2>
                 <ul className="flex gap-2">
                   <li>Egg</li>
                   <li>Flour</li>
