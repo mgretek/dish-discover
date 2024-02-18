@@ -1,5 +1,5 @@
 import "./App.css";
-import "./RandomRecipe";
+import "./RandomRecipe.js";
 
 function App() {
   return;
