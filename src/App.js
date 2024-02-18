@@ -1,12 +1,8 @@
 import "./App.css";
-import "./RandomRecipe.js";
+import { RandomRecipe } from "./RandomRecipe.js";
 
 function App() {
-  return;
-  <>
-    <div className="App">HeiheiheiehieFredikirjutassiia</div>
-    <RandomRecipe />
-  </>;
+  return <RandomRecipe />;
 }
 
 export default App;
