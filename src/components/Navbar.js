@@ -8,7 +8,7 @@ export const Navbar = () => {
         Wish Dish Discover
       </Link>
       <ul>
-        <CustomLink to={"/recipe"}>Recipe</CustomLink>
+        <CustomLink to={"/recipes"}>Recipes</CustomLink>
         <CustomLink to={"/wishlist"}>Wishlist</CustomLink>
         <CustomLink to={"/shoppinglist"}>Shoppinglist</CustomLink>
         <Link>

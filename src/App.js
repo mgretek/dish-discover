@@ -1,7 +1,8 @@
 import "./App.css";
 import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/Home";
-import { Recipe } from "./pages/Recipes";
+import { Recipe } from "./pages/Recipe";
+import { RecipeSearch } from "./pages/RecipeSearch";
 import { Shoppinglist } from "./pages/Shoppinglist";
 import { Wishlist } from "./pages/Wishlist";
 import { Route, Routes } from "react-router-dom";
@@ -13,6 +14,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/recipes" element={<RecipeSearch />} />
           <Route path="/recipe" element={<Recipe />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/shoppinglist" element={<Shoppinglist />} />
