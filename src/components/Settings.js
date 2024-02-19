@@ -4,16 +4,19 @@ export const Settings = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
-    <div className="flex h-full justify-center hover:bg-[#777] m-0 px-1">
-      <button
-        onClick={() => setSettingsOpen(!settingsOpen)}
-        className="p-0 m-0 ">
+    <div className="flex flex-col">
+      <button onClick={() => setSettingsOpen(!settingsOpen)} className="">
         Settings
       </button>
       {settingsOpen && (
-        <div>
-          <button className="bg-grey col-auto">Log out</button>
-        </div>
+        <ul className="flex flex-col settings">
+          <button className="bg-grey col-auto p-1 hover:text-black">
+            Logout
+          </button>
+          <button className="bg-grey col-auto p-1 hover:text-slate-400">
+            Log in
+          </button>
+        </ul>
       )}
     </div>
   );
