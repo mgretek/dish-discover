@@ -186,6 +186,7 @@ export const Recipe = () => {
   let { id } = useParams();
   const [recipe, setRecipe] = useState(recipeTemplate);
   const [measureType, setMeasureType] = useState("us");
+  const [isFetched, setIsFetched] = useState(false);
 
   function toggleMeasure() {
     const newMeasure = measureType === "us" ? "metric" : "us";
@@ -200,6 +201,7 @@ export const Recipe = () => {
         );
         const json = await response.json();
         setRecipe(json);
+        setIsFetched(true);
       } catch (error) {
         console.error(error);
       }
@@ -209,41 +211,48 @@ export const Recipe = () => {
   }, [id]);
 
   return (
-    <div class="flex mx-40 mt-10">
-      <div>
-        <img className="mt-4" src={recipe.image} alt={recipe.title} />
-        <button
-          className=" text-gray py-2 px-4 rounded mr-2"
-          onClick={toggleMeasure}
-        >
-          Toggle units
-        </button>
-        <ul>
-          {recipe.extendedIngredients.map((item) => (
-            <li key={item.id} className="mb-2 text-left">
-              {item.name} ({item.measures[measureType].amount}{" "}
-              {item.measures[measureType].unitShort})
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="p-4 text-left ">
-        <h1 className="text-5xl mb-2">{recipe.title}</h1>
-        <h2 className="mb-2">Time: {recipe.readyInMinutes} minutes</h2>
-        <div className="flex flex-wrap mb-2">
-          <p className="pr-3">Tags:</p>
-          {recipe.dishTypes.map((type) => (
-            <button key={type} className="mr-2 mb-2   text-gray-400 rounded">
-              #{type}
+    <div>
+      {isFetched && (
+        <div class="flex mx-40 mt-10">
+          <div>
+            <img className="mt-4" src={recipe.image} alt={recipe.title} />
+            <button
+              className=" text-gray py-2 px-4 rounded mr-2"
+              onClick={toggleMeasure}
+            >
+              Toggle units
             </button>
-          ))}
+            <ul>
+              {recipe.extendedIngredients.map((item) => (
+                <li key={item.id} className="mb-2 text-left">
+                  {item.name} ({item.measures[measureType].amount}{" "}
+                  {item.measures[measureType].unitShort})
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="p-4 text-left ">
+            <h1 className="text-5xl mb-2">{recipe.title}</h1>
+            <h2 className="mb-2">Time: {recipe.readyInMinutes} minutes</h2>
+            <div className="flex flex-wrap mb-2">
+              <p className="pr-3">Tags:</p>
+              {recipe.dishTypes.map((type) => (
+                <button
+                  key={type}
+                  className="mr-2 mb-2   text-gray-400 rounded"
+                >
+                  #{type}
+                </button>
+              ))}
+            </div>
+            <h1 className="text-2xl">Instructions:</h1>
+            <h2 className="text-red">
+              Ei leidnud veel kuidas API annaks kogu retseptiga juhendeid,
+              tundus et on vaja uus api call teha
+            </h2>
+          </div>
         </div>
-        <h1 className="text-2xl">Instructions:</h1>
-        <h2 className="text-red">
-          Ei leidnud veel kuidas API annaks kogu retseptiga juhendeid, tundus et
-          on vaja uus api call teha
-        </h2>
-      </div>
+      )}
     </div>
   );
 };
