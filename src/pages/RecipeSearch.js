@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const data = {
   results: [
@@ -254,7 +255,6 @@ export const RecipeSearch = () => {
   function handleFilter(input) {
     setFilter(input);
   }
-
   function handleInput(input) {
     setSearchInput(input);
   }
@@ -330,7 +330,9 @@ export const RecipeSearch = () => {
                 <img src={recipe.image} alt={recipe.title} />
 
                 <div className="flex flex-col px-8">
-                  <h2 className="text-4xl text-left">{recipe.title}</h2>
+                  <Link to={`/recipe/${recipe.id}`}>
+                    <h2 className="text-4xl text-left">{recipe.title}</h2>
+                  </Link>
                   <ul className="flex gap-2">
                     <li>Egg</li>
                     <li>Flour</li>
