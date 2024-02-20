@@ -249,8 +249,7 @@ export const RecipeSearch = () => {
   const [searchType, setSearchType] = useState("name");
   const [filter, setFilter] = useState("both");
   const [searchInput, setSearchInput] = useState("");
-
-  const results = data.results;
+  const [results, setResults] = useState(data.results);
 
   function handleFilter(input) {
     setFilter(input);
@@ -258,7 +257,20 @@ export const RecipeSearch = () => {
   function handleInput(input) {
     setSearchInput(input);
   }
-  function handleSearch() {}
+  async function handleSearch() {
+    try {
+      const response = await fetch(
+        `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${searchInput}&addRecipeInformation=true&fillIngredients&number=2&apiKey=71bc3e4381ff4c3db012ffaf603dc32a`
+      );
+      console.log(response);
+
+      const json = await response.json();
+      console.log(json.results);
+      setResults(json.results);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="lg:px-32">
@@ -277,7 +289,7 @@ export const RecipeSearch = () => {
             Search
           </button>
         </div>
-        <div class="flex">
+        <div className="flex">
           <div className="flex">
             <p className="pr-3">Filter:</p>
             <button
@@ -328,7 +340,6 @@ export const RecipeSearch = () => {
               <div className="flex">
                 {/* <div className="bg-gray-500 w-32 h-36"></div> */}
                 <img src={recipe.image} alt={recipe.title} />
-
                 <div className="flex flex-col px-8">
                   <Link to={`/recipe/${recipe.id}`}>
                     <h2 className="text-4xl text-left">{recipe.title}</h2>
@@ -338,7 +349,7 @@ export const RecipeSearch = () => {
                     <li>Flour</li>
                     <li>sugar</li>
                   </ul>
-                  <div class="flex text-gray-400 gap-x-2">
+                  <div className="flex text-gray-400 gap-x-2">
                     {recipe.dishTypes.map((type) => (
                       <p>#{type}</p>
                     ))}
