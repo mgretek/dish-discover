@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div className="container">
+      <div className="mx-auto px-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/recipes" element={<RecipeSearch />} />

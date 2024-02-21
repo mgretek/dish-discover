@@ -273,7 +273,7 @@ export const RecipeSearch = () => {
   }
 
   return (
-    <div className="lg:px-32 bg-stone-300 w-full">
+    <div className="lg:px-32 bg-stone-300">
       <div className="xl:w-1/2 py-14 flex flex-col gap-4">
         <h1 className="text-5xl text-left">Recipe search</h1>
         <div className="flex gap-x-5">
