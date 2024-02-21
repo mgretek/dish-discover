@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { loadWishlists } from "../wishlists";
 
 const data = {
   results: [
@@ -273,7 +274,7 @@ export const RecipeSearch = () => {
   }
 
   return (
-    <div className="lg:px-32 bg-stone-300">
+    <div className="lg:px-32 bg-orange-100">
       <div className="xl:w-1/2 py-14 flex flex-col gap-4">
         <h1 className="text-5xl text-left">Recipe search</h1>
         <div className="flex gap-x-5">
@@ -336,7 +337,7 @@ export const RecipeSearch = () => {
       <section className="p-4 bg-white">
         <ul>
           {results.map((recipe) => (
-            <li className="bg-stone-300 p-10 rounded-xl m-5" key={recipe.id}>
+            <li className="bg-orange-100 p-10 rounded-xl m-5" key={recipe.id}>
               <div className="flex">
                 {/* <div className="bg-gray-500 w-32 h-36"></div> */}
                 <img src={recipe.image} alt={recipe.title} />

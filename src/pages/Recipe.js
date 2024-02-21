@@ -211,9 +211,9 @@ export const Recipe = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="bg-orange-100 min-h-screen">
       {isFetched && (
-        <div class="flex mx-40 mt-10">
+        <div class="flex px-40 pt-10 ">
           <div>
             <img className="mt-4" src={recipe.image} alt={recipe.title} />
             <button

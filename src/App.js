@@ -4,7 +4,7 @@ import { Home } from "./pages/Home";
 import { Recipe } from "./pages/Recipe";
 import { RecipeSearch } from "./pages/RecipeSearch";
 import { Shoppinglist } from "./pages/Shoppinglist";
-import { Wishlist } from "./pages/Wishlist";
+import { Wishlists } from "./pages/Wishlists";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/recipes" element={<RecipeSearch />} />
           <Route path="/recipe/:id" element={<Recipe />} />
-          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/wishlists" element={<Wishlists />} />
           <Route path="/shoppinglist" element={<Shoppinglist />} />
         </Routes>
       </div>

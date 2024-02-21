@@ -9,7 +9,7 @@ export const Navbar = () => {
       </Link>
       <ul>
         <CustomLink to={"/recipes"}>Recipes</CustomLink>
-        <CustomLink to={"/wishlist"}>Wishlist</CustomLink>
+        <CustomLink to={"/wishlists"}>Wishlist</CustomLink>
         <CustomLink to={"/shoppinglist"}>Shoppinglist</CustomLink>
         <Link>
           <Settings />
