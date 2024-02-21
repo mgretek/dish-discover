@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { DownArrow } from "./DownArrow";
+import { ForwardArrow } from "./ForwardArrow";
 
 export const Wishlist = ({ title, children }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -7,10 +9,17 @@ export const Wishlist = ({ title, children }) => {
     setIsCollapsed(!isCollapsed);
   }
   return (
-    <div className="text-left">
-      <h1 className="text-3xl underline">{title}</h1>
-      <button onClick={toggleCollapse}>Collapse</button>
-      {!isCollapsed && <div>{children}</div>}
+    <div className="text-left mb-3">
+      <div class="flex bg-white justify-between px-4 py-3">
+        <h1 className="text-3xl bg-white flex-2">{title}</h1>
+
+        {isCollapsed ? (
+          <ForwardArrow onClick={toggleCollapse} />
+        ) : (
+          <DownArrow onClick={toggleCollapse} />
+        )}
+      </div>
+      {!isCollapsed && <div className="bg-orange-200 p-3">{children}</div>}
     </div>
   );
 };
