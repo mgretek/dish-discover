@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const Wishlist = ({ title, children }) => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  function toggleCollapse() {
+    setIsCollapsed(!isCollapsed);
+  }
   return (
     <div className="text-left">
       <h1 className="text-3xl underline">{title}</h1>
-      {children}
+      <button onClick={toggleCollapse}>Collapse</button>
+      {!isCollapsed && <div>{children}</div>}
     </div>
   );
 };
