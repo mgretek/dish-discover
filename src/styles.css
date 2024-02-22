@@ -48,3 +48,11 @@ body {
 .nav li:hover {
   background-color: #777;
 }
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+
+.swiper-wrapper {
+  transition-timing-function: linear;
+}
