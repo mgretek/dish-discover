@@ -19,7 +19,11 @@ export const Wishlist = ({ title, children }) => {
           <DownArrow onClick={toggleCollapse} />
         )}
       </div>
-      {!isCollapsed && <div className="bg-orange-200 p-3">{children}</div>}
+      <div
+        className={`bg-orange-200 p-3 wishlist ${isCollapsed ? "" : "open"}`}
+      >
+        {children}
+      </div>
     </div>
   );
 };

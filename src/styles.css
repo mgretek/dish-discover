@@ -44,7 +44,6 @@ body {
   border-top: 1px solid grey;
 }
 
-
 .nav {
   background-color: #333;
   color: white;
@@ -82,4 +81,14 @@ body {
 
 .nav li:hover {
   background-color: #777;
+}
+
+.wishlist {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.wishlist.open {
+  max-height: 500px;
 }
