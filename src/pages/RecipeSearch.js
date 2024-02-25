@@ -274,10 +274,10 @@ export const RecipeSearch = () => {
   }
 
   return (
-    <div className="lg:px-32 bg-orange-100">
-      <div className="xl:w-1/2 py-14 flex flex-col gap-4">
+    <div className="lg:px-32 ">
+      <div className="xl:w-1/2 py-14 flex flex-col gap-4 ">
         <h1 className="text-5xl text-left">Recipe search</h1>
-        <div className="flex gap-x-5">
+        <div className="flex gap-x-5 ">
           <input
             placeholder="Search..."
             className="bg-gray-50 flex border border-gray-300 text-gray-900 text-sm w-full h-10"
@@ -334,35 +334,30 @@ export const RecipeSearch = () => {
           </div>
         </div>
       </div>
-      <section className="p-4 bg-white">
-        <ul>
-          {results.map((recipe) => (
-            <li className="bg-orange-100 p-10 rounded-xl m-5" key={recipe.id}>
-              <div className="flex">
-                {/* <div className="bg-gray-500 w-32 h-36"></div> */}
-                <img src={recipe.image} alt={recipe.title} />
-                <div className="flex flex-col px-8">
-                  <Link to={`/recipe/${recipe.id}`}>
-                    <h2 className="text-4xl text-left">{recipe.title}</h2>
-                  </Link>
-                  <ul className="flex gap-2">
-                    <li>Egg</li>
-                    <li>Flour</li>
-                    <li>sugar</li>
-                  </ul>
-                  <div className="flex text-gray-400 gap-x-2">
-                    {recipe.dishTypes.map((type) => (
-                      <p>#{type}</p>
-                    ))}
-                  </div>
-                  <p className="text-sm bg-gray-500 text-white rounded mt-auto">
-                    World
-                  </p>
+      <section className="p-4  grid lg:grid-cols-3 gap-5 border-gray-500 border rounded-xl">
+        {results.map((recipe) => (
+          <div className="bg-white   " key={recipe.id}>
+            <div className="p-5">
+              {/* <div className="bg-gray-500 w-32 h-36"></div> */}
+              <img src={recipe.image} alt={recipe.title} />
+              <div className="flex flex-col ">
+                <Link to={`/recipe/${recipe.id}`}>
+                  <h2 className="text-2xl text-left">{recipe.title}</h2>
+                </Link>
+                <ul className="flex gap-2">
+                  <li>Egg</li>
+                  <li>Flour</li>
+                  <li>sugar</li>
+                </ul>
+                <div className="flex text-gray-400 gap-x-2">
+                  {recipe.dishTypes.map((type) => (
+                    <p>#{type}</p>
+                  ))}
                 </div>
               </div>
-            </li>
-          ))}
-        </ul>
+            </div>
+          </div>
+        ))}
       </section>
     </div>
   );
