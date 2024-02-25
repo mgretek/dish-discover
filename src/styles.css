@@ -86,9 +86,9 @@ body {
 .wishlist {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  transition: max-height 0.4s ease-out;
 }
 
 .wishlist.open {
-  max-height: 500px;
+  max-height: 1000px;
 }
