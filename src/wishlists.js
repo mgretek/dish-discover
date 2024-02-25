@@ -9,6 +9,9 @@ const app = initializeApp(firebaseConfig);
 
 export async function createWishlist() {}
 
-export async function addToWishlist(listId, recipe) {}
+export async function addToWishlist(listId, recipe) {
+  console.log(listId);
+  console.log(recipe);
+}
 
 export async function loadWishlists() {}

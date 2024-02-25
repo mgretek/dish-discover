@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { addToWishlist } from "../wishlists";
+import { HeartIcon } from "../components/HeartIcon";
 
 const recipeTemplate = {
   vegetarian: true,
@@ -211,7 +213,7 @@ export const Recipe = () => {
   }, [id]);
 
   return (
-    <div className="bg-orange-100 min-h-screen">
+    <div className="min-h-screen">
       {isFetched && (
         <div class="flex px-40 pt-10 ">
           <div>
@@ -232,7 +234,15 @@ export const Recipe = () => {
             </ul>
           </div>
           <div className="p-4 text-left ">
-            <h1 className="text-5xl mb-2">{recipe.title}</h1>
+            <div class="flex">
+              <h1 className="text-5xl mb-2">{recipe.title}</h1>
+              <button
+                className="btn text-gray-600 rounded-md py-3 px-5"
+                onClick={() => addToWishlist(1, recipe)}
+              >
+                <HeartIcon />
+              </button>
+            </div>
             <h2 className="mb-2">Time: {recipe.readyInMinutes} minutes</h2>
             <div className="flex flex-wrap mb-2">
               <p className="pr-3">Tags:</p>

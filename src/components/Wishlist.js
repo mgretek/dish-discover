@@ -21,7 +21,7 @@ export const Wishlist = ({ title, children }) => {
           <DownArrow onClick={toggleCollapse} />
         )}
       </div>
-      <div className={`bg-orange-200 wishlist ${isCollapsed ? "" : "open"}`}>
+      <div className={` wishlist ${isCollapsed ? "" : "open"}`}>
         <div className="grid grid-cols-1    xl:grid-cols-3 gap-3">
           {children}
         </div>
@@ -31,7 +31,7 @@ export const Wishlist = ({ title, children }) => {
 };
 export const WishItem = () => {
   return (
-    <div className="bg-white rounded-lg  p-5 flex flex-col">
+    <div className="bg-white   p-5 flex flex-col">
       <div class="flex  items-center">
         <h2 className="text-2xl mr-3">Potato salad</h2>
         <button className="ml-auto">X</button>
