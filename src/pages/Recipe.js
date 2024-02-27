@@ -238,7 +238,7 @@ export const Recipe = () => {
               <h1 className="text-5xl mb-2">{recipe.title}</h1>
               <button
                 className="btn text-gray-600 rounded-md py-3 px-5"
-                onClick={() => addToWishlist(1, recipe)}
+                onClick={() => addToWishlist(0, recipe)}
               >
                 <HeartIcon />
               </button>
