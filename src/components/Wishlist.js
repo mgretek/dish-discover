@@ -29,19 +29,22 @@ export const Wishlist = ({ title, children }) => {
     </div>
   );
 };
-export const WishItem = () => {
+export const WishItem = ({ recipe }) => {
+  console.log("recipe is", recipe);
   return (
     <div className="bg-white   p-5 flex flex-col">
       <div class="flex  items-center">
-        <h2 className="text-2xl mr-3">Potato salad</h2>
+        <h2 className="text-2xl mr-3">{recipe.title}</h2>
         <button className="ml-auto">X</button>
       </div>
       <div class="flex">
-        <p>Time: 2 min</p>
+        <p>Time: {recipe.readyInMinutes} min</p>
         <p className="mx-3">|</p>
         <h3>Ingredients: 4</h3>
       </div>
-      <div className=" bg-orange-500 aspect-square max-h-40 mt-4"></div>
+      <div className=" bg-orange-500 aspect-square max-h-40 mt-4 overflow-hidden">
+        <img src={recipe.image} alt={recipe.title} />
+      </div>
     </div>
   );
 };

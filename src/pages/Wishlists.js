@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Wishlist, WishItem } from "../components/Wishlist";
+import { getAllWishlists } from "../wishlists";
 
 export const Wishlists = () => {
   const [filter, setFilter] = useState("drinks");
+  const [wishlists, setWishlists] = useState([]);
+
+  useEffect(() => {
+    async function fetchWishlists() {
+      const allWishlists = await getAllWishlists();
+      if (allWishlists) {
+        setWishlists(allWishlists);
+        console.log("found");
+        console.log(allWishlists);
+      }
+    }
+    fetchWishlists();
+  }, []);
 
   return (
     <div className="bg-orange-100 md:px-20 xl:px-60 min-h-full">
@@ -13,16 +27,18 @@ export const Wishlists = () => {
           className="bg-gray-50 flex border border-gray-300 text-gray-900 text-sm  h-auto"
         ></input>
       </div>
-      <Wishlist title={"Dinner"}>
+      {/* <Wishlist title={"Dinner"}>
         <WishItem />
         <WishItem />
         <WishItem />
-      </Wishlist>
-      <Wishlist title={"Birthday party"}>
-        <WishItem />
-        <WishItem />
-        <WishItem />
-      </Wishlist>
+      </Wishlist> */}
+      {wishlists.map((list) => (
+        <Wishlist title={"new list"}>
+          {list.map((recipe) => (
+            <WishItem recipe={recipe} />
+          ))}
+        </Wishlist>
+      ))}
     </div>
   );
 };
