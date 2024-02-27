@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { addToWishlist } from "../wishlists";
 import { HeartIcon } from "../components/HeartIcon";
+import { RecipeSteps } from "../components/RecipeSteps";
 
 const recipeTemplate = {
   vegetarian: true,
@@ -255,11 +256,8 @@ export const Recipe = () => {
                 </button>
               ))}
             </div>
-            <h1 className="text-2xl">Instructions:</h1>
-            <h2 className="text-red">
-              Ei leidnud veel kuidas API annaks kogu retseptiga juhendeid,
-              tundus et on vaja uus api call teha
-            </h2>
+            <h1 className="text-2xl mb-6">Instructions:</h1>
+            <RecipeSteps recipe={recipe} />
           </div>
         </div>
       )}
