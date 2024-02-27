@@ -11,8 +11,6 @@ export const Wishlists = () => {
       const allWishlists = await getAllWishlists();
       if (allWishlists) {
         setWishlists(allWishlists);
-        console.log("found");
-        console.log(allWishlists);
       }
     }
     fetchWishlists();
@@ -27,11 +25,6 @@ export const Wishlists = () => {
           className="bg-gray-50 flex border border-gray-300 text-gray-900 text-sm  h-auto"
         ></input>
       </div>
-      {/* <Wishlist title={"Dinner"}>
-        <WishItem />
-        <WishItem />
-        <WishItem />
-      </Wishlist> */}
       {wishlists.map((list) => (
         <Wishlist title={"new list"}>
           {list.map((recipe) => (
