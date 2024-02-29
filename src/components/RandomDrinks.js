@@ -59,10 +59,10 @@ export const RandomDrinks = () => {
               ? data.results.map((recipe) => (
                   <SwiperSlide
                     key={recipe.id}
-                    className="p-5 gap-10 bg-gray-300 rounded-lg"
+                    className="p-3 gap-10 bg-gray-300 rounded-lg"
                   >
                     <img
-                      className="mb-4 rounded-lg w-[100px] h-auto"
+                      className="mb-2 rounded-lg w-[150px] h-auto"
                       src={recipe.image}
                       alt={recipe.title}
                     />
