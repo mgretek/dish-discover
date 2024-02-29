@@ -1,19 +1,21 @@
 import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/Home";
-import { Recipe } from "./pages/Recipes";
+import { Recipe } from "./pages/Recipe";
+import { RecipeSearch } from "./pages/RecipeSearch";
 import { Shoppinglist } from "./pages/Shoppinglist";
-import { Wishlist } from "./pages/Wishlist";
+import { Wishlists } from "./pages/Wishlists";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <div>
+      <div className="mx-auto px-1 h-svh">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/recipe" element={<Recipe />} />
-          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/recipes" element={<RecipeSearch />} />
+          <Route path="/recipe/:id" element={<Recipe />} />
+          <Route path="/wishlists" element={<Wishlists />} />
           <Route path="/shoppinglist" element={<Shoppinglist />} />
         </Routes>
       </div>

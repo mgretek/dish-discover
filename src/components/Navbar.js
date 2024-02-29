@@ -1,4 +1,5 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import { Settings } from "./Settings";
 
 export const Navbar = () => {
   return (
@@ -7,9 +8,12 @@ export const Navbar = () => {
         Wish Dish Discover
       </Link>
       <ul>
-        <CustomLink to={"/recipe"}>Recipe</CustomLink>
-        <CustomLink to={"/wishlist"}>Wishlist</CustomLink>
+        <CustomLink to={"/recipes"}>Recipes</CustomLink>
+        <CustomLink to={"/wishlists"}>Wishlist</CustomLink>
         <CustomLink to={"/shoppinglist"}>Shoppinglist</CustomLink>
+        <Link>
+          <Settings />
+        </Link>
       </ul>
     </nav>
   );

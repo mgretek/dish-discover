@@ -2,12 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+html {
   box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 body {
   margin: 0;
+}
+
+.settings {
+  position: absolute;
+  top: 4.5rem;
+  right: 1.5rem;
+  width: 80px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #555;
+  border: 1px solid grey;
+}
+
+.settings::before {
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  right: 1.1rem;
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+  background-color: #555;
+  border-left: 1px solid grey;
+  border-top: 1px solid grey;
 }
 
 .nav {
@@ -47,12 +81,4 @@ body {
 
 .nav li:hover {
   background-color: #777;
-}
-
-.slick-slide > div {
-  margin: 0 10px;
-}
-
-.swiper-wrapper {
-  transition-timing-function: linear;
 }
