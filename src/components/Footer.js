@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -13,10 +14,14 @@ export const Footer = () => {
             </div>
           </div>
           <div className="flex gap-x-16 lg:gap-x-36 xl:gap-x-48 2xl:gap-x-64 mb-4">
-            <div>
+            <div className="flex flex-col">
               <div className="truncate font-extrabold mb-2">Discover more</div>
-              <div className="text-sm mb-2">Wishlist</div>
-              <div className="text-sm mb-2">Shopping list</div>
+              <Link to="/wishlists" className="text-sm mb-2">
+                Wishlists
+              </Link>
+              <Link to="/shoppinglist" className="text-sm mb-2">
+                Shopping list
+              </Link>
             </div>
             <div>
               <div className="font-extrabold mb-2">Useful</div>
