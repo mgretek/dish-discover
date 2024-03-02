@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/autoplay";
 
-import "../styles.css";
+import "../styles/styles.css";
 
 //Only for development – using dummy data instead of API
 import dummydata from "../config/dummydata/dummydata-drinks.js";
