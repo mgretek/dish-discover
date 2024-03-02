@@ -58,14 +58,20 @@ export const RandomRecipes = () => {
               ? data.results.map((recipe) => (
                   <SwiperSlide
                     key={recipe.id}
-                    className="p-5 gap-10 bg-gray-300 rounded-lg">
+                    className="p-3 gap-10 bg-gray-300 rounded-lg">
                     <img
-                      className="mb-4 rounded-lg w-[150px] h-auto"
+                      className="mb-2 rounded-lg w-max h-auto"
                       src={recipe.image}
                       alt={recipe.title}
                     />
 
-                    <div className="text-md text-gray-800">{recipe.title}</div>
+                    <div className="mb-1 text-md text-gray-800">
+                      {recipe.title}
+                    </div>
+                    <div className="text-xs text-gray-800">
+                      {recipe.preptime}
+                    </div>
+                    <div className="text-xs text-gray-800">{recipe.rating}</div>
                   </SwiperSlide>
                 ))
               : "Loading..."}
