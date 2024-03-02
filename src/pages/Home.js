@@ -1,10 +1,9 @@
 import { React } from "react";
 
-import { RandomRecipes } from "../components/RandomRecipes.js";
-import { RandomDrinks } from "../components/RandomDrinks.js";
-import { HomepageHeader } from "../components/HomepageHeader.js";
-import { HomepageContent } from "../components/HomepageContent.js";
-import { Footer } from "../components/Footer.js";
+import { RandomRecipes } from "../components/randomRecipes/RandomRecipes.js";
+import { RandomDrinks } from "../components/randomRecipes/RandomDrinks.js";
+import { HomepageHeader } from "../components/homepage/HomepageHeader.js";
+import { HomepageContent } from "../components/homepage/HomepageContent.js";
 
 export const Home = () => {
   return (
@@ -19,7 +18,6 @@ export const Home = () => {
           <RandomDrinks />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

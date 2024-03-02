@@ -6,10 +6,12 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/autoplay";
 
-//Only for development – using dummy data instead of API
-import dummydata from "../dummydata/dummydata-meals.js";
+import "../styles/styles.css";
 
-export const RandomRecipes = () => {
+//Only for development – using dummy data instead of API
+import dummydata from "../../config/dummydata/dummydata-drinks.js";
+
+export const RandomDrinks = () => {
   const [data, setData] = useState(null);
 
   //For production - API call
@@ -30,7 +32,7 @@ export const RandomRecipes = () => {
   return (
     <div>
       <div>
-        <div className="flex gap-5 items-center justify-center">
+        <div className="flex gap-5 items-center justify-center swiper-slider">
           <Swiper
             breakpoints={{
               340: {
@@ -53,16 +55,14 @@ export const RandomRecipes = () => {
               reverseDirection: false,
               pauseOnMouseEnter: true,
             }}
-            speed={8000}
-          >
+            speed={8000}>
             {data
               ? data.results.map((recipe) => (
                   <SwiperSlide
                     key={recipe.id}
-                    className="p-3 gap-10 bg-gray-300 rounded-lg"
-                  >
+                    className="p-3 gap-10 bg-gray-300 rounded-lg swiper-slider">
                     <img
-                      className="mb-2 rounded-lg w-max h-auto"
+                      className="mb-2 rounded-lg h-auto"
                       src={recipe.image}
                       alt={recipe.title}
                     />
