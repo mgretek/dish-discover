@@ -9,7 +9,7 @@ import "swiper/css/autoplay";
 import "../styles.css";
 
 //Only for development – using dummy data instead of API
-import dummydata from "../dummydata/dummydata-drinks.js";
+import dummydata from "../config/dummydata/dummydata-drinks.js";
 
 export const RandomDrinks = () => {
   const [data, setData] = useState(null);
@@ -55,14 +55,12 @@ export const RandomDrinks = () => {
               reverseDirection: false,
               pauseOnMouseEnter: true,
             }}
-            speed={8000}
-          >
+            speed={8000}>
             {data
               ? data.results.map((recipe) => (
                   <SwiperSlide
                     key={recipe.id}
-                    className="p-3 gap-10 bg-gray-300 rounded-lg swiper-slider"
-                  >
+                    className="p-3 gap-10 bg-gray-300 rounded-lg swiper-slider">
                     <img
                       className="mb-2 rounded-lg h-auto"
                       src={recipe.image}
