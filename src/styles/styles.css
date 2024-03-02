@@ -58,7 +58,3 @@ body {
 .nav li:hover {
   background-color: #777;
 }
-
-.swiper-slider {
-  transition-timing-function: linear;
-}

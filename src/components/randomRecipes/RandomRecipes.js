@@ -53,12 +53,14 @@ export const RandomRecipes = () => {
               reverseDirection: false,
               pauseOnMouseEnter: true,
             }}
-            speed={8000}>
+            speed={8000}
+          >
             {data
               ? data.results.map((recipe) => (
                   <SwiperSlide
                     key={recipe.id}
-                    className="p-3 gap-10 bg-gray-300 rounded-lg">
+                    className="p-3 gap-10 bg-gray-300 rounded-lg"
+                  >
                     <img
                       className="mb-2 rounded-lg w-max h-auto"
                       src={recipe.image}
