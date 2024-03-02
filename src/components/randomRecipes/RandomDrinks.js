@@ -9,7 +9,7 @@ import "swiper/css/autoplay";
 import "../styles/styles.css";
 
 //Only for development – using dummy data instead of API
-import dummydata from "../config/dummydata/dummydata-drinks.js";
+import dummydata from "../../config/dummydata/dummydata-drinks.js";
 
 export const RandomDrinks = () => {
   const [data, setData] = useState(null);

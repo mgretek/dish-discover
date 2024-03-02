@@ -7,7 +7,7 @@ import "swiper/css/free-mode";
 import "swiper/css/autoplay";
 
 //Only for development – using dummy data instead of API
-import dummydata from "../config/dummydata/dummydata-meals.js";
+import dummydata from "../../config/dummydata/dummydata-meals.js";
 
 export const RandomRecipes = () => {
   const [data, setData] = useState(null);
