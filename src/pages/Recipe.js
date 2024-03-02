@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { addToWishlist } from "../components/wishlist/wishlists";
-import { HeartIcon } from "../components/HeartIcon";
+import { HeartIcon } from "../components/icons/HeartIcon";
 import { RecipeSteps } from "../components/RecipeSteps";
 
 const recipeTemplate = {
