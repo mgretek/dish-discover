@@ -6,8 +6,6 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/autoplay";
 
-import "../styles/styles.css";
-
 //Only for development – using dummy data instead of API
 import dummydata from "../../config/dummydata/dummydata-drinks.js";
 
@@ -32,7 +30,7 @@ export const RandomDrinks = () => {
   return (
     <div>
       <div>
-        <div className="flex gap-5 items-center justify-center swiper-slider">
+        <div className="flex gap-5 items-center justify-center">
           <Swiper
             breakpoints={{
               340: {
@@ -55,12 +53,14 @@ export const RandomDrinks = () => {
               reverseDirection: false,
               pauseOnMouseEnter: true,
             }}
-            speed={8000}>
+            speed={8000}
+          >
             {data
               ? data.results.map((recipe) => (
                   <SwiperSlide
                     key={recipe.id}
-                    className="p-3 gap-10 bg-gray-300 rounded-lg swiper-slider">
+                    className="p-3 gap-10 bg-gray-300 rounded-lg"
+                  >
                     <img
                       className="mb-2 rounded-lg h-auto"
                       src={recipe.image}
