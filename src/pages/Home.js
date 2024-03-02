@@ -4,7 +4,6 @@ import { RandomRecipes } from "../components/RandomRecipes.js";
 import { RandomDrinks } from "../components/RandomDrinks.js";
 import { HomepageHeader } from "../components/HomepageHeader.js";
 import { HomepageContent } from "../components/HomepageContent.js";
-import { Footer } from "../components/Footer.js";
 
 export const Home = () => {
   return (
@@ -19,7 +18,6 @@ export const Home = () => {
           <RandomDrinks />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

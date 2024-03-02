@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { DownArrow } from "./DownArrow";
-import { ForwardArrow } from "./ForwardArrow";
+import { DownArrow } from "../arrows/DownArrow";
+import { ForwardArrow } from "../arrows/ForwardArrow";
 
 export const Wishlist = ({ title, children }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);

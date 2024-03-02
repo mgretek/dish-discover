@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { loadWishlists } from "../wishlists";
+import { loadWishlists } from "../components/wishlist/wishlists";
 
 const data = {
   results: [
@@ -584,12 +584,10 @@ export const RecipeSearch = () => {
           <input
             placeholder="Search..."
             className="bg-gray-50 flex border border-gray-300 text-gray-900 text-sm w-full h-10"
-            onChange={(e) => handleInput(e.target.value)}
-          ></input>
+            onChange={(e) => handleInput(e.target.value)}></input>
           <button
             className="bg-gray-400 rounded-sm px-5"
-            onClick={handleSearch}
-          >
+            onClick={handleSearch}>
             Search
           </button>
         </div>
@@ -598,22 +596,19 @@ export const RecipeSearch = () => {
             <p className="pr-3">Filter:</p>
             <button
               className={`btn ${filter === "meals" ? "underline" : ""}`}
-              onClick={() => handleFilter("meals")}
-            >
+              onClick={() => handleFilter("meals")}>
               Meals
             </button>
             <span className="lg:px-2">/</span>
             <button
               className={`btn ${filter === "drinks" ? "underline" : ""}`}
-              onClick={() => handleFilter("drinks")}
-            >
+              onClick={() => handleFilter("drinks")}>
               Drinks
             </button>
             <span className="lg:px-2">/</span>
             <button
               className={`btn ${filter === "both" ? "underline" : ""}`}
-              onClick={() => handleFilter("both")}
-            >
+              onClick={() => handleFilter("both")}>
               Both
             </button>
           </div>
@@ -623,15 +618,13 @@ export const RecipeSearch = () => {
               className={`btn ${
                 searchType === "incredients" ? "underline" : ""
               }`}
-              onClick={() => setSearchType("incredients")}
-            >
+              onClick={() => setSearchType("incredients")}>
               Incredients
             </button>
             <span className="lg:px-2">/</span>
             <button
               className={`btn ${searchType === "name" ? "underline" : ""}`}
-              onClick={() => setSearchType("name")}
-            >
+              onClick={() => setSearchType("name")}>
               Name
             </button>
           </div>

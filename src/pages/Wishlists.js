@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Wishlist, WishItem } from "../components/Wishlist";
-import { getAllWishlists } from "../wishlists";
+import { Wishlist, WishItem } from "../components/wishlist/Wishlist";
+import { getAllWishlists } from "../components/wishlist/wishlists";
 
 export const Wishlists = () => {
   const [filter, setFilter] = useState("drinks");
@@ -22,8 +22,7 @@ export const Wishlists = () => {
         <h2 className="text-5xl text-left ">Your wishlists</h2>
         <input
           placeholder="Search recipes..."
-          className="bg-gray-50 flex border border-gray-300 text-gray-900 text-sm  h-auto"
-        ></input>
+          className="bg-gray-50 flex border border-gray-300 text-gray-900 text-sm  h-auto"></input>
       </div>
       {wishlists.map((list) => (
         <Wishlist title={"new list"}>
