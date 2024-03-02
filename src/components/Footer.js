@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
-    <div className="mt-8 w-full bg-gradient-to-b from-violet-200 to-pink-200">
-      <div className="mx-8 mb-6 mt-8 text-gray-700 xl:max-w-6xl xl:mx-auto">
+    <div className="mt-8 pt-6 pb-6 w-full bg-gradient-to-b from-violet-200 to-pink-200">
+      <div className="mx-3 md:mx-8 text-gray-700 xl:max-w-6xl xl:mx-auto">
         <div className="font-extrabold text-2xl ">Wish Dish Discover</div>
         <div className="flex md:gap-x-2.5 lg:gap-x-10 mb-2 flex-wrap md:flex-nowrap">
           <div>
