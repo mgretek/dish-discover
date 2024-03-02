@@ -10,19 +10,21 @@ import { Login } from "./pages/Login";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <div className="mx-auto h-svh">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/recipes" element={<RecipeSearch />} />
-          <Route path="/recipe/:id" element={<Recipe />} />
-          <Route path="/wishlists" element={<Wishlists />} />
-          <Route path="/shoppinglist" element={<Shoppinglist />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+    <div className="App grid min-h-dvh grid-cols-1 grid-rows-[1fr_auto]">
+      <div>
+        <Navbar />
+        <div className="mx-auto">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/recipes" element={<RecipeSearch />} />
+            <Route path="/recipe/:id" element={<Recipe />} />
+            <Route path="/wishlists" element={<Wishlists />} />
+            <Route path="/shoppinglist" element={<Shoppinglist />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </div>
       </div>
-      <div className="flex">
+      <div>
         <Footer />
       </div>
     </div>
