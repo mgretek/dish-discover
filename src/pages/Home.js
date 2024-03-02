@@ -9,7 +9,7 @@ import { Footer } from "../components/Footer.js";
 export const Home = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-grow mt-24 mx-10 xl:max-w-6xl xl:mx-auto">
+      <div className="flex-grow mt-24 mx-2 sm:mx-10 xl:max-w-6xl xl:mx-auto">
         <HomepageHeader title="Discover 1000+ meals" />
         <HomepageContent text="Dive into a variety of meal recipes, from quick weeknight options to gourmet weekend dishes. Discover new flavors and cooking techniques for a satisfying dining experience." />
         <RandomRecipes />
