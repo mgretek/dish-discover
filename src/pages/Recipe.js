@@ -210,7 +210,6 @@ export const Recipe = () => {
         console.error(error);
       }
     };
-
     fetchRecipe();
   }, [id]);
 
