@@ -227,24 +227,24 @@ export const Recipe = () => {
           </div>
 
           {/* TITLE & DESCRIPTION */}
-          <div className="mb-6">
+          <div className="mb-6 w-full">
             {/* Title + "Add to wishlist" button */}
-            <div className="flex gap-x-6 mt-4 items-center mb-4 justify-between">
+            <div className="flex mt-4 items-center mb-4 justify-between gap-x-4">
               <div>
                 <h1 className="text-3xl font-bold md:text-5xl text-gray-800">
                   {recipe.title}
                 </h1>
               </div>
-              <div className="flex gap-1.5 items-center">
+              <div className="flex gap-1.5 items-center pr-2">
+                <div className="text-right text-xs md:text-md text-gray-500 italic">
+                  Add to wishlist
+                </div>
                 <button
                   className="btn text-gray-600 rounded-md"
                   onClick={() => addToWishlist(0, recipe)}
                 >
                   <HeartIcon />
                 </button>
-                <div className="text-xs md:text-md text-gray-500 italic self-end">
-                  Add to wishlist
-                </div>
               </div>
             </div>
 
