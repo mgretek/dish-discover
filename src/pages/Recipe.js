@@ -201,7 +201,7 @@ export const Recipe = () => {
     const fetchRecipe = async () => {
       try {
         const response = await fetch(
-          `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=8c7408891f0843b7a5b62b8bd041580d`
+          `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=ce8f62b9c28943eeb68a1f734847059a`
         );
         const json = await response.json();
         setRecipe(json);
@@ -214,7 +214,7 @@ export const Recipe = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen max-w-[576px] mx-auto">
       {isFetched && (
         <div class="flex flex-wrap md:flex-nowrap mx-2 md:mx-40 pt-10 ">
           {/* IMG */}
@@ -229,19 +229,22 @@ export const Recipe = () => {
           {/* TITLE & DESCRIPTION */}
           <div className="mb-6">
             {/* Title + "Add to wishlist" button */}
-            <div className="flex mt-4 items-center mb-4 justify-between">
+            <div className="flex gap-x-6 mt-4 items-center mb-4 justify-between">
               <div>
                 <h1 className="text-3xl font-bold md:text-5xl text-gray-800">
                   {recipe.title}
                 </h1>
               </div>
-              <div>
+              <div className="flex gap-1.5 items-center">
                 <button
-                  className="btn text-gray-600 rounded-md py-3 px-5"
+                  className="btn text-gray-600 rounded-md"
                   onClick={() => addToWishlist(0, recipe)}
                 >
                   <HeartIcon />
                 </button>
+                <div className="text-xs md:text-md text-gray-500 italic self-end">
+                  Add to wishlist
+                </div>
               </div>
             </div>
 
@@ -265,17 +268,18 @@ export const Recipe = () => {
           </div>
 
           {/* INGREDIENTS & CONVERSION TOGGLE */}
-          <div className="w-full mb-10">
-            <div className="flex gap-x-2 mb-0.5 text-xs justify-end pr-2">
+          <div className="w-full mb-14">
+            <div className="flex gap-x-2 mb-0.5 text-xs pr-2 justify-end">
               <div className="text-gray-500">Metric units</div>
               <button onClick={toggleMeasure}>
                 <Toggle />
               </button>
             </div>
 
-            <div className="font-bold mb-4 text-gray-800 text-lg md:text-xl">
+            <div className="font-bold text-gray-800 text-lg md:text-xl">
               Ingredients
             </div>
+            <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-4"></div>
             <ul>
               {recipe.extendedIngredients.map((item) => (
                 <li key={item.id} className="mb-1.5 text-left">
@@ -283,7 +287,7 @@ export const Recipe = () => {
                     {item.measures[measureType].amount}{" "}
                     {item.measures[measureType].unitShort}
                   </span>
-                  <span> {item.name}</span>
+                  <span className="text-gray-800"> {item.name}</span>
                 </li>
               ))}
             </ul>
@@ -291,9 +295,10 @@ export const Recipe = () => {
 
           {/* INSTRUCTIONS */}
           <div className="">
-            <h1 className="font-bold mb-4 text-gray-800 text-lg md:text-xl">
+            <h1 className="font-bold text-gray-800 text-lg md:text-xl">
               Instructions
             </h1>
+            <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-4"></div>
             <RecipeSteps recipe={recipe} className="truncate" />
           </div>
         </div>

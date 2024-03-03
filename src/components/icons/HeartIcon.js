@@ -18,7 +18,6 @@ export const HeartIcon = ({ onClick }) => {
           stroke-width="32"
         />
       </svg>
-      <p className="text-xs md:text-md text-gray-500">Add to wishlist</p>
     </div>
   );
 };
