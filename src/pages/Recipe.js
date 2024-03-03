@@ -201,7 +201,7 @@ export const Recipe = () => {
     const fetchRecipe = async () => {
       try {
         const response = await fetch(
-          `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=71bc3e4381ff4c3db012ffaf603dc32a`
+          `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=8c7408891f0843b7a5b62b8bd041580d`
         );
         const json = await response.json();
         setRecipe(json);
@@ -217,48 +217,84 @@ export const Recipe = () => {
     <div className="min-h-screen">
       {isFetched && (
         <div class="flex flex-wrap md:flex-nowrap mx-2 md:mx-40 pt-10 ">
+          {/* IMG */}
           <div>
-            <img className="mt-4" src={recipe.image} alt={recipe.title} />
-            <div className="flex gap-x-2 mt-6 mb-2 text-xs justify-end">
+            <img
+              className="rounded mb-2"
+              src={recipe.image}
+              alt={recipe.title}
+            />
+          </div>
+
+          {/* TITLE & DESCRIPTION */}
+          <div className="mb-6">
+            {/* Title + "Add to wishlist" button */}
+            <div className="flex mt-4 items-center mb-4 justify-between">
+              <div>
+                <h1 className="text-3xl font-bold md:text-5xl text-gray-800">
+                  {recipe.title}
+                </h1>
+              </div>
+              <div>
+                <button
+                  className="btn text-gray-600 rounded-md py-3 px-5"
+                  onClick={() => addToWishlist(0, recipe)}
+                >
+                  <HeartIcon />
+                </button>
+              </div>
+            </div>
+
+            {/* Preptime, tags */}
+            <div>
+              <h2 className="mb-1.5 text-gray-800">
+                Time: {recipe.readyInMinutes} minutes
+              </h2>
+              <div className="flex flex-wrap">
+                <p className="pr-2 text-gray-800">Tags:</p>
+                {recipe.dishTypes.map((type) => (
+                  <button
+                    key={type}
+                    className="mr-2 mb-2   text-gray-400 rounded"
+                  >
+                    #{type}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* INGREDIENTS & CONVERSION TOGGLE */}
+          <div className="w-full mb-10">
+            <div className="flex gap-x-2 mb-0.5 text-xs justify-end pr-2">
               <div className="text-gray-500">Metric units</div>
               <button onClick={toggleMeasure}>
                 <Toggle />
               </button>
             </div>
-            <div className="font-bold mb-3">Ingredients</div>
+
+            <div className="font-bold mb-4 text-gray-800 text-lg md:text-xl">
+              Ingredients
+            </div>
             <ul>
               {recipe.extendedIngredients.map((item) => (
-                <li key={item.id} className="mb-2 text-left">
-                  {item.name} ({item.measures[measureType].amount}{" "}
-                  {item.measures[measureType].unitShort})
+                <li key={item.id} className="mb-1.5 text-left">
+                  <span className="text-gray-800 font-semibold">
+                    {item.measures[measureType].amount}{" "}
+                    {item.measures[measureType].unitShort}
+                  </span>
+                  <span> {item.name}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="p-4 text-left ">
-            <div class="flex">
-              <h1 className="text-5xl mb-2">{recipe.title}</h1>
-              <button
-                className="btn text-gray-600 rounded-md py-3 px-5"
-                onClick={() => addToWishlist(0, recipe)}
-              >
-                <HeartIcon />
-              </button>
-            </div>
-            <h2 className="mb-2">Time: {recipe.readyInMinutes} minutes</h2>
-            <div className="flex flex-wrap mb-2">
-              <p className="pr-3">Tags:</p>
-              {recipe.dishTypes.map((type) => (
-                <button
-                  key={type}
-                  className="mr-2 mb-2   text-gray-400 rounded"
-                >
-                  #{type}
-                </button>
-              ))}
-            </div>
-            <h1 className="text-2xl mb-6">Instructions:</h1>
-            <RecipeSteps recipe={recipe} />
+
+          {/* INSTRUCTIONS */}
+          <div className="">
+            <h1 className="font-bold mb-4 text-gray-800 text-lg md:text-xl">
+              Instructions
+            </h1>
+            <RecipeSteps recipe={recipe} className="truncate" />
           </div>
         </div>
       )}
