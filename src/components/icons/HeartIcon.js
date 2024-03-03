@@ -1,6 +1,6 @@
 export const HeartIcon = ({ onClick }) => {
   return (
-    <div className="flex">
+    <div className="flex items-center gap-x-2 italic">
       <svg
         onClick={onClick}
         xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@ export const HeartIcon = ({ onClick }) => {
           stroke-width="32"
         />
       </svg>
-      <p className="ml-2">Add to wishlist</p>
+      <p className="text-xs md:text-md text-gray-500">Add to wishlist</p>
     </div>
   );
 };
