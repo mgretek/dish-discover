@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { loadWishlists } from "../components/wishlist/wishlists";
+import { Loading } from "../components/loading/Loading";
 
 const data = {
   results: [
@@ -554,6 +555,7 @@ export const RecipeSearch = () => {
   const [filter, setFilter] = useState("both");
   const [searchInput, setSearchInput] = useState("");
   const [results, setResults] = useState(data.results);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleFilter(input) {
     setFilter(input);
@@ -562,6 +564,7 @@ export const RecipeSearch = () => {
     setSearchInput(input);
   }
   async function handleSearch() {
+    setIsLoading(true);
     try {
       const response = await fetch(
         `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${searchInput}&addRecipeInformation=true&fillIngredients&number=10&apiKey=71bc3e4381ff4c3db012ffaf603dc32a`
@@ -574,6 +577,7 @@ export const RecipeSearch = () => {
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   }
 
   return (
@@ -631,29 +635,33 @@ export const RecipeSearch = () => {
         </div>
       </div>
       <section className="p-4  grid  lg:grid-cols-3 xl:grid-cols-4 gap-10">
-        {results.map((recipe) => (
-          <div className="bg-white-100" key={recipe.id}>
-            <div className="flex lg:flex-col lg:mx-auto">
-              {/* <div className="bg-gray-500 w-32 h-36"></div> */}
-              <img src={recipe.image} alt={recipe.title} />
-              <div className="flex flex-col ml-6 lg:ml-0 lg:items-center text-left lg:text-center text-wrap">
-                <Link to={`/recipe/${recipe.id}`}>
-                  <h2 className="text-xl font-semibold mt-4">{recipe.title}</h2>
-                </Link>
-                <ul className="flex gap-2">
-                  <li>Egg</li>
-                  <li>Flour</li>
-                  <li>sugar</li>
-                </ul>
-                <div className="text-gray-400">
-                  {recipe.dishTypes.map((type) => (
-                    <span>#{type} </span>
-                  ))}
+        {!isLoading &&
+          results.map((recipe) => (
+            <div className="bg-white-100" key={recipe.id}>
+              <div className="flex lg:flex-col lg:mx-auto">
+                {/* <div className="bg-gray-500 w-32 h-36"></div> */}
+                <img src={recipe.image} alt={recipe.title} />
+                <div className="flex flex-col ml-6 lg:ml-0 lg:items-center text-left lg:text-center text-wrap">
+                  <Link to={`/recipe/${recipe.id}`}>
+                    <h2 className="text-xl font-semibold mt-4">
+                      {recipe.title}
+                    </h2>
+                  </Link>
+                  <ul className="flex gap-2">
+                    <li>Egg</li>
+                    <li>Flour</li>
+                    <li>sugar</li>
+                  </ul>
+                  <div className="text-gray-400">
+                    {recipe.dishTypes.map((type) => (
+                      <span>#{type} </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        {isLoading && <Loading />}
       </section>
     </div>
   );

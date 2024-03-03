@@ -209,7 +209,6 @@ export const Recipe = () => {
         console.error(error);
       }
     };
-
     fetchRecipe();
   }, [id]);
 
@@ -221,8 +220,7 @@ export const Recipe = () => {
             <img className="mt-4" src={recipe.image} alt={recipe.title} />
             <button
               className=" text-gray py-2 px-4 rounded mr-2"
-              onClick={toggleMeasure}
-            >
+              onClick={toggleMeasure}>
               Toggle units
             </button>
             <ul>
@@ -239,8 +237,7 @@ export const Recipe = () => {
               <h1 className="text-5xl mb-2">{recipe.title}</h1>
               <button
                 className="btn text-gray-600 rounded-md py-3 px-5"
-                onClick={() => addToWishlist(0, recipe)}
-              >
+                onClick={() => addToWishlist(0, recipe)}>
                 <HeartIcon />
               </button>
             </div>
@@ -250,8 +247,7 @@ export const Recipe = () => {
               {recipe.dishTypes.map((type) => (
                 <button
                   key={type}
-                  className="mr-2 mb-2   text-gray-400 rounded"
-                >
+                  className="mr-2 mb-2   text-gray-400 rounded">
                   #{type}
                 </button>
               ))}
