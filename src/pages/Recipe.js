@@ -217,11 +217,11 @@ export const Recipe = () => {
   return (
     <div className="min-h-screen">
       {isFetched && (
-        <div class="flex px-40 pt-10 ">
+        <div class="flex flex-wrap md:flex-nowrap mx-2 md:mx-40 pt-10 ">
           <div>
             <img className="mt-4" src={recipe.image} alt={recipe.title} />
             <div className="flex gap-x-2 mt-6 mb-2 text-xs justify-end">
-              <div>Metric units</div>
+              <div className="text-gray-500">Metric units</div>
               <button onClick={toggleMeasure}>
                 <Toggle />
               </button>
