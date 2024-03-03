@@ -567,7 +567,7 @@ export const RecipeSearch = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${searchInput}&addRecipeInformation=true&fillIngredients&number=10&apiKey=71bc3e4381ff4c3db012ffaf603dc32a`
+        `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${searchInput}&addRecipeInformation=true&fillIngredients&number=10&apiKey=8c7408891f0843b7a5b62b8bd041580d`
       );
       console.log(response);
 
