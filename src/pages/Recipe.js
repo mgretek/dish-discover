@@ -214,92 +214,96 @@ export const Recipe = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen max-w-[576px] mx-auto">
+    <div className="min-h-screen max-w-[576px] md:max-w-full mx-auto">
       {isFetched && (
-        <div class="flex flex-wrap md:flex-nowrap mx-2 md:mx-40 pt-10 ">
-          {/* IMG */}
-          <div>
-            <img
-              className="rounded mb-2"
-              src={recipe.image}
-              alt={recipe.title}
-            />
-          </div>
+        <div class="flex flex-wrap mx-2 md:mx-auto mt-10 md:px-20">
+          <div className="md:flex md:gap-x-3 md:pb-14">
+            {/* IMG */}
+            <div>
+              <img
+                className="rounded mb-2"
+                src={recipe.image}
+                alt={recipe.title}
+              />
+            </div>
 
-          {/* TITLE & DESCRIPTION */}
-          <div className="mb-6">
-            {/* Title + "Add to wishlist" button */}
-            <div className="flex gap-x-6 mt-4 items-center mb-4 justify-between">
-              <div>
-                <h1 className="text-3xl font-bold md:text-5xl text-gray-800">
-                  {recipe.title}
-                </h1>
+            {/* TITLE & DESCRIPTION */}
+            <div className="mb-6 w-full md:mb-0">
+              {/* Title + "Add to wishlist" button */}
+              <div className="flex my-4 items-center justify-between gap-x-4 md:mt-2 md:mb-4">
+                <div>
+                  <h1 className="text-3xl font-bold md:text-5xl text-gray-800">
+                    {recipe.title}
+                  </h1>
+                </div>
+                <div className="flex gap-1.5 items-center pr-2">
+                  <div className="text-right text-xs md:text-md text-gray-500 italic">
+                    Add to wishlist
+                  </div>
+                  <button
+                    className="btn text-gray-600 rounded-md"
+                    onClick={() => addToWishlist(0, recipe)}
+                  >
+                    <HeartIcon />
+                  </button>
+                </div>
               </div>
-              <div className="flex gap-1.5 items-center">
-                <button
-                  className="btn text-gray-600 rounded-md"
-                  onClick={() => addToWishlist(0, recipe)}
-                >
-                  <HeartIcon />
-                </button>
-                <div className="text-xs md:text-md text-gray-500 italic self-end">
-                  Add to wishlist
+
+              {/* Preptime, tags */}
+              <div>
+                <h2 className="mb-1.5 text-gray-800">
+                  Time: {recipe.readyInMinutes} minutes
+                </h2>
+                <div className="flex flex-wrap">
+                  <p className="pr-2 text-gray-800">Tags:</p>
+                  {recipe.dishTypes.map((type) => (
+                    <button
+                      key={type}
+                      className="mr-2 mb-2   text-gray-400 rounded"
+                    >
+                      #{type}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Preptime, tags */}
-            <div>
-              <h2 className="mb-1.5 text-gray-800">
-                Time: {recipe.readyInMinutes} minutes
-              </h2>
-              <div className="flex flex-wrap">
-                <p className="pr-2 text-gray-800">Tags:</p>
-                {recipe.dishTypes.map((type) => (
-                  <button
-                    key={type}
-                    className="mr-2 mb-2   text-gray-400 rounded"
-                  >
-                    #{type}
-                  </button>
-                ))}
+          <div className="md:flex md:gap-x-14">
+            {/* INGREDIENTS & CONVERSION TOGGLE */}
+            <div className="w-full mb-14">
+              <div className="flex gap-x-2 mb-0.5 text-xs pr-2 justify-end">
+                <div className="text-gray-500">Metric units</div>
+                <button onClick={toggleMeasure}>
+                  <Toggle />
+                </button>
               </div>
-            </div>
-          </div>
 
-          {/* INGREDIENTS & CONVERSION TOGGLE */}
-          <div className="w-full mb-14">
-            <div className="flex gap-x-2 mb-0.5 text-xs pr-2 justify-end">
-              <div className="text-gray-500">Metric units</div>
-              <button onClick={toggleMeasure}>
-                <Toggle />
-              </button>
+              <div className="font-bold text-gray-800 text-lg md:text-xl">
+                Ingredients
+              </div>
+              <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-4"></div>
+              <ul>
+                {recipe.extendedIngredients.map((item) => (
+                  <li key={item.id} className="mb-1.5 text-left">
+                    <span className="text-gray-800 font-semibold">
+                      {item.measures[measureType].amount}{" "}
+                      {item.measures[measureType].unitShort}
+                    </span>
+                    <span className="text-gray-800"> {item.name}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="font-bold text-gray-800 text-lg md:text-xl">
-              Ingredients
+            {/* INSTRUCTIONS */}
+            <div>
+              <h1 className="font-bold text-gray-800 text-lg md:text-xl">
+                Instructions
+              </h1>
+              <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-4"></div>
+              <RecipeSteps recipe={recipe} className="truncate" />
             </div>
-            <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-4"></div>
-            <ul>
-              {recipe.extendedIngredients.map((item) => (
-                <li key={item.id} className="mb-1.5 text-left">
-                  <span className="text-gray-800 font-semibold">
-                    {item.measures[measureType].amount}{" "}
-                    {item.measures[measureType].unitShort}
-                  </span>
-                  <span className="text-gray-800"> {item.name}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* INSTRUCTIONS */}
-          <div className="">
-            <h1 className="font-bold text-gray-800 text-lg md:text-xl">
-              Instructions
-            </h1>
-            <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-4"></div>
-            <RecipeSteps recipe={recipe} className="truncate" />
           </div>
         </div>
       )}
