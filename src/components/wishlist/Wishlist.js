@@ -35,7 +35,7 @@ export const Wishlist = ({
           onMouseLeave={() => setIsHovered(false)}
         >
           {!titleEditActive ? (
-            <h1 className="text-xlflex-2 uppercase tracking-wider mr-2">
+            <h1 className="text-xl flex-2 uppercase tracking-wider mr-2 ">
               {listTitle}
             </h1>
           ) : (
@@ -84,7 +84,7 @@ export const Wishlist = ({
 };
 export const WishItem = ({ recipe, listIndex, itemIndex, handleDelete }) => {
   return (
-    <div className="bg-white p-5 flex flex-col shadow-xl">
+    <div className="bg-white p-5 m-1 flex flex-col shadow-md  border border-gray-200 rounded-xl">
       <div class="flex  items-center">
         <h2 className="text-2xl mr-3">{recipe.title}</h2>
         <button

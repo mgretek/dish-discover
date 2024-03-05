@@ -62,7 +62,10 @@ export const Wishlists = () => {
       <div class="flex py-10 justify-between">
         {true ? (
           <>
-            <h2 className="text-5xl text-left" onClick={handleTitleEdit}>
+            <h2
+              className="text-5xl text-left font-bold"
+              onClick={handleTitleEdit}
+            >
               Your wishlists
             </h2>
             <button className="bg-gray-800 px-5 py-3 rounded-full font-bold text-white ml-auto mr-3">
