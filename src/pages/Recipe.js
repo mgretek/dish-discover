@@ -242,7 +242,7 @@ export const Recipe = () => {
                   </div>
                   <button
                     className="btn text-gray-600 rounded-md"
-                    onClick={() => addToWishlist(0, recipe)}
+                    onClick={() => addToWishlist(2, recipe)}
                   >
                     <HeartIcon />
                   </button>

@@ -7,14 +7,17 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase";
 import CallToAction from "../components/wishlist/CallToAction";
+import { AddNewModal } from "../components/wishlist/AddNewModal";
 
 export const Wishlists = () => {
+  const [popupOpen, setPopupOpen] = useState(true);
   const [filter, setFilter] = useState("drinks");
   const [wishlists, setWishlists] = useState([]);
   const [user] = useAuthState(auth);
   const [titleEditActive, setTitleEditActive] = useState(false);
 
   useEffect(() => {
+    setPopupOpen(false);
     async function fetchWishlists() {
       const allWishlists = await getAllWishlists();
       if (allWishlists) {
@@ -29,6 +32,13 @@ export const Wishlists = () => {
   //   console.log("Wishlists:", wishlists);
   //   saveWishlist({ wishLists: wishlists });
   // }, [wishlists]);
+
+  function addNewList({ title }) {
+    const newArr = [...wishlists, { title: title, recipes: [] }];
+    setWishlists(newArr);
+    saveWishlist({ wishLists: newArr });
+    setPopupOpen(false);
+  }
 
   function handleDelete({ recipeId, listIndex }) {
     const newArr = [...wishlists];
@@ -59,6 +69,12 @@ export const Wishlists = () => {
 
   return (
     <div className="md:px-20 xl:px-60 min-h-full">
+      {popupOpen && (
+        <AddNewModal
+          addNewList={addNewList}
+          onCancel={() => setPopupOpen(false)}
+        />
+      )}
       <div class="flex py-10 justify-between">
         {true ? (
           <>
@@ -68,7 +84,10 @@ export const Wishlists = () => {
             >
               Your wishlists
             </h2>
-            <button className="bg-gray-800 px-5 py-3 rounded-full font-bold text-white ml-auto mr-3">
+            <button
+              className="bg-gray-800 px-5 py-3 rounded-full font-bold text-white ml-auto mr-3"
+              onClick={() => setPopupOpen(true)}
+            >
               + New
             </button>
             <input

@@ -66,7 +66,8 @@ export const Wishlist = ({
       </div>
       <div className={` wishlist ${isCollapsed ? "" : "open"}`}>
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
-          {list.length > 0 &&
+          {Array.isArray(list) &&
+            list.length > 0 &&
             list.map((recipe, itemIndex) => (
               <div key={recipe.id}>
                 <WishItem
