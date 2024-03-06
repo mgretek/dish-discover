@@ -581,88 +581,130 @@ export const RecipeSearch = () => {
   }
 
   return (
-    <div className="">
-      <div className="xl:w-1/2 py-14 flex flex-col gap-4 px-20">
-        <h1 className="text-5xl text-left">Recipe search</h1>
-        <div className="flex gap-x-5 ">
-          <input
-            placeholder="Search..."
-            className="bg-gray-50 flex border border-gray-300 text-gray-900 text-sm w-full h-10"
-            onChange={(e) => handleInput(e.target.value)}></input>
-          <button
-            className="bg-gray-400 rounded-sm px-5"
-            onClick={handleSearch}>
-            Search
-          </button>
-        </div>
-        <div className="flex">
-          <div className="flex">
-            <p className="pr-3">Filter:</p>
+    <div className="min-h-screen max-w-[576px] md:max-w-7xl mx-auto">
+      <div className="flex flex-wrap mx-2 md:mx-auto md:px-20">
+        {/* Searchbar section */}
+        <div className="xl:w-1/2 pt-12 pb-8 md:py-14 flex flex-col gap-4">
+          <h1 className="text-5xl font-bold text-gray-800 text-left">
+            Recipe search
+          </h1>
+          <div className="h-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-2"></div>{" "}
+          {/* Searchbar */}
+          <div className="relative">
+            <input
+              placeholder="Search..."
+              className="pl-2 bg-gray-50 flex border rounded-sm border-gray-300 text-gray-900 text-sm w-full h-10"
+              onChange={(e) => handleInput(e.target.value)}
+            />
             <button
-              className={`btn ${filter === "meals" ? "underline" : ""}`}
-              onClick={() => handleFilter("meals")}>
-              Meals
-            </button>
-            <span className="lg:px-2">/</span>
-            <button
-              className={`btn ${filter === "drinks" ? "underline" : ""}`}
-              onClick={() => handleFilter("drinks")}>
-              Drinks
-            </button>
-            <span className="lg:px-2">/</span>
-            <button
-              className={`btn ${filter === "both" ? "underline" : ""}`}
-              onClick={() => handleFilter("both")}>
-              Both
+              className="absolute right-0 top-0 h-full px-3"
+              onClick={handleSearch}
+            >
+              <div className="w-4 text-violet-400">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path
+                    fill="currentColor"
+                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                  />
+                </svg>
+              </div>
             </button>
           </div>
-          <div className="flex ml-auto">
-            <p className="pr-3">Search by:</p>{" "}
-            <button
-              className={`btn ${
-                searchType === "incredients" ? "underline" : ""
-              }`}
-              onClick={() => setSearchType("incredients")}>
-              Incredients
-            </button>
-            <span className="lg:px-2">/</span>
-            <button
-              className={`btn ${searchType === "name" ? "underline" : ""}`}
-              onClick={() => setSearchType("name")}>
-              Name
-            </button>
+          {/* Search filter section */}
+          <div className="flex text-gray-700 gap-x-6 flex-wrap">
+            <div className="flex items-center mb-2 md:mb-1">
+              <p className="pr-1 text-gray-700 font-semibold">Filter</p>
+
+              <button
+                className={`btn ${
+                  filter === "meals"
+                    ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
+                    : "text-gray-500"
+                }`}
+                onClick={() => handleFilter("meals")}
+              >
+                <span className="px-2 py-1">Meals</span>
+              </button>
+
+              <button
+                className={`btn ${
+                  filter === "drinks"
+                    ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
+                    : "text-gray-500"
+                }`}
+                onClick={() => handleFilter("drinks")}
+              >
+                <span className="px-2">Drinks</span>
+              </button>
+              <button
+                className={`btn ${
+                  filter === "both"
+                    ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
+                    : "text-gray-500"
+                }`}
+                onClick={() => handleFilter("both")}
+              >
+                <span className="px-2">Both</span>
+              </button>
+            </div>
+
+            <div className="flex items-center mb-1">
+              <p className="pr-1 text-gray-700 font-semibold">Search by</p>{" "}
+              <button
+                className={`btn ${
+                  searchType === "incredients"
+                    ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
+                    : "text-gray-500"
+                }`}
+                onClick={() => setSearchType("incredients")}
+              >
+                <span className="px-2">Ingredient</span>
+              </button>
+              <button
+                className={`btn ${
+                  searchType === "name"
+                    ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
+                    : "text-gray-500"
+                }`}
+                onClick={() => setSearchType("name")}
+              >
+                <span className="px-2">Name</span>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      <section className="p-4  grid  lg:grid-cols-3 xl:grid-cols-4 gap-10">
-        {!isLoading &&
-          results.map((recipe) => (
-            <div className="bg-white-100" key={recipe.id}>
-              <div className="flex lg:flex-col lg:mx-auto">
-                {/* <div className="bg-gray-500 w-32 h-36"></div> */}
-                <img src={recipe.image} alt={recipe.title} />
-                <div className="flex flex-col ml-6 lg:ml-0 lg:items-center text-left lg:text-center text-wrap">
-                  <Link to={`/recipe/${recipe.id}`}>
-                    <h2 className="text-xl font-semibold mt-4">
-                      {recipe.title}
-                    </h2>
-                  </Link>
-                  <ul className="flex gap-2">
-                    <li>Egg</li>
-                    <li>Flour</li>
-                    <li>sugar</li>
-                  </ul>
-                  <div className="text-gray-400">
-                    {recipe.dishTypes.map((type) => (
-                      <span>#{type} </span>
-                    ))}
+
+        {/* Search results section */}
+        <section className="p-4 grid lg:grid-cols-3 xl:grid-cols-4 gap-10">
+          {!isLoading &&
+            results.map((recipe) => (
+              <div className="bg-white-100" key={recipe.id}>
+                <div className="flex flex-wrap sm:flex-nowrap lg:flex-col lg:mx-auto gap-x-4">
+                  {/* <div className="bg-gray-500 w-32 h-36"></div> */}
+                  <img src={recipe.image} alt={recipe.title} />
+                  <div className="flex flex-col lg:items-center lg:text-center text-wrap">
+                    <Link to={`/recipe/${recipe.id}`}>
+                      <h2 className="text-xl font-semibold mt-4">
+                        {recipe.title}
+                      </h2>
+                    </Link>
+                    <ul className="flex gap-2">
+                      <li>Egg</li>
+                      <li>Flour</li>
+                      <li>sugar</li>
+                    </ul>
+                    <div className="text-gray-400">
+                      {recipe.dishTypes.map((type) => (
+                        <span>#{type} </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        {isLoading && <Loading />}
-      </section>
+            ))}
+          {isLoading && <Loading />}
+        </section>
+      </div>
     </div>
   );
 };
