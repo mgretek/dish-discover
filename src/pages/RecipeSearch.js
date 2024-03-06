@@ -614,7 +614,7 @@ export const RecipeSearch = () => {
           <div className="relative">
             <input
               placeholder="Search..."
-              className="pl-2 bg-gray-50 flex border rounded-sm border-gray-300 text-gray-900 text-sm w-full h-10"
+              className="h-10 pl-2 bg-gray-50 flex border rounded-sm border-gray-300 text-gray-800 text-md w-full focus:outline-none focus:ring-2 focus:ring-violet-300"
               onChange={(e) => handleInput(e.target.value)}
             />
             <button
