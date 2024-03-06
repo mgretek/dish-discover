@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { DownArrow } from "../arrows/DownArrow";
+import { Draggable } from "react-beautiful-dnd";
 import { ForwardArrow } from "../arrows/ForwardArrow";
 import { PencilIcon } from "../icons/PencilIcon";
 
-export const Wishlist = ({
-  title,
-  children,
-  saveTitle,
-  list,
-  listIndex,
-  handleDelete,
-}) => {
+export const Wishlist = ({ saveTitle, list, listIndex, handleDelete }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [listTitle, setListTitle] = useState(title);
-  const [wishlist, setWishlist] = useState(list);
+  const [listTitle, setListTitle] = useState(list.title);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [titleEditActive, setTitleEditActive] = useState(false);
 
@@ -28,16 +21,23 @@ export const Wishlist = ({
   }
   return (
     <div className="text-left mb-3">
-      <div class="flex bg-gradient-to-r from-indigo-100 via-indigo-200 to-violet-200 rounded-full justify-between items-center px-4 py-3 mb-3">
+      <div className="flex bg-gradient-to-r from-indigo-100 via-indigo-200 to-violet-200 rounded-full justify-between items-center px-4 py-3 mb-3">
         <div
           className="flex items-center"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           {!titleEditActive ? (
-            <h1 className="text-xl flex-2 uppercase tracking-wider mr-2 ">
-              {listTitle}
-            </h1>
+            <div class="flex">
+              <h1 className="text-xl flex-2 font-medium uppercase tracking-wider mr-2 ">
+                {listTitle}
+              </h1>
+              <h1 className="text-sm flex-2 uppercase tracking-wider mr-2 ">
+                {Array.isArray(list.recipes) > 0
+                  ? `(${list.recipes.length})`
+                  : "(0)"}
+              </h1>
+            </div>
           ) : (
             <div className="flex">
               <input
@@ -46,10 +46,16 @@ export const Wishlist = ({
                 onChange={(e) => setListTitle(e.target.value)}
               ></input>
               <button
-                className="bg-gray-300 text-sm px-4 ml-3 rounded-sm"
+                className="bg-indigo-400 text-white text-sm px-4 ml-3 rounded-sm"
                 onClick={handleTitleEdit}
               >
-                Save
+                Save title
+              </button>
+              <button
+                className="bg-red-500 text-white text-sm px-4 ml-3 rounded-sm"
+                onClick={console.log("delete happens here")}
+              >
+                Delete list
               </button>
             </div>
           )}
@@ -66,45 +72,63 @@ export const Wishlist = ({
       </div>
       <div className={` wishlist ${isCollapsed ? "" : "open"}`}>
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
-          {Array.isArray(list) &&
-            list.length > 0 &&
-            list.map((recipe, itemIndex) => (
-              <div key={recipe.id}>
-                <WishItem
-                  recipe={recipe}
-                  listIndex={listIndex}
-                  itemIndex={itemIndex}
-                  handleDelete={handleDelete}
-                />
-              </div>
+          {Array.isArray(list.recipes) &&
+            list.recipes.length > 0 &&
+            list.recipes.map((recipe, itemIndex) => (
+              <WishItem
+                id={recipe.id}
+                recipe={recipe}
+                listIndex={listIndex}
+                itemIndex={itemIndex}
+                handleDelete={handleDelete}
+              />
             ))}
         </div>
       </div>
     </div>
   );
 };
-export const WishItem = ({ recipe, listIndex, itemIndex, handleDelete }) => {
+export const WishItem = ({
+  recipe,
+  listIndex,
+  itemIndex,
+  handleDelete,
+  id,
+}) => {
   return (
-    <div className="bg-white p-5 m-1 flex flex-col shadow-md  border border-gray-200 rounded-xl">
-      <div class="flex  items-center">
-        <h2 className="text-2xl mr-3">{recipe.title}</h2>
-        <button
-          className="ml-auto"
-          onClick={() =>
-            handleDelete({ recipeId: recipe.id, listIndex: listIndex })
-          }
+    <Draggable
+      key={id} // Ensure a unique key
+      draggableId={`${recipe.id}tt`} // Use recipe.id as draggableId
+      index={itemIndex}
+    >
+      {(provided) => (
+        <div
+          className="bg-white p-5 m-1 flex flex-col shadow-md  border border-gray-200 rounded-xl hover:border-gray-400"
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
         >
-          X
-        </button>
-      </div>
-      <div class="flex">
-        <p>Time: {recipe.readyInMinutes} min</p>
-        <p className="mx-3">|</p>
-        <h3>Ingredients: 4</h3>
-      </div>
-      <div className=" bg-orange-500 aspect-square max-h-40 mt-4 overflow-hidden">
-        <img src={recipe.image} alt={recipe.title} />
-      </div>
-    </div>
+          <div className="flex  items-center">
+            <h2 className="text-2xl mr-3">{recipe.title}</h2>
+            <button
+              className="ml-auto"
+              onClick={() =>
+                handleDelete({ recipeId: recipe.id, listIndex: listIndex })
+              }
+            >
+              X
+            </button>
+          </div>
+          <div className="flex">
+            <p>Time: {recipe.readyInMinutes} min</p>
+            <p className="mx-3">|</p>
+            <h3>Ingredients: 4</h3>
+          </div>
+          <div className=" aspect-square max-h-40 mt-4 overflow-hidden">
+            <img src={recipe.image} alt={recipe.title} />
+          </div>
+        </div>
+      )}
+    </Draggable>
   );
 };
