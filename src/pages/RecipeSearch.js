@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { loadWishlists } from "../components/wishlist/wishlists";
 import { Loading } from "../components/loading/Loading";
@@ -555,7 +555,24 @@ export const RecipeSearch = () => {
   const [filter, setFilter] = useState("both");
   const [searchInput, setSearchInput] = useState("");
   const [results, setResults] = useState(data.results);
+  const [filteredResults, setFilteredResults] = useState(results);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    let filteredArr;
+    if (filter === "both") {
+      filteredArr = results;
+    } else if (filter === "meals") {
+      filteredArr = results.filter(
+        (item) =>
+          !item.dishTypes.includes("drink") &&
+          !item.dishTypes.includes("beverage")
+      );
+    } else {
+      filteredArr = results.filter((item) => item.dishTypes.includes(filter));
+    }
+    setFilteredResults(filteredArr);
+  }, [filter, results]);
 
   function handleFilter(input) {
     setFilter(input);
@@ -632,7 +649,7 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => handleFilter("drinks")}
+                onClick={() => handleFilter("drink")}
               >
                 <span className="px-2">Drinks</span>
               </button>
@@ -677,7 +694,7 @@ export const RecipeSearch = () => {
         {/* Search results section */}
         <section className="p-4 grid lg:grid-cols-3 xl:grid-cols-4 gap-10">
           {!isLoading &&
-            results.map((recipe) => (
+            filteredResults.map((recipe) => (
               <div className="bg-white-100" key={recipe.id}>
                 <div className="flex flex-wrap sm:flex-nowrap lg:flex-col lg:mx-auto gap-x-4">
                   {/* <div className="bg-gray-500 w-32 h-36"></div> */}
