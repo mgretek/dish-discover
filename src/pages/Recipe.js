@@ -214,7 +214,7 @@ export const Recipe = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen max-w-[576px] md:max-w-full mx-auto">
+    <div className="min-h-screen max-w-[576px] md:max-w-7xl mx-auto">
       {isFetched && (
         <div class="flex flex-wrap mx-2 md:mx-auto mt-10 md:px-20">
           <div className="md:flex md:gap-x-3 md:pb-14">
@@ -269,20 +269,22 @@ export const Recipe = () => {
             </div>
           </div>
 
-          <div className="md:flex md:gap-x-14">
+          <div className="lg:flex md:gap-x-12">
             {/* INGREDIENTS & CONVERSION TOGGLE */}
-            <div className="w-full mb-14">
-              <div className="flex gap-x-2 mb-0.5 text-xs pr-2 justify-end">
-                <div className="text-gray-500">Metric units</div>
-                <button onClick={toggleMeasure}>
-                  <Toggle />
-                </button>
-              </div>
-
-              <div className="font-bold text-gray-800 text-lg md:text-xl">
-                Ingredients
+            <div className="mb-14 min-w-[30%]">
+              <div className="flex justify-between">
+                <div className="font-bold text-gray-800 text-lg md:text-xl">
+                  Ingredients
+                </div>
+                <div className="flex gap-x-2 mb-0.5 text-xs pr-2 md:pr-0 items-center">
+                  <div className="text-gray-500">Metric units</div>
+                  <button onClick={toggleMeasure}>
+                    <Toggle />
+                  </button>
+                </div>
               </div>
               <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-4"></div>
+
               <ul>
                 {recipe.extendedIngredients.map((item) => (
                   <li key={item.id} className="mb-1.5 text-left">
