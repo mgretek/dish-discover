@@ -38,6 +38,7 @@ export const Settings = () => {
               width="40"
               height="30"
               alt="profile avatar"
+              className="rounded-md"
             />
           </button>
         </>
@@ -58,14 +59,14 @@ export const Settings = () => {
           {user ? (
             <button
               onClick={logUserOut}
-              className="bg-grey col-auto p-1 hover:text-black"
+              className="bg-violet-200 col-auto p-1 hover:text-gray-800"
             >
               Logout
             </button>
           ) : (
             <Link
               to="/login"
-              className="bg-grey self-center p-1 hover:text-slate-400"
+              className="bg-violet-200 self-center p-1 hover:text-gray-800"
             >
               Login
             </Link>
