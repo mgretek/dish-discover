@@ -559,6 +559,10 @@ export const RecipeSearch = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setFilter("both");
+  }, []);
+
+  useEffect(() => {
     let filteredArr;
     if (filter === "both") {
       filteredArr = results;
@@ -645,7 +649,7 @@ export const RecipeSearch = () => {
 
               <button
                 className={`btn ${
-                  filter === "drinks"
+                  filter === "drink"
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
