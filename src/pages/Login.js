@@ -13,7 +13,7 @@ export const Login = () => {
     <div className="flex flex-col border border-violet-200 rounded-md mt-14 p-6 mx-8 sm:mx-14 md:max-w-xl md:mx-auto">
       <div className="w-12 p-3 self-center mb-3">
         <svg
-          className="text-pink-300"
+          className="text-gray-400"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448 512"
         >
