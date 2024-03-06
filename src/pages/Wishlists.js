@@ -112,7 +112,7 @@ export const Wishlists = () => {
           onCancel={() => setPopupOpen(false)}
         />
       )}
-      {true && (
+      {user && (
         <div className="flex py-10 justify-between">
           <h2
             className="text-5xl text-left font-bold"
@@ -133,7 +133,7 @@ export const Wishlists = () => {
         </div>
       )}
       <div>
-        {true ? (
+        {user ? (
           <DragDropContext onDragEnd={onDragEnd}>
             {wishlists.length > 0 &&
               wishlists.map((list, index) => (
