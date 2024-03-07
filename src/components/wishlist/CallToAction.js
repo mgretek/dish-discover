@@ -7,10 +7,12 @@ export default function CallToAction() {
         Please log in to use wishlists
       </h2>
       <p className="text-md sm:text-lg text-center mb-16 text-gray-700">
-        Here you can create lists of your favourite recipes. Imagine finding
-        those exact pancakes that would make an excellent sunday morning dish.
-        Create a special Sunday list and add the recipe to your list, so you
-        would find those pancakes easily with just a couple of clicks!
+        Discover a whole new level of kitchen fun with our wishlist feature,
+        exclusively for our logged-in users. Dive into a variety of recipes and
+        casually save your top picks to different wishlists. It's like having
+        your own personalized cookbook! Easily organize and access your favorite
+        recipes whenever the mood strikes. Cooking just got a whole lot more
+        convenient!
       </p>
     </div>
   );
