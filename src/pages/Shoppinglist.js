@@ -14,10 +14,12 @@ export const Shoppinglist = () => {
             Please log in to use the shopping list
           </h1>
           <p className="text-md sm:text-lg text-center mb-16 text-gray-700">
-            Here you can add chosen ingredients from your found recipes, to make
-            yourself a shopping list, to make your life just a little bit
-            easier. No more manually copying stuff you need to buy. Everything
-            is just a mouse click away!{" "}
+            Say hello to your personal shopping assistant, exclusive to our
+            logged-in users! Discover recipes, pick your favorites, and
+            effortlessly add ingredients to your shopping list. It's like having
+            a virtual grocery sidekick – making your shopping experience a
+            breeze. Stay organized, never miss an item, and enjoy stress-free
+            cooking prep!{" "}
           </p>
         </div>
       )}
