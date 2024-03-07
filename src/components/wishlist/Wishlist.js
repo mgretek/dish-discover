@@ -21,7 +21,7 @@ export const Wishlist = ({ saveTitle, list, listIndex, handleDelete }) => {
   }
   return (
     <div className="text-left mb-3">
-      <div className="flex bg-gradient-to-r from-indigo-100 via-indigo-200 to-violet-200 rounded-full justify-between items-center px-4 py-3 mb-3">
+      <div className="flex bg-gradient-to-r from-pink-100 via-pink-200 to-indigo-200 rounded-full justify-between items-center px-4 py-3 mb-3">
         <div
           className="flex items-center"
           onMouseEnter={() => setIsHovered(true)}
@@ -29,10 +29,10 @@ export const Wishlist = ({ saveTitle, list, listIndex, handleDelete }) => {
         >
           {!titleEditActive ? (
             <div class="flex">
-              <h1 className="text-xl flex-2 font-medium uppercase tracking-wider mr-2 ">
+              <h1 className="text-xl flex-2 font-medium uppercase tracking-wider mr-2 text-gray-800">
                 {listTitle}
               </h1>
-              <h1 className="text-sm flex-2 uppercase tracking-wider mr-2 ">
+              <h1 className="text-sm flex-2 uppercase tracking-wider mr-2 text-gray-800">
                 {Array.isArray(list.recipes) > 0
                   ? `(${list.recipes.length})`
                   : "(0)"}
@@ -103,20 +103,31 @@ export const WishItem = ({
     >
       {(provided) => (
         <div
-          className="bg-white p-5 m-1 flex flex-col shadow-md  border border-gray-200 rounded-xl hover:border-gray-400"
+          className="bg-white p-5 m-1 flex flex-col shadow-md  border border-gray-200 rounded-xl hover:border-violet-300"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <div className="flex  items-center">
+          <div className="flex items-center">
             <h2 className="text-2xl mr-3">{recipe.title}</h2>
             <button
-              className="ml-auto"
+              className="ml-auto text-gray-500 font-semibold text-sm"
               onClick={() =>
                 handleDelete({ recipeId: recipe.id, listIndex: listIndex })
               }
             >
-              X
+              <div className="w-4">
+                <svg
+                  className="text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 384 512"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+                  />
+                </svg>
+              </div>
             </button>
           </div>
           <div className="flex">
@@ -124,7 +135,7 @@ export const WishItem = ({
             <p className="mx-3">|</p>
             <h3>Ingredients: 4</h3>
           </div>
-          <div className=" aspect-square max-h-40 mt-4 overflow-hidden">
+          <div className="aspect-square max-h-40 mt-4 overflow-hidden">
             <img src={recipe.image} alt={recipe.title} />
           </div>
         </div>
