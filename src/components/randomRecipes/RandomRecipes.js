@@ -9,23 +9,30 @@ import "swiper/css/autoplay";
 //Only for development – using dummy data instead of API
 import dummydata from "../../config/dummydata/dummydata-meals.js";
 
+function truncateString(str, maxLength) {
+  if (str.length > maxLength) {
+    return str.slice(0, maxLength) + "...";
+  }
+  return str;
+}
+
 export const RandomRecipes = () => {
   const [data, setData] = useState(null);
 
   //For production - API call
-  // useEffect(() => {
-  //   fetch(
-  //     "https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=8c7408891f0843b7a5b62b8bd041580d"
-  //   )
-  //     .then((response) => response.json())
-  //     .then((json) => setData(json))
-  //     .catch((error) => console.error(error));
-  // }, []);
+  useEffect(() => {
+    fetch(
+      "https://api.spoonacular.com/recipes/random?number=12&apiKey=8c7408891f0843b7a5b62b8bd041580d"
+    )
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .catch((error) => console.error(error));
+  }, []);
 
   // //Only for development – using dummy data instead of API
-  useEffect(() => {
-    setData(dummydata());
-  }, []);
+  // useEffect(() => {
+  //   setData(dummydata());
+  // }, []);
 
   return (
     <div>
@@ -34,12 +41,14 @@ export const RandomRecipes = () => {
           <Swiper
             breakpoints={{
               340: {
+                width: 340,
                 slidesPerView: 2,
                 spaceBetween: 15,
                 pauseOnMouseEnter: true,
                 disableOnInteraction: false,
               },
-              700: {
+              750: {
+                width: 750,
                 slidesPerView: 4,
                 spaceBetween: 15,
                 pauseOnMouseEnter: true,
@@ -47,7 +56,7 @@ export const RandomRecipes = () => {
               },
             }}
             modules={[Autoplay]}
-            loop={true}
+            // loop={true}
             autoplay={{
               delay: 0,
               reverseDirection: false,
@@ -56,7 +65,7 @@ export const RandomRecipes = () => {
             speed={8000}
           >
             {data
-              ? data.results.map((recipe) => (
+              ? data.recipes.map((recipe) => (
                   <SwiperSlide
                     key={recipe.id}
                     className="p-3 gap-10 bg-gray-100 border border-gray-200 drop-shadow-md rounded-lg"
@@ -67,16 +76,18 @@ export const RandomRecipes = () => {
                       alt={recipe.title}
                     />
 
-                    <div className="mb-1 text-xl text-gray-800 font-semibold h-[55px] mt-4">
-                      {recipe.title}
+                    <div className="mb-1 text-md text-gray-800 font-semibold h-[45px] sm:h-[70px] mt-4">
+                      {truncateString(recipe.title, 45)}
                     </div>
+
+                    <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-gray-100 pl-1 mb-2"></div>
 
                     <div className="flex justify-between">
                       <div className="text-xs text-gray-800">
-                        {recipe.preptime}
+                        Time: {recipe.readyInMinutes} min
                       </div>
                       <div className="text-xs text-gray-800">
-                        {recipe.rating}
+                        Score: {Number(recipe.spoonacularScore.toFixed(2))}
                       </div>
                     </div>
                   </SwiperSlide>
@@ -88,3 +99,6 @@ export const RandomRecipes = () => {
     </div>
   );
 };
+
+//700px-819px : jump from 2 to 4 cards and text doesn't fit anymore. would be ok, if 2 -> 4 would happen at 820px (not 700px)
+//prolly have to create custom breakpoints?
