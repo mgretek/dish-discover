@@ -22,7 +22,7 @@ export const RandomRecipes = () => {
   //For production - API call
   useEffect(() => {
     fetch(
-      "https://api.spoonacular.com/recipes/random?number=12&apiKey=8c7408891f0843b7a5b62b8bd041580d"
+      "https://api.spoonacular.com/recipes/random?number=24&apiKey=8c7408891f0843b7a5b62b8bd041580d"
     )
       .then((response) => response.json())
       .then((json) => setData(json))
@@ -56,7 +56,7 @@ export const RandomRecipes = () => {
               },
             }}
             modules={[Autoplay]}
-            // loop={true}
+            loop={true}
             autoplay={{
               delay: 0,
               reverseDirection: false,
