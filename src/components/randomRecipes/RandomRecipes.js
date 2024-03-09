@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
+import { Link } from "react-router-dom";
+
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/autoplay";
@@ -19,7 +21,7 @@ function truncateString(str, maxLength) {
 export const RandomRecipes = () => {
   const [data, setData] = useState(null);
 
-  //For production - API call
+  //API call fetches 24 random recipes
   useEffect(() => {
     fetch(
       "https://api.spoonacular.com/recipes/random?number=24&apiKey=8c7408891f0843b7a5b62b8bd041580d"
@@ -77,9 +79,11 @@ export const RandomRecipes = () => {
                       alt={recipe.title}
                     />
 
-                    <div className="mb-1 text-md text-gray-800 font-semibold h-[45px] sm:h-[70px] mt-4">
-                      {truncateString(recipe.title, 45)}
-                    </div>
+                    <Link to={`/recipe/${recipe.id}`}>
+                      <div className="mb-1 text-md text-gray-800 font-semibold h-[45px] sm:h-[70px] mt-4">
+                        {truncateString(recipe.title, 45)}
+                      </div>
+                    </Link>
 
                     <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-gray-100 pl-1 mb-2"></div>
 
