@@ -47,8 +47,9 @@ export const RandomRecipes = () => {
                 pauseOnMouseEnter: true,
                 disableOnInteraction: false,
               },
-              750: {
-                width: 750,
+              700: {
+                width: 700,
+
                 slidesPerView: 4,
                 spaceBetween: 15,
                 pauseOnMouseEnter: true,
