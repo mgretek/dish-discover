@@ -4,6 +4,8 @@ import { addToWishlist } from "../components/wishlist/wishlists";
 import { HeartIcon } from "../components/icons/HeartIcon";
 import { RecipeSteps } from "../components/RecipeSteps";
 import { Toggle } from "../components/toggle/Toggle";
+import { addToShoppinglist } from "../components/shoppinglist/shoppinglist";
+import { CartIcon } from "../components/icons/CartIcon";
 
 // For WishListPopover
 import { Popover, Transition } from "@headlessui/react";
@@ -211,6 +213,7 @@ const recipeTemplate = {
     "https://spoonacular.com/grilled-peach-melba-with-vanilla-bean-frozen-yogurt-716421",
 };
 
+const apiKey = "33850490cff6451f9704d9b995785d53";
 // const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
 // const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
 // const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
@@ -361,6 +364,17 @@ export const Recipe = () => {
                       )}
                     </Popover>
                   </div>
+                </div>
+                <div className="flex gap-1.5 items-center pr-2 flex-row-reverse">
+                  <div className="text-right text-xs md:text-md text-gray-500 italic">
+                    Add to shoppinglist
+                  </div>
+                  <button
+                    className="btn text-gray-600 rounded-md"
+                    onClick={() => addToShoppinglist(0, recipe, 2)}
+                  >
+                    <CartIcon />
+                  </button>
                 </div>
               </div>
 
