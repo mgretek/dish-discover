@@ -18,22 +18,32 @@ function truncateString(str, maxLength) {
   return str;
 }
 
-const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
+// const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
 // const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
 // const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
+const apiKey = "abebc2e2899343ea9485cc2a513f6a4c"; //10minutemail.one
 
 export const RandomRecipes = () => {
   const [data, setData] = useState(null);
 
-  //API call fetches 24 random recipes
   useEffect(() => {
-    fetch(
-      `https://api.spoonacular.com/recipes/random?number=24&apiKey=${apiKey}`
-    )
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.error(error));
+    if (sessionStorage.getItem("randomRecipes")) {
+      let unparsedData = sessionStorage.getItem("randomRecipes");
+      setData(JSON.parse(unparsedData));
+    } else {
+      console.log("doing an api call");
+      fetch(
+        `https://api.spoonacular.com/recipes/random?number=24&apiKey=${apiKey}`
+      )
+        .then((response) => response.json())
+        .then((json) => setData(json))
+        .catch((error) => console.error(error));
+    }
   }, []);
+
+  if (data) {
+    sessionStorage.setItem("randomRecipes", JSON.stringify(data));
+  }
 
   // //Only for development – using dummy data instead of API
   // useEffect(() => {
@@ -43,7 +53,7 @@ export const RandomRecipes = () => {
   return (
     <div>
       <div>
-        <div className="flex gap-5 items-center justify-center">
+        <div className="flex gap-5 items-center justify-center mb-6">
           <Swiper
             breakpoints={{
               340: {
