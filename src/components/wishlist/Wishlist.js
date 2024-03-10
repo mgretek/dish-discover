@@ -135,8 +135,29 @@ export const WishItem = ({
             <p className="mx-3">|</p>
             <h3>Ingredients: 4</h3>
           </div>
+
           <div className="aspect-square max-h-40 mt-4 overflow-hidden">
-            <img src={recipe.image} alt={recipe.title} />
+            {/* <img src={recipe.image} alt={recipe.title} /> */}
+            <div className="aspect-w-4 aspect-h-3">
+              {recipe.image ? (
+                <img
+                  className="mb-2 rounded-lg "
+                  src={recipe.image}
+                  alt={recipe.title}
+                />
+              ) : (
+                <div
+                  className="flex items-start pt-16 justify-start w-full h-full bg-right bg-cover mb-2 rounded-lg"
+                  style={{
+                    backgroundImage: "url(/images/placeholder-min.jpg)",
+                  }}
+                >
+                  <span className="text-xl font-semibold text-gray-500 w-2/3 pl-3 text-center">
+                    Sorry, no image available
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

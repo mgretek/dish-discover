@@ -601,6 +601,12 @@ export const RecipeSearch = () => {
     setIsLoading(false);
   }
 
+  const handleKeyPush = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="min-h-screen max-w-[576px] md:max-w-7xl mx-auto">
       <div className="flex flex-wrap mx-2 md:mx-auto md:px-20">
@@ -616,6 +622,7 @@ export const RecipeSearch = () => {
               placeholder="Search..."
               className="h-10 pl-2 bg-gray-50 flex border rounded-sm border-gray-300 text-gray-800 text-md w-full focus:outline-none focus:ring-2 focus:ring-violet-300"
               onChange={(e) => handleInput(e.target.value)}
+              onKeyDown={handleKeyPush}
             />
             <button
               className="absolute right-0 top-0 h-full px-3"

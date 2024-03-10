@@ -291,8 +291,8 @@ export const Recipe = () => {
 
           <div className="lg:flex md:gap-x-12">
             {/* INGREDIENTS & CONVERSION TOGGLE */}
-            <div className="mb-14 min-w-[30%]">
-              <div className="flex justify-between">
+            <div className="mb-14 min-w-[35%]">
+              <div className="flex justify-between gap-x-2">
                 <div className="font-bold text-gray-800 text-lg md:text-xl">
                   Ingredients
                 </div>
