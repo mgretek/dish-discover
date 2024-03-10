@@ -73,26 +73,44 @@ export const RandomRecipes = () => {
                     key={recipe.id}
                     className="p-3 gap-10 bg-gray-100 border border-gray-200 drop-shadow-md rounded-lg"
                   >
-                    <img
-                      className="mb-2 rounded-lg w-max h-auto"
-                      src={recipe.image}
-                      alt={recipe.title}
-                    />
-
-                    <Link to={`/recipe/${recipe.id}`}>
-                      <div className="mb-1 text-md text-gray-800 font-semibold h-[45px] sm:h-[70px] mt-4">
-                        {truncateString(recipe.title, 45)}
+                    <div>
+                      <div className="aspect-w-4 aspect-h-3">
+                        {recipe.image ? (
+                          <img
+                            className="mb-2 rounded-lg "
+                            src={recipe.image}
+                            alt={recipe.title}
+                          />
+                        ) : (
+                          <div
+                            className="flex items-center justify-start w-full h-full bg-right bg-cover mb-2 rounded-lg"
+                            style={{
+                              backgroundImage:
+                                "url(/images/placeholder-min.jpg)",
+                            }}
+                          >
+                            <span className="text-xs font-semibold text-gray-600 w-2/6 pl-3">
+                              Sorry, no image available
+                            </span>
+                          </div>
+                        )}
                       </div>
-                    </Link>
 
-                    <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-gray-100 pl-1 mb-2"></div>
+                      <Link to={`/recipe/${recipe.id}`}>
+                        <div className="mb-1 text-md text-gray-800 font-semibold h-[45px] sm:h-[70px] mt-4">
+                          {truncateString(recipe.title, 45)}
+                        </div>
+                      </Link>
 
-                    <div className="flex justify-between">
-                      <div className="text-xs text-gray-800">
-                        Time: {recipe.readyInMinutes} min
-                      </div>
-                      <div className="text-xs text-gray-800">
-                        Score: {Number(recipe.spoonacularScore.toFixed(2))}
+                      <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-gray-100 pl-1 mb-2"></div>
+
+                      <div className="flex justify-between">
+                        <div className="text-xs text-gray-800">
+                          Time: {recipe.readyInMinutes} min
+                        </div>
+                        <div className="text-xs text-gray-800">
+                          Score: {Number(recipe.spoonacularScore.toFixed(2))}
+                        </div>
                       </div>
                     </div>
                   </SwiperSlide>
