@@ -4,6 +4,8 @@ import { addToWishlist } from "../components/wishlist/wishlists";
 import { HeartIcon } from "../components/icons/HeartIcon";
 import { RecipeSteps } from "../components/RecipeSteps";
 import { Toggle } from "../components/toggle/Toggle";
+import { addToShoppinglist } from "../components/shoppinglist/shoppinglist";
+import { CartIcon } from "../components/icons/CartIcon";
 
 const recipeTemplate = {
   vegetarian: true,
@@ -201,7 +203,7 @@ export const Recipe = () => {
     const fetchRecipe = async () => {
       try {
         const response = await fetch(
-          `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=ce8f62b9c28943eeb68a1f734847059a`
+          `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=33850490cff6451f9704d9b995785d53`
         );
         const json = await response.json();
         setRecipe(json);
@@ -265,6 +267,17 @@ export const Recipe = () => {
                     onClick={() => addToWishlist(2, recipe)}
                   >
                     <HeartIcon />
+                  </button>
+                </div>
+                <div className="flex gap-1.5 items-center pr-2 flex-row-reverse">
+                  <div className="text-right text-xs md:text-md text-gray-500 italic">
+                    Add to shoppinglist
+                  </div>
+                  <button
+                    className="btn text-gray-600 rounded-md"
+                    onClick={() => addToShoppinglist(0, recipe, 2)}
+                  >
+                    <CartIcon />
                   </button>
                 </div>
               </div>
