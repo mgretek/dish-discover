@@ -1,6 +1,6 @@
 export const PencilIcon = ({ onClick }) => {
   return (
-    <div className="flex">
+    <div className="flex cursor-pointer">
       <svg
         onClick={onClick}
         xmlns="http://www.w3.org/2000/svg"
