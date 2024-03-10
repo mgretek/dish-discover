@@ -219,24 +219,44 @@ export const Recipe = () => {
         <div class="flex flex-wrap mx-2 md:mx-auto mt-10 md:px-20">
           <div className="md:flex md:gap-x-3 md:pb-14">
             {/* IMG */}
-            <div>
-              <img
+            <div className="w-full md:w-2/6">
+              {/* <img
                 className="rounded mb-2"
                 src={recipe.image}
                 alt={recipe.title}
-              />
+              /> */}
+              <div className="aspect-w-4 aspect-h-3">
+                {recipe.image ? (
+                  <img
+                    className="mb-2 rounded-lg "
+                    src={recipe.image}
+                    alt={recipe.title}
+                  />
+                ) : (
+                  <div
+                    className="flex items-center justify-start w-full h-full bg-right bg-cover mb-2 rounded-lg"
+                    style={{
+                      backgroundImage: "url(/images/placeholder-min.jpg)",
+                    }}
+                  >
+                    <span className="text-xl md:text-xs font-semibold text-gray-500 w-2/3 pl-3 text-center">
+                      Sorry, no image available
+                    </span>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* TITLE & DESCRIPTION */}
             <div className="mb-6 w-full md:mb-0">
               {/* Title + "Add to wishlist" button */}
-              <div className="flex my-4 items-center justify-between gap-x-4 md:mt-2 md:mb-4">
+              <div className="flex flex-wrap xl:flex-nowrap my-4 items-center justify-between gap-x-4 gap-y-3 xl:gap-y-0 md:mt-2 md:mb-4">
                 <div>
                   <h1 className="text-3xl font-bold md:text-5xl text-gray-800">
                     {recipe.title}
                   </h1>
                 </div>
-                <div className="flex gap-1.5 items-center pr-2">
+                <div className="flex gap-1.5 items-center pr-2 flex-row-reverse">
                   <div className="text-right text-xs md:text-md text-gray-500 italic">
                     Add to wishlist
                   </div>
