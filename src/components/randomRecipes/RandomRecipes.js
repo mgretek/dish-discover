@@ -100,7 +100,7 @@ export const RandomRecipes = () => {
                 {data.recipes.map((recipe) => (
                   <div className="pr-8">
                     <div
-                      className="p-3 bg-gray-100 border border-gray-200 drop-shadow-md rounded-lg"
+                      className="p-3 bg-gray-50 border border-gray-200 drop-shadow-md rounded-lg"
                       key={recipe.id}
                     >
                       <div>
@@ -127,7 +127,7 @@ export const RandomRecipes = () => {
                         </div>
 
                         <Link to={`/recipe/${recipe.id}`}>
-                          <div className="mb-1 text-md text-gray-800 font-semibold h-[45px] sm:h-[70px] mt-4">
+                          <div className="mb-1 text-md md:text-lg text-gray-800 font-semibold h-[45px] sm:h-[70px] mt-4">
                             {/* {truncateString(recipe.title, 45)} */}
                             {recipe.title}
                           </div>

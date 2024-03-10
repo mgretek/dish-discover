@@ -137,11 +137,10 @@ export const WishItem = ({
           </div>
 
           <div className="aspect-square max-h-40 mt-4 overflow-hidden">
-            {/* <img src={recipe.image} alt={recipe.title} /> */}
             <div className="aspect-w-4 aspect-h-3">
               {recipe.image ? (
                 <img
-                  className="mb-2 rounded-lg "
+                  className="mb-2 rounded-lg"
                   src={recipe.image}
                   alt={recipe.title}
                 />
