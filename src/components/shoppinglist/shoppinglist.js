@@ -38,3 +38,26 @@ export async function addToShoppinglist(listId, recipe, quantity) {
     return false;
   }
 }
+export async function deleteRecipeById(listId, recipeId) {
+  const db = getDatabase();
+  const dbRef = ref(db, `shoppinglists/${listId}`);
+
+  try {
+    const shoppinglistSnapshot = await get(dbRef);
+    let shoppinglistObj = shoppinglistSnapshot.val() || {};
+
+    let shoppinglistArr = Object.values(shoppinglistObj);
+
+    const filteredArr = shoppinglistArr.filter((item) => item.id !== recipeId);
+
+    await set(ref(db, `shoppinglists/${listId}`), filteredArr);
+
+    console.log(
+      `Recipe with id ${recipeId} deleted from shoppinglist ${listId}`
+    );
+    return true;
+  } catch (error) {
+    console.error("Error deleting recipe with id", recipeId);
+    return false;
+  }
+}
