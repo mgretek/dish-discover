@@ -550,6 +550,10 @@ const data = {
   totalResults: 29,
 };
 
+const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
+// const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
+// const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
+
 export const RecipeSearch = () => {
   const [searchType, setSearchType] = useState("name");
   const [filter, setFilter] = useState("both");
@@ -588,7 +592,7 @@ export const RecipeSearch = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${searchInput}&addRecipeInformation=true&fillIngredients&number=10&apiKey=8c7408891f0843b7a5b62b8bd041580d`
+        `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${searchInput}&addRecipeInformation=true&fillIngredients&number=10&apiKey=${apiKey}`
       );
       console.log(response);
 

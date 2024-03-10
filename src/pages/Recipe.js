@@ -7,6 +7,31 @@ import { Toggle } from "../components/toggle/Toggle";
 import { addToShoppinglist } from "../components/shoppinglist/shoppinglist";
 import { CartIcon } from "../components/icons/CartIcon";
 
+// For WishListPopover
+import { Popover, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+// import { HeartIcon } from "./icons/HeartIcon";
+// import { addToWishlist } from "../components/wishlist/wishlists";
+
+// For WishListPopover
+const Wishlists = [
+  {
+    name: "List 1",
+    description: "Measure actions your users take",
+    href: "##",
+  },
+  {
+    name: "List 2",
+    description: "Create your own targeted content",
+    href: "##",
+  },
+  {
+    name: "List 3",
+    description: "Keep track of your growth",
+    href: "##",
+  },
+];
+
 const recipeTemplate = {
   vegetarian: true,
   vegan: false,
@@ -188,6 +213,11 @@ const recipeTemplate = {
     "https://spoonacular.com/grilled-peach-melba-with-vanilla-bean-frozen-yogurt-716421",
 };
 
+const apiKey = "33850490cff6451f9704d9b995785d53";
+// const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
+// const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
+// const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
+
 export const Recipe = () => {
   let { id } = useParams();
   const [recipe, setRecipe] = useState(recipeTemplate);
@@ -203,7 +233,7 @@ export const Recipe = () => {
     const fetchRecipe = async () => {
       try {
         const response = await fetch(
-          `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=33850490cff6451f9704d9b995785d53`
+          `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${apiKey}`
         );
         const json = await response.json();
         setRecipe(json);
@@ -222,11 +252,6 @@ export const Recipe = () => {
           <div className="md:flex md:gap-x-3 md:pb-14">
             {/* IMG */}
             <div className="w-full md:w-2/6">
-              {/* <img
-                className="rounded mb-2"
-                src={recipe.image}
-                alt={recipe.title}
-              /> */}
               <div className="aspect-w-4 aspect-h-3">
                 {recipe.image ? (
                   <img
@@ -262,12 +287,83 @@ export const Recipe = () => {
                   <div className="text-right text-xs md:text-md text-gray-500 italic">
                     Add to wishlist
                   </div>
-                  <button
+                  {/* Old solution */}
+                  {/* <button
                     className="btn text-gray-600 rounded-md"
                     onClick={() => addToWishlist(2, recipe)}
                   >
                     <HeartIcon />
-                  </button>
+                  </button> */}
+
+                  {/* <div>
+                    <WishListPopover />
+                  </div> */}
+                  {/* Popover for development */}
+                  <div className="">
+                    <Popover className="">
+                      {({ open }) => (
+                        <>
+                          <Popover.Button className="btn text-gray-600 rounded-md">
+                            {" "}
+                            <HeartIcon />
+                          </Popover.Button>
+                          <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-200"
+                            enterFrom="opacity-0 translate-y-1"
+                            enterTo="opacity-100 translate-y-0"
+                            leave="transition ease-in duration-150"
+                            leaveFrom="opacity-100 translate-y-0"
+                            leaveTo="opacity-0 translate-y-1"
+                          >
+                            <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-[50%] max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
+                              <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
+                                <div className="relative grid bg-white px-2 pt-2">
+                                  <div className="cursor-pointer p-1.5 mx-1.5 flow-root rounded-md transition duration-150 ease-in-out hover:bg-gray-100">
+                                    <div className="flex justify-end gap-x-2">
+                                      <div className="text-sm font-medium text-gray-700">
+                                        Create new
+                                      </div>
+                                      <div className="flex justify-center w-6 h-6 bg-violet-100 rounded-full font-bold text-gray-700">
+                                        <div className="self-center">
+                                          <svg
+                                            className="text-gray-700 w-3"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 448 512"
+                                          >
+                                            <path
+                                              fill="currentColor"
+                                              d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                                            />
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="h-1 ml-1.5 mb-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white"></div>
+
+                                  {Wishlists.map((item) => (
+                                    <div className="mb-1.5 mt-1.5 flex items-center rounded-lg px-1.5 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50">
+                                      <div className="text-sm font-medium text-gray-900">
+                                        <button
+                                          onClick={() =>
+                                            addToWishlist(2, recipe)
+                                          }
+                                          className="flex items-center justify-between"
+                                        >
+                                          {item.name}
+                                        </button>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </Popover.Panel>
+                          </Transition>
+                        </>
+                      )}
+                    </Popover>
+                  </div>
                 </div>
                 <div className="flex gap-1.5 items-center pr-2 flex-row-reverse">
                   <div className="text-right text-xs md:text-md text-gray-500 italic">
