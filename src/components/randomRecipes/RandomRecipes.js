@@ -60,6 +60,7 @@ export const RandomRecipes = () => {
     pauseOnHover: true,
     swipeToSlide: true,
     centerMode: true,
+    arrows: false,
 
     responsive: [
       {
