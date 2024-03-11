@@ -28,6 +28,27 @@ export async function saveWishlist({ wishLists }) {
     return false;
   }
 }
+export async function removeFromWishlist(listId, recipe) {
+  const db = getDatabase();
+  const dbRef = ref(db, `wishlists/${listId}/recipes`);
+
+  try {
+    const wishlistSnapshot = await get(dbRef);
+    let wishlistObj = wishlistSnapshot.val() || {};
+
+    let wishlistArr = Object.values(wishlistObj);
+
+    const filteredArr = wishlistArr.filter((item) => item.id !== recipe.id);
+
+    await set(ref(db, `wishlists/${listId}/recipes`), filteredArr);
+
+    console.log("Recipe added to wishlist:", recipe);
+    return true;
+  } catch (error) {
+    console.error("Error adding recipe to wishlist:", error);
+    return false;
+  }
+}
 
 export async function addToWishlist(listId, recipe) {
   const db = getDatabase();

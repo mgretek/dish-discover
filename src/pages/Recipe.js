@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { addToWishlist } from "../components/wishlist/wishlists";
+import {
+  addToWishlist,
+  getAllWishlists,
+  removeFromWishlist,
+} from "../components/wishlist/wishlists";
 import { HeartIcon } from "../components/icons/HeartIcon";
 import { RecipeSteps } from "../components/RecipeSteps";
 import { Toggle } from "../components/toggle/Toggle";
@@ -16,17 +20,17 @@ import { Fragment } from "react";
 // For WishListPopover
 const Wishlists = [
   {
-    name: "List 1",
+    title: "List 1",
     description: "Measure actions your users take",
     href: "##",
   },
   {
-    name: "List 2",
+    title: "List 2",
     description: "Create your own targeted content",
     href: "##",
   },
   {
-    name: "List 3",
+    title: "List 3",
     description: "Keep track of your growth",
     href: "##",
   },
@@ -213,7 +217,8 @@ const recipeTemplate = {
     "https://spoonacular.com/grilled-peach-melba-with-vanilla-bean-frozen-yogurt-716421",
 };
 
-const apiKey = "33850490cff6451f9704d9b995785d53";
+const apiKey = "da2c9951c50f4074ad413ff879110743";
+// const apiKey = "33850490cff6451f9704d9b995785d53";
 // const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
 // const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
 // const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
@@ -223,11 +228,50 @@ export const Recipe = () => {
   const [recipe, setRecipe] = useState(recipeTemplate);
   const [measureType, setMeasureType] = useState("us");
   const [isFetched, setIsFetched] = useState(false);
+  const [wishlists, setWishlists] = useState([]);
+
+  function handleRemoveRecipe(listIndex, recipe) {
+    const filteredRecipes = wishlists[listIndex].recipes.filter(
+      (item) => item.id !== recipe.id
+    );
+    const updatedWishlists = [...wishlists];
+    updatedWishlists[listIndex] = {
+      ...wishlists[listIndex],
+      recipes: filteredRecipes,
+    };
+    setWishlists(updatedWishlists);
+    removeFromWishlist(listIndex, recipe);
+  }
+  function handleAddRecipe(listIndex, recipe) {
+    const updatedWishlists = [...wishlists];
+    if (wishlists[listIndex].recipes) {
+      updatedWishlists[listIndex] = {
+        ...wishlists[listIndex],
+        recipes: [...wishlists[listIndex].recipes, recipe],
+      };
+    } else {
+      updatedWishlists[listIndex] = {
+        ...wishlists[listIndex],
+        recipes: [recipe],
+      };
+    }
+    setWishlists(updatedWishlists);
+    addToWishlist(listIndex, recipe);
+  }
 
   function toggleMeasure() {
     const newMeasure = measureType === "us" ? "metric" : "us";
     setMeasureType(newMeasure);
   }
+  // import wishlists from firebase for dropdown list display
+  useEffect(() => {
+    async function fetchWishlists() {
+      const allWishlists = await getAllWishlists();
+      setWishlists(allWishlists);
+      console.log(allWishlists);
+    }
+    fetchWishlists();
+  }, []);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -342,16 +386,37 @@ export const Recipe = () => {
                                   </div>
                                   <div className="h-1 ml-1.5 mb-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white"></div>
 
-                                  {Wishlists.map((item) => (
+                                  {wishlists.map((item, index) => (
                                     <div className="mb-1.5 mt-1.5 flex items-center rounded-lg px-1.5 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50">
-                                      <div className="text-sm font-medium text-gray-900">
+                                      <div className="text-sm font-medium text-gray-900 flex">
+                                        {item.recipes &&
+                                        item.recipes.some(
+                                          (recipe) => recipe.id == id
+                                        ) ? (
+                                          <input
+                                            type="checkbox"
+                                            className="mr-2"
+                                            checked={true}
+                                            onClick={() =>
+                                              handleRemoveRecipe(index, recipe)
+                                            }
+                                          ></input>
+                                        ) : (
+                                          <input
+                                            type="checkbox"
+                                            className="mr-2"
+                                            onClick={() =>
+                                              handleAddRecipe(index, recipe)
+                                            }
+                                          ></input>
+                                        )}
                                         <button
                                           onClick={() =>
                                             addToWishlist(2, recipe)
                                           }
                                           className="flex items-center justify-between"
                                         >
-                                          {item.name}
+                                          {item.title}
                                         </button>
                                       </div>
                                     </div>
