@@ -248,7 +248,7 @@ export const Recipe = () => {
   return (
     <div className="min-h-screen max-w-[576px] md:max-w-7xl mx-auto">
       {isFetched && (
-        <div class="flex flex-wrap mx-2 md:mx-auto mt-10 md:px-20">
+        <div className="flex flex-wrap mx-2 md:mx-auto mt-10 md:px-20">
           <div className="md:flex md:gap-x-3 md:pb-14">
             {/* IMG */}
             <div className="w-full md:w-2/6">
@@ -298,7 +298,7 @@ export const Recipe = () => {
                   {/* <div>
                     <WishListPopover />
                   </div> */}
-                  {/* Popover for development */}
+                  {/* Popover in development */}
                   <div className="">
                     <Popover className="">
                       {({ open }) => (

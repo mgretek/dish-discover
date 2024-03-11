@@ -18,7 +18,7 @@ export const Toggle = () => {
     >
       <motion.div
         className="w-3 h-3 bg-white rounded-full"
-        animate={{ x: isOn ? "130%" : "0%" }}
+        animate={{ x: isOn ? "0%" : "0%" }}
         transition={{ type: "spring", stiffness: 700, damping: 40 }}
       />
     </div>
