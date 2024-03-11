@@ -217,11 +217,11 @@ const recipeTemplate = {
     "https://spoonacular.com/grilled-peach-melba-with-vanilla-bean-frozen-yogurt-716421",
 };
 
-const apiKey = "da2c9951c50f4074ad413ff879110743";
+// const apiKey = "da2c9951c50f4074ad413ff879110743";
 // const apiKey = "33850490cff6451f9704d9b995785d53";
 // const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
 // const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
-// const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
+const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
 
 export const Recipe = () => {
   let { id } = useParams();
@@ -331,18 +331,6 @@ export const Recipe = () => {
                   <div className="text-right text-xs md:text-md text-gray-500 italic">
                     Add to wishlist
                   </div>
-                  {/* Old solution */}
-                  {/* <button
-                    className="btn text-gray-600 rounded-md"
-                    onClick={() => addToWishlist(2, recipe)}
-                  >
-                    <HeartIcon />
-                  </button> */}
-
-                  {/* <div>
-                    <WishListPopover />
-                  </div> */}
-                  {/* Popover in development */}
                   <div className="">
                     <Popover className="">
                       {({ open }) => (
@@ -393,31 +381,37 @@ export const Recipe = () => {
                                         item.recipes.some(
                                           (recipe) => recipe.id == id
                                         ) ? (
-                                          <input
-                                            type="checkbox"
-                                            className="mr-2"
-                                            checked={true}
+                                          <div
+                                            className="flex"
                                             onClick={() =>
                                               handleRemoveRecipe(index, recipe)
                                             }
-                                          ></input>
+                                          >
+                                            <input
+                                              type="checkbox"
+                                              className="mr-2"
+                                              checked={true}
+                                            ></input>
+                                            <button className="flex items-center justify-between">
+                                              {item.title}
+                                            </button>
+                                          </div>
                                         ) : (
-                                          <input
-                                            type="checkbox"
-                                            className="mr-2"
+                                          <div
+                                            className="flex"
                                             onClick={() =>
                                               handleAddRecipe(index, recipe)
                                             }
-                                          ></input>
+                                          >
+                                            <input
+                                              type="checkbox"
+                                              className="mr-2"
+                                            ></input>
+                                            <button className="flex items-center justify-between">
+                                              {item.title}
+                                            </button>
+                                          </div>
                                         )}
-                                        <button
-                                          onClick={() =>
-                                            addToWishlist(2, recipe)
-                                          }
-                                          className="flex items-center justify-between"
-                                        >
-                                          {item.title}
-                                        </button>
                                       </div>
                                     </div>
                                   ))}
