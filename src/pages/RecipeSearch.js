@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { loadWishlists } from "../components/wishlist/wishlists";
+/* import { loadWishlists } from "../components/wishlist/wishlists"; */
 import { Loading } from "../components/loading/Loading";
 
 const data = {
@@ -630,8 +630,7 @@ export const RecipeSearch = () => {
             />
             <button
               className="absolute right-0 top-0 h-full px-3"
-              onClick={handleSearch}
-            >
+              onClick={handleSearch}>
               <div className="w-4 text-violet-400">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                   <path
@@ -653,8 +652,7 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => handleFilter("meals")}
-              >
+                onClick={() => handleFilter("meals")}>
                 <span className="px-2 py-1">Meals</span>
               </button>
 
@@ -664,8 +662,7 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => handleFilter("drink")}
-              >
+                onClick={() => handleFilter("drink")}>
                 <span className="px-2">Drinks</span>
               </button>
               <button
@@ -674,8 +671,7 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => handleFilter("both")}
-              >
+                onClick={() => handleFilter("both")}>
                 <span className="px-2">Both</span>
               </button>
             </div>
@@ -688,8 +684,7 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => setSearchType("incredients")}
-              >
+                onClick={() => setSearchType("incredients")}>
                 <span className="px-2">Ingredient</span>
               </button>
               <button
@@ -698,8 +693,7 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => setSearchType("name")}
-              >
+                onClick={() => setSearchType("name")}>
                 <span className="px-2">Name</span>
               </button>
             </div>

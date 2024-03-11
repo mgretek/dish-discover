@@ -8,16 +8,22 @@ import {
   getShoppinglist,
 } from "../components/shoppinglist/shoppinglist";
 import { Toggle } from "../components/toggle/Toggle";
+/* import { Loading } from "../components/loading/Loading"; */
 
 export const Shoppinglist = () => {
   const [shoppinglist, setShoppingList] = useState([]);
   const [user] = useAuthState(auth);
   const [measureType, setMeasureType] = useState("us");
+  /* const [isLoading, setIsLoading] = useState(false); */
 
   function toggleMeasure() {
     const newMeasure = measureType === "us" ? "metric" : "us";
     setMeasureType(newMeasure);
   }
+
+  /* function refreshPage() {
+    window.location.reload(false);
+  } */
 
   useEffect(() => {
     async function fetchShoppingList() {
@@ -40,11 +46,15 @@ export const Shoppinglist = () => {
             <Toggle />
           </button>
           {shoppinglist.map((item) => (
-            <div className="flex flex-row gap-3 m-3 w-max">
+            <div className="flex flex-row gap-3 m-3">
               <p className="font-bold">{item.title}</p>
-              <p>{item.ingredients[0].name}</p>
-              <p>{item.ingredients[0].measures[measureType].amount}</p>
-              <p>{item.ingredients[0].measures[measureType].unitLong}</p>
+              {item.ingredients.map((ingredient) => (
+                <div className="border-b-black border-2">
+                  <p>{ingredient.name}</p>
+                  <p>{ingredient.amount}</p>
+                  <p>{ingredient.measures[measureType].unitLong}</p>
+                </div>
+              ))}
               <button
                 className="text-red-600"
                 onClick={() => deleteRecipeById(0, item.id)}>
