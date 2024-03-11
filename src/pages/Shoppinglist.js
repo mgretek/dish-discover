@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import { Link } from "react-router-dom";
 
-import { getShoppinglist } from "../components/shoppinglist/shoppinglist";
+import {
+  deleteRecipeById,
+  getShoppinglist,
+} from "../components/shoppinglist/shoppinglist";
 
 export const Shoppinglist = () => {
   const [shoppinglist, setShoppingList] = useState([]);
@@ -31,6 +34,11 @@ export const Shoppinglist = () => {
               <p>{item.title}</p>
             </div>
           ))}
+          {/* <button onClick={() => deleteRecipeById(0, 646486)}>
+            Delete
+            Sellise funktsiooniga saab kustutada ka, esimene on listId ja teine
+            itemId
+          </button> */}
         </div>
       ) : (
         <div className="flex flex-col">
