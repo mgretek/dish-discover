@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import { useParams } from "react-router-dom";
 import {
   addToWishlist,
   getAllWishlists,
   removeFromWishlist,
+  saveWishlist,
 } from "../components/wishlist/wishlists";
 import { HeartIcon } from "../components/icons/HeartIcon";
 import { RecipeSteps } from "../components/RecipeSteps";
@@ -14,6 +17,7 @@ import { CartIcon } from "../components/icons/CartIcon";
 // For WishListPopover
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { CreateNewWishlist } from "../components/CreateNewWishlist";
 // import { HeartIcon } from "./icons/HeartIcon";
 // import { addToWishlist } from "../components/wishlist/wishlists";
 
@@ -230,6 +234,14 @@ export const Recipe = () => {
   const [isFetched, setIsFetched] = useState(false);
   const [wishlists, setWishlists] = useState([]);
 
+  const [newTitle, setNewTitle] = useState("");
+
+  function addNewList({ title }) {
+    const newId = uuidv4();
+    const newArr = [...wishlists, { title: title, recipes: [], id: newId }];
+    setWishlists(newArr);
+    saveWishlist({ wishLists: newArr });
+  }
   function handleRemoveRecipe(listIndex, recipe) {
     const filteredRecipes = wishlists[listIndex].recipes.filter(
       (item) => item.id !== recipe.id
@@ -308,7 +320,8 @@ export const Recipe = () => {
                     className="flex items-center justify-start w-full h-full bg-right bg-cover mb-2 rounded-lg"
                     style={{
                       backgroundImage: "url(/images/placeholder-min.jpg)",
-                    }}>
+                    }}
+                  >
                     <span className="text-xl md:text-xs font-semibold text-gray-500 w-2/3 pl-3 text-center">
                       Sorry, no image available
                     </span>
@@ -355,21 +368,21 @@ export const Recipe = () => {
                             enterTo="opacity-100 translate-y-0"
                             leave="transition ease-in duration-150"
                             leaveFrom="opacity-100 translate-y-0"
-                            leaveTo="opacity-0 translate-y-1">
+                            leaveTo="opacity-0 translate-y-1"
+                          >
                             <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-[50%] max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
                               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                                 <div className="relative grid bg-white px-2 pt-2">
                                   <div className="cursor-pointer p-1.5 mx-1.5 flow-root rounded-md transition duration-150 ease-in-out hover:bg-gray-100">
                                     <div className="flex justify-end gap-x-2">
-                                      <div className="text-sm font-medium text-gray-700">
-                                        Create new
-                                      </div>
+                                      <CreateNewWishlist />
                                       <div className="flex justify-center w-6 h-6 bg-violet-100 rounded-full font-bold text-gray-700">
                                         <div className="self-center">
                                           <svg
                                             className="text-gray-700 w-3"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512">
+                                            viewBox="0 0 448 512"
+                                          >
                                             <path
                                               fill="currentColor"
                                               d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
@@ -392,11 +405,13 @@ export const Recipe = () => {
                                             className="flex"
                                             onClick={() =>
                                               handleRemoveRecipe(index, recipe)
-                                            }>
+                                            }
+                                          >
                                             <input
                                               type="checkbox"
                                               className="mr-2"
-                                              checked={true}></input>
+                                              checked={true}
+                                            ></input>
                                             <button className="flex items-center justify-between">
                                               {item.title}
                                             </button>
@@ -406,10 +421,12 @@ export const Recipe = () => {
                                             className="flex"
                                             onClick={() =>
                                               handleAddRecipe(index, recipe)
-                                            }>
+                                            }
+                                          >
                                             <input
                                               type="checkbox"
-                                              className="mr-2"></input>
+                                              className="mr-2"
+                                            ></input>
                                             <button className="flex items-center justify-between">
                                               {item.title}
                                             </button>
@@ -433,7 +450,8 @@ export const Recipe = () => {
                   </div>
                   <button
                     className="btn text-gray-600 rounded-md"
-                    onClick={() => addToShoppinglist(0, recipe, 2)}>
+                    onClick={() => addToShoppinglist(0, recipe, 2)}
+                  >
                     <CartIcon />
                   </button>
                 </div>
@@ -449,7 +467,8 @@ export const Recipe = () => {
                   {recipe.dishTypes.map((type) => (
                     <button
                       key={type}
-                      className="mr-2 mb-2   text-gray-400 rounded">
+                      className="mr-2 mb-2   text-gray-400 rounded"
+                    >
                       #{type}
                     </button>
                   ))}
