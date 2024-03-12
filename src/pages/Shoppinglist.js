@@ -16,7 +16,17 @@ export const Shoppinglist = () => {
   const [user] = useAuthState(auth);
   const [measureType, setMeasureType] = useState("us");
 
+  function handleDeleteRecipe(id) {
+    // copy shoppinglist and filter deleted item out
+    const newShoppingList = shoppinglist.filter((recipe) => recipe.id !== id);
+    // update local state
+    setShoppingList(newShoppingList);
+    // update firebase database
+    deleteRecipeById(0, id);
+  }
+
   function handleIncrement(index, listIndex) {
+    // Copy shoppinglist object
     const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
     // Increment metric amount
     newShoppingList[listIndex].ingredients[index].measures.metric.amount += 1;
@@ -24,8 +34,9 @@ export const Shoppinglist = () => {
     newShoppingList[listIndex].ingredients[index].measures.us.amount += 1;
     // Increment general amount
     newShoppingList[listIndex].ingredients[index].amount += 1;
-
+    // update local state
     setShoppingList(newShoppingList);
+    // update firebase database
     saveShoppinglist(newShoppingList);
   }
   function handleDecrement(index, listIndex) {
@@ -37,7 +48,9 @@ export const Shoppinglist = () => {
     // Decrement general amount
     newShoppingList[listIndex].ingredients[index].amount -= 1;
     console.log("decremented some");
+    // update local state
     setShoppingList(newShoppingList);
+    // update firebase database
     saveShoppinglist(newShoppingList);
   }
 
@@ -84,7 +97,7 @@ export const Shoppinglist = () => {
                   <p className="flex-grow font-bold">{item.title}</p>
                   <button
                     className="text-red-600"
-                    onClick={() => deleteRecipeById(0, item.id)}
+                    onClick={() => handleDeleteRecipe(item.id)}
                   >
                     Delete
                   </button>
