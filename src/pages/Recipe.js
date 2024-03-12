@@ -337,7 +337,17 @@ export const Recipe = () => {
                         <>
                           <Popover.Button className="btn text-gray-600 rounded-md">
                             {" "}
-                            <HeartIcon />
+                            {wishlists.some(
+                              (wishlist) =>
+                                wishlist.recipes &&
+                                wishlist.recipes.some(
+                                  (item) => item.id === recipe.id
+                                )
+                            ) ? (
+                              <HeartIcon fill="currentColor" />
+                            ) : (
+                              <HeartIcon />
+                            )}
                           </Popover.Button>
                           <Transition
                             as={Fragment}
