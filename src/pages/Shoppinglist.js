@@ -7,10 +7,22 @@ import {
   deleteRecipeById,
   getShoppinglist,
 } from "../components/shoppinglist/shoppinglist";
+import { Toggle } from "../components/buttons/toggle/Toggle";
+import { Checkbox } from "../components/buttons/checkbox/checkbox";
 
 export const Shoppinglist = () => {
   const [shoppinglist, setShoppingList] = useState([]);
   const [user] = useAuthState(auth);
+  const [measureType, setMeasureType] = useState("us");
+
+  function toggleMeasure() {
+    const newMeasure = measureType === "us" ? "metric" : "us";
+    setMeasureType(newMeasure);
+  }
+
+  /* function refreshPage() {
+    window.location.reload(false);
+  } */
 
   useEffect(() => {
     async function fetchShoppingList() {
@@ -25,20 +37,45 @@ export const Shoppinglist = () => {
   }, []);
 
   return (
-    <div className="px-6 sm:px-16 mt-8 sm:mt-16 mx-6 sm:mx-auto max-w-[620px] min-h-full border-2 border-violet-200 rounded-md">
+    <div className="mx-4 md:px-20 xl:px-60 min-h-full">
       {user ? (
-        <div>
-          <h1>Shopping list</h1>
+        <div className="">
+          <div className="flex">
+            <h1 className="text-5xl text-left font-bold text-gray-800 py-10">
+              Your Shopping List
+            </h1>
+            <button className="px-3" onClick={toggleMeasure}>
+              Unit<Toggle></Toggle>
+            </button>
+          </div>
           {shoppinglist.map((item) => (
-            <div>
-              <p>{item.title}</p>
-            </div>
+            <>
+              <div className="flex flex-col border border-pink-200 content-center p-3 m-3">
+                <div className="flex">
+                  <p className="flex-grow font-bold">{item.title}</p>
+                  <button
+                    className="text-red-600"
+                    onClick={() => deleteRecipeById(0, item.id)}>
+                    Delete
+                  </button>
+                </div>
+
+                {item.ingredients.map((ingredient) => (
+                  <div className="flex justify-around border border-b-2 p-2 m-2 ">
+                    <p>{ingredient.name}</p>
+                    <p>
+                      {ingredient.measures[measureType].amount}
+                      <button className="ml-auto text-xl">+</button>
+                      <button className="ml-auto text-xl">-</button>
+                    </p>
+
+                    <p>{ingredient.measures[measureType].unitLong}</p>
+                    <Checkbox />
+                  </div>
+                ))}
+              </div>
+            </>
           ))}
-          {/* <button onClick={() => deleteRecipeById(0, 646486)}>
-            Delete
-            Sellise funktsiooniga saab kustutada ka, esimene on listId ja teine
-            itemId
-          </button> */}
         </div>
       ) : (
         <div className="flex flex-col">
@@ -55,8 +92,7 @@ export const Shoppinglist = () => {
           </p>
           <Link
             to={"/login"}
-            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 "
-          >
+            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 ">
             Sign in
           </Link>
         </div>

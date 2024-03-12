@@ -7,7 +7,7 @@ import {
 } from "../components/wishlist/wishlists";
 import { HeartIcon } from "../components/icons/HeartIcon";
 import { RecipeSteps } from "../components/RecipeSteps";
-import { Toggle } from "../components/toggle/Toggle";
+import { Toggle } from "../components/buttons/toggle/Toggle";
 import { addToShoppinglist } from "../components/shoppinglist/shoppinglist";
 import { CartIcon } from "../components/icons/CartIcon";
 
@@ -308,8 +308,7 @@ export const Recipe = () => {
                     className="flex items-center justify-start w-full h-full bg-right bg-cover mb-2 rounded-lg"
                     style={{
                       backgroundImage: "url(/images/placeholder-min.jpg)",
-                    }}
-                  >
+                    }}>
                     <span className="text-xl md:text-xs font-semibold text-gray-500 w-2/3 pl-3 text-center">
                       Sorry, no image available
                     </span>
@@ -356,8 +355,7 @@ export const Recipe = () => {
                             enterTo="opacity-100 translate-y-0"
                             leave="transition ease-in duration-150"
                             leaveFrom="opacity-100 translate-y-0"
-                            leaveTo="opacity-0 translate-y-1"
-                          >
+                            leaveTo="opacity-0 translate-y-1">
                             <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-[50%] max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
                               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                                 <div className="relative grid bg-white px-2 pt-2">
@@ -371,8 +369,7 @@ export const Recipe = () => {
                                           <svg
                                             className="text-gray-700 w-3"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                          >
+                                            viewBox="0 0 448 512">
                                             <path
                                               fill="currentColor"
                                               d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
@@ -395,13 +392,11 @@ export const Recipe = () => {
                                             className="flex"
                                             onClick={() =>
                                               handleRemoveRecipe(index, recipe)
-                                            }
-                                          >
+                                            }>
                                             <input
                                               type="checkbox"
                                               className="mr-2"
-                                              checked={true}
-                                            ></input>
+                                              checked={true}></input>
                                             <button className="flex items-center justify-between">
                                               {item.title}
                                             </button>
@@ -411,12 +406,10 @@ export const Recipe = () => {
                                             className="flex"
                                             onClick={() =>
                                               handleAddRecipe(index, recipe)
-                                            }
-                                          >
+                                            }>
                                             <input
                                               type="checkbox"
-                                              className="mr-2"
-                                            ></input>
+                                              className="mr-2"></input>
                                             <button className="flex items-center justify-between">
                                               {item.title}
                                             </button>
@@ -440,8 +433,7 @@ export const Recipe = () => {
                   </div>
                   <button
                     className="btn text-gray-600 rounded-md"
-                    onClick={() => addToShoppinglist(0, recipe, 2)}
-                  >
+                    onClick={() => addToShoppinglist(0, recipe, 2)}>
                     <CartIcon />
                   </button>
                 </div>
@@ -457,8 +449,7 @@ export const Recipe = () => {
                   {recipe.dishTypes.map((type) => (
                     <button
                       key={type}
-                      className="mr-2 mb-2   text-gray-400 rounded"
-                    >
+                      className="mr-2 mb-2   text-gray-400 rounded">
                       #{type}
                     </button>
                   ))}
