@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import {
   deleteRecipeById,
   getShoppinglist,
+  saveShoppinglist,
 } from "../components/shoppinglist/shoppinglist";
 import { Toggle } from "../components/buttons/toggle/Toggle";
 import { Checkbox } from "../components/buttons/checkbox/checkbox";
@@ -14,6 +15,31 @@ export const Shoppinglist = () => {
   const [shoppinglist, setShoppingList] = useState([]);
   const [user] = useAuthState(auth);
   const [measureType, setMeasureType] = useState("us");
+
+  function handleIncrement(index, listIndex) {
+    const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
+    // Increment metric amount
+    newShoppingList[listIndex].ingredients[index].measures.metric.amount += 1;
+    // Increment US amount
+    newShoppingList[listIndex].ingredients[index].measures.us.amount += 1;
+    // Increment general amount
+    newShoppingList[listIndex].ingredients[index].amount += 1;
+
+    setShoppingList(newShoppingList);
+    saveShoppinglist(newShoppingList);
+  }
+  function handleDecrement(index, listIndex) {
+    const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
+    // Decrement metric amount
+    newShoppingList[listIndex].ingredients[index].measures.metric.amount -= 1;
+    // Decrement US amount
+    newShoppingList[listIndex].ingredients[index].measures.us.amount -= 1;
+    // Decrement general amount
+    newShoppingList[listIndex].ingredients[index].amount -= 1;
+    console.log("decremented some");
+    setShoppingList(newShoppingList);
+    saveShoppinglist(newShoppingList);
+  }
 
   function toggleMeasure() {
     const newMeasure = measureType === "us" ? "metric" : "us";
@@ -48,25 +74,42 @@ export const Shoppinglist = () => {
               Unit<Toggle></Toggle>
             </button>
           </div>
-          {shoppinglist.map((item) => (
+          {shoppinglist.map((item, listIndex) => (
             <>
-              <div className="flex flex-col border border-pink-200 content-center p-3 m-3">
+              <div
+                className="flex flex-col border border-pink-200 content-center p-3 m-3"
+                key={shoppinglist.id}
+              >
                 <div className="flex">
                   <p className="flex-grow font-bold">{item.title}</p>
                   <button
                     className="text-red-600"
-                    onClick={() => deleteRecipeById(0, item.id)}>
+                    onClick={() => deleteRecipeById(0, item.id)}
+                  >
                     Delete
                   </button>
                 </div>
 
-                {item.ingredients.map((ingredient) => (
-                  <div className="flex justify-around border border-b-2 p-2 m-2 ">
+                {item.ingredients.map((ingredient, index) => (
+                  <div
+                    className="flex justify-around border border-b-2 p-2 m-2 "
+                    key={ingredient.name}
+                  >
                     <p>{ingredient.name}</p>
                     <p>
                       {ingredient.measures[measureType].amount}
-                      <button className="ml-auto text-xl">+</button>
-                      <button className="ml-auto text-xl">-</button>
+                      <button
+                        className="ml-auto text-xl"
+                        onClick={() => handleIncrement(index, listIndex)}
+                      >
+                        +
+                      </button>
+                      <button
+                        className="ml-auto text-xl"
+                        onClick={() => handleDecrement(index, listIndex)}
+                      >
+                        -
+                      </button>
                     </p>
 
                     <p>{ingredient.measures[measureType].unitLong}</p>
@@ -92,7 +135,8 @@ export const Shoppinglist = () => {
           </p>
           <Link
             to={"/login"}
-            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 ">
+            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 "
+          >
             Sign in
           </Link>
         </div>

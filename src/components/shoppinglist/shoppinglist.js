@@ -13,16 +13,14 @@ export async function getShoppinglist() {
   }
 }
 
-// export async function saveShoppinglist(listId, shoppinglist) {
-//   const db = getDatabase();
-//   const dbRef = ref(database);
-//   const snapshot = await get(child(dbRef, `shoppinglists/${listId}`));
-//   try {
-//     await set(ref(db, `shoppinglists/${listId}`), shoppinglist);
-//   } catch (error) {
-//     console.log("Error updating shoppinglist with id", listId);
-//   }
-// }
+export async function saveShoppinglist(shoppinglist) {
+  const db = getDatabase();
+  const dbRef = ref(database);
+  const snapshot = await get(child(dbRef, `shoppinglists/0`));
+  try {
+    await set(ref(db, `shoppinglists/0`), shoppinglist);
+  } catch (error) {}
+}
 
 export async function addToShoppinglist(listId, recipe, quantity) {
   const db = getDatabase();
