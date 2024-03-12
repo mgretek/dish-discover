@@ -3,8 +3,15 @@ import { DownArrow } from "../arrows/DownArrow";
 import { Draggable } from "react-beautiful-dnd";
 import { ForwardArrow } from "../arrows/ForwardArrow";
 import { PencilIcon } from "../icons/PencilIcon";
+import { DeleteIcon } from "../icons/DeleteIcon";
 
-export const Wishlist = ({ saveTitle, list, listIndex, handleDelete }) => {
+export const Wishlist = ({
+  saveTitle,
+  list,
+  listIndex,
+  handleDelete,
+  handleDeleteList,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [listTitle, setListTitle] = useState(list.title);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -51,16 +58,13 @@ export const Wishlist = ({ saveTitle, list, listIndex, handleDelete }) => {
               >
                 Save title
               </button>
-              <button
-                className="bg-red-500 text-white text-sm px-4 ml-3 rounded-sm"
-                onClick={console.log("delete happens here")}
-              >
-                Delete list
-              </button>
             </div>
           )}
           {isHovered && !titleEditActive && (
-            <PencilIcon onClick={handleTitleEdit} />
+            <div class="flex">
+              <PencilIcon onClick={handleTitleEdit} />
+              <DeleteIcon onClick={() => handleDeleteList(list)} />
+            </div>
           )}
         </div>
 
