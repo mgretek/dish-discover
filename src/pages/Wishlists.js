@@ -172,7 +172,7 @@ export const Wishlists = () => {
           <DragDropContext onDragEnd={onDragEnd}>
             {wishlists.length > 0 &&
               wishlists.map((list, index) => (
-                <Droppable key={index} droppableId={`list-${index}`}>
+                <Droppable key={list.id} droppableId={`list-${index}`}>
                   {(provided) => (
                     <div
                       {...provided.droppableProps}
