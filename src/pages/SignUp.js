@@ -68,7 +68,7 @@ export const SignUp = () => {
           <div className="flex mt-3 justify-center">
             <span className="text-center">
               Go back to login?{" "}
-              <Link className="text-blue-500" to={"/"}>
+              <Link className="text-blue-500" to={"/login"}>
                 Click here.
               </Link>
             </span>
