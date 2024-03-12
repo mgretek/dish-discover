@@ -676,7 +676,7 @@ export const RecipeSearch = () => {
               </button>
             </div>
 
-            <div className="flex items-center mb-1">
+            {/* <div className="flex items-center mb-1">
               <p className="pr-1 text-gray-700 font-semibold">Search by</p>{" "}
               <button
                 className={`btn ${
@@ -696,7 +696,7 @@ export const RecipeSearch = () => {
                 onClick={() => setSearchType("name")}>
                 <span className="px-2">Name</span>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 

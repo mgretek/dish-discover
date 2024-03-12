@@ -32,7 +32,9 @@ export const Settings = () => {
     <div className="flex flex-col" ref={menuRef}>
       {user ? (
         <>
-          <button onClick={() => setSettingsOpen(!settingsOpen)} className="">
+          <button
+            onClick={() => setSettingsOpen(!settingsOpen)}
+            className="relative">
             <img
               src={user?.photoURL || user.displayName}
               width="40"
@@ -43,24 +45,20 @@ export const Settings = () => {
           </button>
         </>
       ) : (
-        <button onClick={() => setSettingsOpen(!settingsOpen)} className="">
-          <span className="text-gray-700 pl-3 md:pr-4 md:pl-4">Account</span>
+        <button onClick={() => setSettingsOpen(!settingsOpen)}>
+          <span className="flex flex-start text-violet-400 hover:text-violet-500 md:pr-4 md:pl-4">
+            <Link to="/login">Account</Link>
+          </span>
         </button>
       )}
       {settingsOpen && (
-        <ul className="flex flex-col settings">
-          {user ? (
+        <ul className="flex">
+          {user && (
             <button
               onClick={logUserOut}
-              className="bg-violet-200 col-auto p-1 hover:text-gray-800">
-              Logout
+              className="absolute md:right-4 py-1 px-3 bg-white rounded text-sm mt-3 md:mt-3.5 border-2 md:border-violet-200 border-pink-50">
+              <div className="text-gray-500 hover:text-gray-600">Logout</div>
             </button>
-          ) : (
-            <Link
-              to="/login"
-              className="bg-violet-200 self-center p-1 hover:text-gray-800">
-              Login
-            </Link>
           )}
         </ul>
       )}
