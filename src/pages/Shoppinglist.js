@@ -7,14 +7,13 @@ import {
   deleteRecipeById,
   getShoppinglist,
 } from "../components/shoppinglist/shoppinglist";
-import { Toggle } from "../components/toggle/Toggle";
-/* import { Loading } from "../components/loading/Loading"; */
+import { Toggle } from "../components/buttons/toggle/Toggle";
+import { Checkbox } from "../components/buttons/checkbox/checkbox";
 
 export const Shoppinglist = () => {
   const [shoppinglist, setShoppingList] = useState([]);
   const [user] = useAuthState(auth);
   const [measureType, setMeasureType] = useState("us");
-  /* const [isLoading, setIsLoading] = useState(false); */
 
   function toggleMeasure() {
     const newMeasure = measureType === "us" ? "metric" : "us";
@@ -38,29 +37,44 @@ export const Shoppinglist = () => {
   }, []);
 
   return (
-    <div className="flex justify-center lg:max-w-[1260px] px-6 sm:px-16 mt-8 sm:mt-16 mx-6 sm:mx-auto max-w-[620px] min-h-full border-2 border-violet-200 rounded-md">
+    <div className="mx-4 md:px-20 xl:px-60 min-h-full">
       {user ? (
-        <div className="flex flex-col">
-          <div className="self-end text-gray-500">Metric units</div>
-          <button className="self-end" onClick={toggleMeasure}>
-            <Toggle />
-          </button>
+        <div className="">
+          <div className="flex">
+            <h1 className="text-5xl text-left font-bold text-gray-800 py-10">
+              Your Shopping List
+            </h1>
+            <button className="px-3" onClick={toggleMeasure}>
+              Unit<Toggle></Toggle>
+            </button>
+          </div>
           {shoppinglist.map((item) => (
-            <div className="flex flex-row gap-3 m-3">
-              <p className="font-bold">{item.title}</p>
-              {item.ingredients.map((ingredient) => (
-                <div className="border-b-black border-2">
-                  <p>{ingredient.name}</p>
-                  <p>{ingredient.amount}</p>
-                  <p>{ingredient.measures[measureType].unitLong}</p>
+            <>
+              <div className="flex flex-col border border-pink-200 content-center p-3 m-3">
+                <div className="flex">
+                  <p className="flex-grow font-bold">{item.title}</p>
+                  <button
+                    className="text-red-600"
+                    onClick={() => deleteRecipeById(0, item.id)}>
+                    Delete
+                  </button>
                 </div>
-              ))}
-              <button
-                className="text-red-600"
-                onClick={() => deleteRecipeById(0, item.id)}>
-                Delete
-              </button>
-            </div>
+
+                {item.ingredients.map((ingredient) => (
+                  <div className="flex justify-around border border-b-2 p-2 m-2 ">
+                    <p>{ingredient.name}</p>
+                    <p>
+                      {ingredient.measures[measureType].amount}
+                      <button className="ml-auto text-xl">+</button>
+                      <button className="ml-auto text-xl">-</button>
+                    </p>
+
+                    <p>{ingredient.measures[measureType].unitLong}</p>
+                    <Checkbox />
+                  </div>
+                ))}
+              </div>
+            </>
           ))}
         </div>
       ) : (

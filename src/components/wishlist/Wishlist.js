@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { DownArrow } from "../arrows/DownArrow";
+import { DownArrow } from "../buttons/arrows/DownArrow";
 import { Draggable } from "react-beautiful-dnd";
-import { ForwardArrow } from "../arrows/ForwardArrow";
+import { ForwardArrow } from "../buttons/arrows/ForwardArrow";
 import { PencilIcon } from "../icons/PencilIcon";
 
 export const Wishlist = ({ saveTitle, list, listIndex, handleDelete }) => {
@@ -25,8 +25,7 @@ export const Wishlist = ({ saveTitle, list, listIndex, handleDelete }) => {
         <div
           className="flex items-center"
           onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+          onMouseLeave={() => setIsHovered(false)}>
           {!titleEditActive ? (
             <div class="flex">
               <h1 className="text-xl flex-2 font-medium uppercase tracking-wider mr-2 text-gray-800">
@@ -43,18 +42,15 @@ export const Wishlist = ({ saveTitle, list, listIndex, handleDelete }) => {
               <input
                 className="border rounded-sm"
                 value={listTitle}
-                onChange={(e) => setListTitle(e.target.value)}
-              ></input>
+                onChange={(e) => setListTitle(e.target.value)}></input>
               <button
                 className="bg-indigo-400 text-white text-sm px-4 ml-3 rounded-sm"
-                onClick={handleTitleEdit}
-              >
+                onClick={handleTitleEdit}>
                 Save title
               </button>
               <button
                 className="bg-red-500 text-white text-sm px-4 ml-3 rounded-sm"
-                onClick={console.log("delete happens here")}
-              >
+                onClick={console.log("delete happens here")}>
                 Delete list
               </button>
             </div>
@@ -99,29 +95,25 @@ export const WishItem = ({
     <Draggable
       key={id} // Ensure a unique key
       draggableId={`${recipe.id}tt`} // Use recipe.id as draggableId
-      index={itemIndex}
-    >
+      index={itemIndex}>
       {(provided) => (
         <div
           className="bg-white p-5 m-1 flex flex-col shadow-md  border border-gray-200 rounded-xl hover:border-violet-300"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          ref={provided.innerRef}
-        >
+          ref={provided.innerRef}>
           <div className="flex items-center">
             <h2 className="text-2xl mr-3">{recipe.title}</h2>
             <button
               className="ml-auto text-gray-500 font-semibold text-sm"
               onClick={() =>
                 handleDelete({ recipeId: recipe.id, listIndex: listIndex })
-              }
-            >
+              }>
               <div className="w-4">
                 <svg
                   className="text-gray-400"
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 384 512"
-                >
+                  viewBox="0 0 384 512">
                   <path
                     fill="currentColor"
                     d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
@@ -150,8 +142,7 @@ export const WishItem = ({
                   className="flex items-start pt-16 justify-start w-full h-full bg-right bg-cover mb-2 rounded-lg"
                   style={{
                     backgroundImage: "url(/images/placeholder-min.jpg)",
-                  }}
-                >
+                  }}>
                   <span className="text-xl font-semibold text-gray-500 w-2/3 pl-3 text-center">
                     Sorry, no image available
                   </span>

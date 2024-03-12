@@ -34,10 +34,10 @@ export const Settings = () => {
         <>
           <button onClick={() => setSettingsOpen(!settingsOpen)} className="">
             <img
-              src={user?.photoURL || ""}
+              src={user?.photoURL || user.displayName}
               width="40"
               height="30"
-              alt="profile avatar"
+              alt="profile"
               className="rounded-md"
             />
           </button>
@@ -52,15 +52,13 @@ export const Settings = () => {
           {user ? (
             <button
               onClick={logUserOut}
-              className="bg-violet-200 col-auto p-1 hover:text-gray-800"
-            >
+              className="bg-violet-200 col-auto p-1 hover:text-gray-800">
               Logout
             </button>
           ) : (
             <Link
               to="/login"
-              className="bg-violet-200 self-center p-1 hover:text-gray-800"
-            >
+              className="bg-violet-200 self-center p-1 hover:text-gray-800">
               Login
             </Link>
           )}

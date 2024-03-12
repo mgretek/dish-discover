@@ -1,5 +1,6 @@
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import { database } from "../../config/firebase";
+import { useLoaderData } from "react-router-dom";
 
 export async function getShoppinglist() {
   const dbRef = ref(database);
@@ -61,3 +62,5 @@ export async function deleteRecipeById(listId, recipeId) {
     return false;
   }
 }
+
+export async function LoadShoppinglist() {}
