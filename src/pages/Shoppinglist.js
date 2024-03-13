@@ -9,12 +9,12 @@ import {
   saveShoppinglist,
 } from "../components/shoppinglist/shoppinglist";
 import { Toggle } from "../components/buttons/toggle/Toggle";
-import { Checkbox } from "../components/buttons/checkbox/checkbox";
 
 export const Shoppinglist = () => {
   const [shoppinglist, setShoppingList] = useState([]);
   const [user] = useAuthState(auth);
   const [measureType, setMeasureType] = useState("us");
+  const [isChecked, setIsChecked] = useState("false");
 
   function handleDeleteRecipe(id) {
     // copy shoppinglist and filter deleted item out
@@ -59,9 +59,9 @@ export const Shoppinglist = () => {
     setMeasureType(newMeasure);
   }
 
-  /* function refreshPage() {
-    window.location.reload(false);
-  } */
+  function toggleChecked() {
+    setIsChecked(!setIsChecked);
+  }
 
   useEffect(() => {
     async function fetchShoppingList() {
@@ -90,43 +90,47 @@ export const Shoppinglist = () => {
           {shoppinglist.map((item, listIndex) => (
             <>
               <div
-                className="flex flex-col border border-pink-200 content-center p-3 m-3"
-                key={shoppinglist.id}
-              >
-                <div className="flex">
-                  <p className="flex-grow font-bold">{item.title}</p>
+                className="border border-pink-200 content-center p-3 m-3"
+                key={shoppinglist.id}>
+                <div className="flex ">
+                  <p className="flex-grow font-bold items-baseline">
+                    {item.title}
+                  </p>
                   <button
                     className="text-red-600"
-                    onClick={() => handleDeleteRecipe(item.id)}
-                  >
+                    onClick={() => handleDeleteRecipe(item.id)}>
                     Delete
                   </button>
                 </div>
 
-                {item.ingredients.map((ingredient, index) => (
+                {item.ingredients.map((ingredient, index, id) => (
                   <div
-                    className="flex justify-around border border-b-2 p-2 m-2 "
-                    key={ingredient.name}
-                  >
-                    <p>{ingredient.name}</p>
-                    <p>
+                    style={{
+                      textDecoration: isChecked ? "line-through" : "none",
+                      textDecorationColor: "red",
+                    }}
+                    className="flex items-baseline justify-around border border-b-2 p-2 m-2 "
+                    key={ingredient.name}>
+                    <p className="">{ingredient.name}</p>
+                    <p className="flex justify-center items-baseline">
                       {ingredient.measures[measureType].amount}
                       <button
-                        className="ml-auto text-xl"
-                        onClick={() => handleIncrement(index, listIndex)}
-                      >
+                        className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
+                        onClick={() => handleIncrement(index, listIndex)}>
                         +
                       </button>
                       <button
-                        className="ml-auto text-xl"
-                        onClick={() => handleDecrement(index, listIndex)}
-                      >
+                        className="bg-red-300 hover:bg-red-100 text-red-800 font-bold py-2 px-4 mx-1 rounded"
+                        onClick={() => handleDecrement(index, listIndex)}>
                         -
                       </button>
                     </p>
-
                     <p>{ingredient.measures[measureType].unitLong}</p>
-                    <Checkbox />
+                    <button
+                      className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
+                      onClick={() => toggleChecked()}>
+                      Checked!
+                    </button>
                   </div>
                 ))}
               </div>
@@ -142,14 +146,13 @@ export const Shoppinglist = () => {
             Say hello to your personal shopping assistant, exclusive to our
             logged-in users! Discover recipes, pick your favorites, and
             effortlessly add ingredients to your shopping list. It's like having
-            a virtual grocery sidekick – making your shopping experience a
+            a virtual grocery sidekick - making your shopping experience a
             breeze. Stay organized, never miss an item, and enjoy stress-free
-            cooking prep!{" "}
+            cooking prep!
           </p>
           <Link
             to={"/login"}
-            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 "
-          >
+            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 ">
             Sign in
           </Link>
         </div>
