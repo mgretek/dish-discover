@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const CreateNewWishlist = () => {
+export const CreateNewWishlist = ({ addNewList }) => {
   const [userInput, setUserInput] = useState("");
   const [inputVisible, setInputVisible] = useState(false);
 
@@ -8,16 +8,22 @@ export const CreateNewWishlist = () => {
     setInputVisible(!inputVisible);
   }
   function handleSubmit() {
-    
+    addNewList({ title: userInput });
+    setUserInput("");
   }
 
   return (
     <div>
-      <h2>{userInput}</h2>
       {inputVisible ? (
         <div class="flex">
-          <input onChange={(e) => setUserInput(e.target.value)}></input>
-          <button>Create</button>
+          <input
+            className="border"
+            placeholder="New title..."
+            onChange={(e) => setUserInput(e.target.value)}
+          ></input>
+          <button className="bg-gray-300 px-3 ml-2" onClick={handleSubmit}>
+            Create
+          </button>
         </div>
       ) : (
         <div

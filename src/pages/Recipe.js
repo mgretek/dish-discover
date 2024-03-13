@@ -375,7 +375,9 @@ export const Recipe = () => {
                                 <div className="relative grid bg-white px-2 pt-2">
                                   <div className="cursor-pointer p-1.5 mx-1.5 flow-root rounded-md transition duration-150 ease-in-out hover:bg-gray-100">
                                     <div className="flex justify-end gap-x-2">
-                                      <CreateNewWishlist />
+                                      <CreateNewWishlist
+                                        addNewList={addNewList}
+                                      />
                                       <div className="flex justify-center w-6 h-6 bg-violet-100 rounded-full font-bold text-gray-700">
                                         <div className="self-center">
                                           <svg
@@ -450,7 +452,7 @@ export const Recipe = () => {
                   </div>
                   <button
                     className="btn text-gray-600 rounded-md"
-                    onClick={() => addToShoppinglist(0, recipe, 2)}
+                    onClick={() => addToShoppinglist(0, recipe, 1)}
                   >
                     <CartIcon />
                   </button>
