@@ -14,7 +14,6 @@ export const Shoppinglist = () => {
   const [shoppinglist, setShoppingList] = useState([]);
   const [user] = useAuthState(auth);
   const [measureType, setMeasureType] = useState("us");
-  const [isChecked, setIsChecked] = useState("false");
 
   function handleDeleteRecipe(id) {
     // copy shoppinglist and filter deleted item out
