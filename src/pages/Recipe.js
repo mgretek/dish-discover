@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../config/firebase";
+
 import { useParams } from "react-router-dom";
 import {
   addToWishlist,
@@ -233,6 +236,8 @@ export const Recipe = () => {
   const [measureType, setMeasureType] = useState("us");
   const [isFetched, setIsFetched] = useState(false);
   const [wishlists, setWishlists] = useState([]);
+  const [user] = useAuthState(auth);
+  const [uid, setUid] = useState("");
 
   const [newTitle, setNewTitle] = useState("");
 
@@ -275,6 +280,16 @@ export const Recipe = () => {
     const newMeasure = measureType === "us" ? "metric" : "us";
     setMeasureType(newMeasure);
   }
+
+  // get user id when logged in
+  useEffect(() => {
+    if (user) {
+      const userData = JSON.parse(JSON.stringify(user));
+      console.log("user uid is:", userData.uid);
+      setUid(userData.uid);
+    }
+  }, [user]);
+
   // import wishlists from firebase for dropdown list display
   useEffect(() => {
     async function fetchWishlists() {
@@ -349,7 +364,8 @@ export const Recipe = () => {
                         <>
                           <Popover.Button className="btn text-gray-600 rounded-md">
                             {" "}
-                            {wishlists &&
+                            {user &&
+                            wishlists &&
                             wishlists.some(
                               (wishlist) =>
                                 wishlist.recipes &&
@@ -374,30 +390,39 @@ export const Recipe = () => {
                             <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-[50%] max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
                               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                                 <div className="relative grid bg-white px-2 pt-2">
-                                  <div className="cursor-pointer p-1.5 mx-1.5 flow-root rounded-md transition duration-150 ease-in-out hover:bg-gray-100">
-                                    <div className="flex justify-end gap-x-2">
-                                      <CreateNewWishlist
-                                        addNewList={addNewList}
-                                      />
-                                      <div className="flex justify-center w-6 h-6 bg-violet-100 rounded-full font-bold text-gray-700">
-                                        <div className="self-center">
-                                          <svg
-                                            className="text-gray-700 w-3"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 448 512"
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
-                                            />
-                                          </svg>
+                                  {user ? (
+                                    <div className="cursor-pointer p-1.5 mx-1.5 flow-root rounded-md transition duration-150 ease-in-out hover:bg-gray-100">
+                                      <div className="flex justify-end gap-x-2">
+                                        <div>
+                                          <CreateNewWishlist
+                                            addNewList={addNewList}
+                                          />
+                                          <div className="flex justify-center w-6 h-6 bg-violet-100 rounded-full font-bold text-gray-700">
+                                            <div className="self-center">
+                                              <svg
+                                                className="text-gray-700 w-3"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 448 512"
+                                              >
+                                                <path
+                                                  fill="currentColor"
+                                                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                                                />
+                                              </svg>
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
+                                  ) : (
+                                    <p>
+                                      Please log in to use wishlist features
+                                    </p>
+                                  )}
                                   <div className="h-1 ml-1.5 mb-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white"></div>
 
-                                  {wishlists &&
+                                  {uid &&
+                                    wishlists &&
                                     wishlists.map((item, index) => (
                                       <div className="mb-1.5 mt-1.5 flex items-center rounded-lg px-1.5 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50">
                                         <div className="text-sm font-medium text-gray-900 flex">
@@ -471,14 +496,15 @@ export const Recipe = () => {
                 </h2>
                 <div className="flex flex-wrap">
                   <p className="pr-2 text-gray-800">Tags:</p>
-                  {recipe.dishTypes.map((type) => (
-                    <button
-                      key={type}
-                      className="mr-2 mb-2   text-gray-400 rounded"
-                    >
-                      #{type}
-                    </button>
-                  ))}
+                  {Array.isArray(recipe.dishTypes) &&
+                    recipe.dishTypes.map((type) => (
+                      <button
+                        key={type}
+                        className="mr-2 mb-2   text-gray-400 rounded"
+                      >
+                        #{type}
+                      </button>
+                    ))}
                 </div>
               </div>
             </div>
