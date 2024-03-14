@@ -6,11 +6,85 @@ import { Link } from "react-router-dom";
 import {
   deleteRecipeById,
   getShoppinglist,
+  saveShoppinglist,
 } from "../components/shoppinglist/shoppinglist";
+import { Toggle } from "../components/buttons/toggle/Toggle";
 
 export const Shoppinglist = () => {
   const [shoppinglist, setShoppingList] = useState([]);
   const [user] = useAuthState(auth);
+  const [measureType, setMeasureType] = useState("us");
+
+  function handleDeleteRecipe(id) {
+    // copy shoppinglist and filter deleted item out
+    const newShoppingList = shoppinglist.filter((recipe) => recipe.id !== id);
+    // update local state
+    setShoppingList(newShoppingList);
+    // update firebase database
+    deleteRecipeById(0, id);
+  }
+
+  function handleIncrement(index, listIndex) {
+    // Copy shoppinglist object
+    const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
+    // Increment metric amount
+    newShoppingList[listIndex].ingredients[index].measures.metric.amount += 1;
+    // Increment US amount
+    newShoppingList[listIndex].ingredients[index].measures.us.amount += 1;
+    // Increment general amount
+    newShoppingList[listIndex].ingredients[index].amount += 1;
+    // update local state
+    setShoppingList(newShoppingList);
+    // update firebase database
+    saveShoppinglist(newShoppingList);
+  }
+  function handleDecrement(index, listIndex) {
+    const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
+    // Decrement metric amount
+    newShoppingList[listIndex].ingredients[index].measures.metric.amount -= 1;
+    // Decrement US amount
+    newShoppingList[listIndex].ingredients[index].measures.us.amount -= 1;
+    // Decrement general amount
+    newShoppingList[listIndex].ingredients[index].amount -= 1;
+    console.log("decremented some");
+    // update local state
+    setShoppingList(newShoppingList);
+    // update firebase database
+    saveShoppinglist(newShoppingList);
+  }
+
+  function incrementQuantity(listIndex) {
+    // copy shoppinglist array and modify it
+    const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
+    newShoppingList[listIndex].quantity += 1;
+    // save to local state and database
+    setShoppingList(newShoppingList);
+    saveShoppinglist(newShoppingList);
+  }
+  function decrementQuantity(listIndex) {
+    const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
+    if (newShoppingList[listIndex].quantity > 1) {
+      newShoppingList[listIndex].quantity -= 1;
+    }
+    setShoppingList(newShoppingList);
+    saveShoppinglist(newShoppingList);
+  }
+
+  function toggleMeasure() {
+    const newMeasure = measureType === "us" ? "metric" : "us";
+    setMeasureType(newMeasure);
+  }
+
+  function toggleChecked(index, listIndex) {
+    const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
+    if (newShoppingList[listIndex].ingredients[index].isChecked) {
+      newShoppingList[listIndex].ingredients[index].isChecked = false;
+    } else {
+      newShoppingList[listIndex].ingredients[index].isChecked = true;
+    }
+    setShoppingList(newShoppingList);
+    saveShoppinglist(newShoppingList);
+  }
 
   useEffect(() => {
     async function fetchShoppingList() {
@@ -25,20 +99,90 @@ export const Shoppinglist = () => {
   }, []);
 
   return (
-    <div className="px-6 sm:px-16 mt-8 sm:mt-16 mx-6 sm:mx-auto max-w-[620px] min-h-full border-2 border-violet-200 rounded-md">
+    <div className="mx-4 md:px-20 xl:px-60 min-h-full">
       {user ? (
-        <div>
-          <h1>Shopping list</h1>
-          {shoppinglist.map((item) => (
-            <div>
-              <p>{item.title}</p>
-            </div>
+        <div className="">
+          <div className="flex">
+            <h1 className="text-5xl text-left font-bold text-gray-800 py-10">
+              Your Shopping List
+            </h1>
+            <button className="px-3" onClick={toggleMeasure}>
+              Unit<Toggle></Toggle>
+            </button>
+          </div>
+          {shoppinglist.map((item, listIndex) => (
+            <>
+              <div
+                className="border border-pink-200 content-center p-3 m-3"
+                key={shoppinglist.id}
+              >
+                <div className="grid grid-cols-3">
+                  <p className="font-bold items-baseline">{item.title}</p>
+                  <div class="flex gap-1">
+                    <p className="ml-2">Quantity: {item.quantity}</p>
+                    <button
+                      className="bg-gray-200 px-2 rounded-md "
+                      onClick={() => decrementQuantity(listIndex)}
+                    >
+                      -
+                    </button>
+                    <button
+                      className="bg-gray-200 px-2 rounded-md "
+                      onClick={() => incrementQuantity(listIndex)}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button
+                    className="text-red-600 ml-auto"
+                    onClick={() => handleDeleteRecipe(item.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+
+                {item.ingredients.map((ingredient, index, id) => (
+                  <div
+                    style={{
+                      textDecoration: ingredient.isChecked
+                        ? "line-through"
+                        : "none",
+                      textDecorationColor: "red",
+                    }}
+                    className="grid grid-cols-4 items-center border border-b-2 p-2 m-2 "
+                    key={ingredient.name}
+                  >
+                    <p className="">{ingredient.name}</p>
+                    <p className="grid grid-cols-3 justify-center items-baseline">
+                      <p className="text-right">
+                        {ingredient.measures[measureType].amount *
+                          item.quantity}
+                      </p>
+                      <button
+                        className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
+                        onClick={() => handleIncrement(index, listIndex)}
+                      >
+                        +
+                      </button>
+                      <button
+                        className="bg-red-300 hover:bg-red-100 text-red-800 font-bold py-2 px-4 mx-1 rounded"
+                        onClick={() => handleDecrement(index, listIndex)}
+                      >
+                        -
+                      </button>
+                    </p>
+                    <p>{ingredient.measures[measureType].unitLong}</p>
+                    <button
+                      className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
+                      onClick={() => toggleChecked(index, listIndex)}
+                    >
+                      Checked!
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
           ))}
-          {/* <button onClick={() => deleteRecipeById(0, 646486)}>
-            Delete
-            Sellise funktsiooniga saab kustutada ka, esimene on listId ja teine
-            itemId
-          </button> */}
         </div>
       ) : (
         <div className="flex flex-col">
@@ -49,9 +193,9 @@ export const Shoppinglist = () => {
             Say hello to your personal shopping assistant, exclusive to our
             logged-in users! Discover recipes, pick your favorites, and
             effortlessly add ingredients to your shopping list. It's like having
-            a virtual grocery sidekick – making your shopping experience a
+            a virtual grocery sidekick - making your shopping experience a
             breeze. Stay organized, never miss an item, and enjoy stress-free
-            cooking prep!{" "}
+            cooking prep!
           </p>
           <Link
             to={"/login"}

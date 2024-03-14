@@ -34,13 +34,12 @@ export const Settings = () => {
         <>
           <button
             onClick={() => setSettingsOpen(!settingsOpen)}
-            className="relative"
-          >
+            className="relative">
             <img
-              src={user?.photoURL || ""}
+              src={user?.photoURL || user.displayName}
               width="40"
               height="30"
-              alt="profile avatar"
+              alt="profile"
               className="rounded-md"
             />
           </button>
@@ -57,8 +56,7 @@ export const Settings = () => {
           {user && (
             <button
               onClick={logUserOut}
-              className="absolute md:right-4 py-1 px-3 bg-white rounded text-sm mt-3 md:mt-3.5 border-2 md:border-violet-200 border-pink-50"
-            >
+              className="absolute md:right-4 py-1 px-3 bg-white rounded text-sm mt-3 md:mt-3.5 border-2 md:border-violet-200 border-pink-50">
               <div className="text-gray-500 hover:text-gray-600">Logout</div>
             </button>
           )}

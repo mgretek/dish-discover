@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Wishlist } from "../components/wishlist/Wishlist";
+import { v4 as uuidv4 } from "uuid";
 import { AddNewModal } from "../components/wishlist/AddNewModal";
 import CallToAction from "../components/wishlist/CallToAction";
 import {
@@ -34,10 +35,17 @@ export const Wishlists = () => {
   }, []);
 
   function addNewList({ title }) {
-    const newArr = [...wishlists, { title: title, recipes: [] }];
+    const newId = uuidv4();
+    const newArr = [...wishlists, { title: title, recipes: [], id: newId }];
     setWishlists(newArr);
     saveWishlist({ wishLists: newArr });
     setPopupOpen(false);
+  }
+  function handleDeleteList(listObj) {
+    const newArr = [...wishlists];
+    const filteredArr = newArr.filter((list) => list.id !== listObj.id);
+    saveWishlist({ wishLists: filteredArr });
+    setWishlists(filteredArr);
   }
 
   function handleDelete({ recipeId, listIndex }) {
@@ -148,7 +156,7 @@ export const Wishlists = () => {
           <DragDropContext onDragEnd={onDragEnd}>
             {wishlists.length > 0 &&
               wishlists.map((list, index) => (
-                <Droppable key={index} droppableId={`list-${index}`}>
+                <Droppable key={list.id} droppableId={`list-${index}`}>
                   {(provided) => (
                     <div
                       {...provided.droppableProps}
@@ -159,6 +167,7 @@ export const Wishlists = () => {
                         listIndex={index}
                         list={list}
                         handleDelete={handleDelete}
+                        handleDeleteList={handleDeleteList}
                         saveTitle={saveTitle}
                       />
                       {provided.placeholder}

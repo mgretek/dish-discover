@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { loadWishlists } from "../components/wishlist/wishlists";
+/* import { loadWishlists } from "../components/wishlist/wishlists"; */
 import { Loading } from "../components/loading/Loading";
 import { SearchIcon } from "../components/icons/SearchIcon";
 
@@ -674,7 +674,7 @@ export const RecipeSearch = () => {
               </button>
             </div>
 
-            <div className="flex items-center mb-1">
+            {/* <div className="flex items-center mb-1">
               <p className="pr-1 text-gray-700 font-semibold">Search by</p>{" "}
               <button
                 className={`btn ${
@@ -682,8 +682,7 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => setSearchType("incredients")}
-              >
+                onClick={() => setSearchType("incredients")}>
                 <span className="px-2">Ingredient</span>
               </button>
               <button
@@ -692,11 +691,10 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => setSearchType("name")}
-              >
+                onClick={() => setSearchType("name")}>
                 <span className="px-2">Name</span>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 

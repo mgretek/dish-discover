@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const AddNewModal = ({ addNewList, onCancel }) => {
   const [newTitle, setNewTitle] = useState();

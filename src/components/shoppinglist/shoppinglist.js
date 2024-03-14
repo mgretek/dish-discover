@@ -1,5 +1,6 @@
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import { database } from "../../config/firebase";
+import { useLoaderData } from "react-router-dom";
 
 export async function getShoppinglist() {
   const dbRef = ref(database);
@@ -10,6 +11,15 @@ export async function getShoppinglist() {
   } else {
     console.log("No lists found");
   }
+}
+
+export async function saveShoppinglist(shoppinglist) {
+  const db = getDatabase();
+  const dbRef = ref(database);
+  const snapshot = await get(child(dbRef, `shoppinglists/0`));
+  try {
+    await set(ref(db, `shoppinglists/0`), shoppinglist);
+  } catch (error) {}
 }
 
 export async function addToShoppinglist(listId, recipe, quantity) {
@@ -61,3 +71,5 @@ export async function deleteRecipeById(listId, recipeId) {
     return false;
   }
 }
+
+export async function LoadShoppinglist() {}
