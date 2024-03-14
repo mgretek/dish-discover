@@ -54,8 +54,10 @@ export const Shoppinglist = () => {
   }
 
   function incrementQuantity(listIndex) {
+    // copy shoppinglist array and modify it
     const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
     newShoppingList[listIndex].quantity += 1;
+    // save to local state and database
     setShoppingList(newShoppingList);
     saveShoppinglist(newShoppingList);
   }
