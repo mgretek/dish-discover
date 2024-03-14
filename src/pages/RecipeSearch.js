@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 /* import { loadWishlists } from "../components/wishlist/wishlists"; */
 import { Loading } from "../components/loading/Loading";
+import { SearchIcon } from "../components/icons/SearchIcon";
 
 const data = {
   results: [
@@ -630,15 +631,9 @@ export const RecipeSearch = () => {
             />
             <button
               className="absolute right-0 top-0 h-full px-3"
-              onClick={handleSearch}>
-              <div className="w-4 text-violet-400">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path
-                    fill="currentColor"
-                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-                  />
-                </svg>
-              </div>
+              onClick={handleSearch}
+            >
+              <SearchIcon className="w-4 text-violet-400" />
             </button>
           </div>
           {/* Search filter section */}
@@ -652,7 +647,8 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => handleFilter("meals")}>
+                onClick={() => handleFilter("meals")}
+              >
                 <span className="px-2 py-1">Meals</span>
               </button>
 
@@ -662,7 +658,8 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => handleFilter("drink")}>
+                onClick={() => handleFilter("drink")}
+              >
                 <span className="px-2">Drinks</span>
               </button>
               <button
@@ -671,7 +668,8 @@ export const RecipeSearch = () => {
                     ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
                     : "text-gray-500"
                 }`}
-                onClick={() => handleFilter("both")}>
+                onClick={() => handleFilter("both")}
+              >
                 <span className="px-2">Both</span>
               </button>
             </div>
