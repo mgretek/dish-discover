@@ -53,6 +53,21 @@ export const Shoppinglist = () => {
     saveShoppinglist(newShoppingList);
   }
 
+  function incrementQuantity(listIndex) {
+    const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
+    newShoppingList[listIndex].quantity += 1;
+    setShoppingList(newShoppingList);
+    saveShoppinglist(newShoppingList);
+  }
+  function decrementQuantity(listIndex) {
+    const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
+    if (newShoppingList[listIndex].quantity > 1) {
+      newShoppingList[listIndex].quantity -= 1;
+    }
+    setShoppingList(newShoppingList);
+    saveShoppinglist(newShoppingList);
+  }
+
   function toggleMeasure() {
     const newMeasure = measureType === "us" ? "metric" : "us";
     setMeasureType(newMeasure);
@@ -100,11 +115,22 @@ export const Shoppinglist = () => {
                 key={shoppinglist.id}
               >
                 <div className="flex ">
-                  <p className="flex-grow font-bold items-baseline">
-                    {item.title}
-                  </p>
+                  <p className="font-bold items-baseline">{item.title}</p>
+                  <p className="ml-2">Quantity: {item.quantity}</p>
                   <button
-                    className="text-red-600"
+                    className="bg-gray-300 px-2 rounded-md"
+                    onClick={() => decrementQuantity(listIndex)}
+                  >
+                    -
+                  </button>
+                  <button
+                    className="bg-gray-300 px-2 rounded-md"
+                    onClick={() => incrementQuantity(listIndex)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="text-red-600 ml-auto"
                     onClick={() => handleDeleteRecipe(item.id)}
                   >
                     Delete
@@ -125,7 +151,8 @@ export const Shoppinglist = () => {
                     <p className="">{ingredient.name}</p>
                     <p className="grid grid-cols-3 justify-center items-baseline">
                       <p className="text-right">
-                        {ingredient.measures[measureType].amount}
+                        {ingredient.measures[measureType].amount *
+                          item.quantity}
                       </p>
                       <button
                         className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
