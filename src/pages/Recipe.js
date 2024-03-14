@@ -349,7 +349,8 @@ export const Recipe = () => {
                         <>
                           <Popover.Button className="btn text-gray-600 rounded-md">
                             {" "}
-                            {wishlists.some(
+                            {wishlists &&
+                            wishlists.some(
                               (wishlist) =>
                                 wishlist.recipes &&
                                 wishlist.recipes.some(
@@ -396,47 +397,51 @@ export const Recipe = () => {
                                   </div>
                                   <div className="h-1 ml-1.5 mb-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white"></div>
 
-                                  {wishlists.map((item, index) => (
-                                    <div className="mb-1.5 mt-1.5 flex items-center rounded-lg px-1.5 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50">
-                                      <div className="text-sm font-medium text-gray-900 flex">
-                                        {item.recipes &&
-                                        item.recipes.some(
-                                          (recipe) => recipe.id == id
-                                        ) ? (
-                                          <div
-                                            className="flex"
-                                            onClick={() =>
-                                              handleRemoveRecipe(index, recipe)
-                                            }
-                                          >
-                                            <input
-                                              type="checkbox"
-                                              className="mr-2"
-                                              checked={true}
-                                            ></input>
-                                            <button className="flex items-center justify-between">
-                                              {item.title}
-                                            </button>
-                                          </div>
-                                        ) : (
-                                          <div
-                                            className="flex"
-                                            onClick={() =>
-                                              handleAddRecipe(index, recipe)
-                                            }
-                                          >
-                                            <input
-                                              type="checkbox"
-                                              className="mr-2"
-                                            ></input>
-                                            <button className="flex items-center justify-between">
-                                              {item.title}
-                                            </button>
-                                          </div>
-                                        )}
+                                  {wishlists &&
+                                    wishlists.map((item, index) => (
+                                      <div className="mb-1.5 mt-1.5 flex items-center rounded-lg px-1.5 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50">
+                                        <div className="text-sm font-medium text-gray-900 flex">
+                                          {item.recipes &&
+                                          item.recipes.some(
+                                            (recipe) => recipe.id == id
+                                          ) ? (
+                                            <div
+                                              className="flex"
+                                              onClick={() =>
+                                                handleRemoveRecipe(
+                                                  index,
+                                                  recipe
+                                                )
+                                              }
+                                            >
+                                              <input
+                                                type="checkbox"
+                                                className="mr-2"
+                                                checked={true}
+                                              ></input>
+                                              <button className="flex items-center justify-between">
+                                                {item.title}
+                                              </button>
+                                            </div>
+                                          ) : (
+                                            <div
+                                              className="flex"
+                                              onClick={() =>
+                                                handleAddRecipe(index, recipe)
+                                              }
+                                            >
+                                              <input
+                                                type="checkbox"
+                                                className="mr-2"
+                                              ></input>
+                                              <button className="flex items-center justify-between">
+                                                {item.title}
+                                              </button>
+                                            </div>
+                                          )}
+                                        </div>
                                       </div>
-                                    </div>
-                                  ))}
+                                    ))}
                                 </div>
                               </div>
                             </Popover.Panel>
