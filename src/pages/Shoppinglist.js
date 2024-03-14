@@ -91,14 +91,16 @@ export const Shoppinglist = () => {
             <>
               <div
                 className="border border-pink-200 content-center p-3 m-3"
-                key={shoppinglist.id}>
+                key={shoppinglist.id}
+              >
                 <div className="flex ">
                   <p className="flex-grow font-bold items-baseline">
                     {item.title}
                   </p>
                   <button
                     className="text-red-600"
-                    onClick={() => handleDeleteRecipe(item.id)}>
+                    onClick={() => handleDeleteRecipe(item.id)}
+                  >
                     Delete
                   </button>
                 </div>
@@ -109,26 +111,32 @@ export const Shoppinglist = () => {
                       textDecoration: isChecked ? "line-through" : "none",
                       textDecorationColor: "red",
                     }}
-                    className="flex items-baseline justify-around border border-b-2 p-2 m-2 "
-                    key={ingredient.name}>
+                    className="grid grid-cols-4 items-center border border-b-2 p-2 m-2 "
+                    key={ingredient.name}
+                  >
                     <p className="">{ingredient.name}</p>
-                    <p className="flex justify-center items-baseline">
-                      {ingredient.measures[measureType].amount}
+                    <p className="grid grid-cols-3 justify-center items-baseline">
+                      <p className="text-right">
+                        {ingredient.measures[measureType].amount}
+                      </p>
                       <button
                         className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
-                        onClick={() => handleIncrement(index, listIndex)}>
+                        onClick={() => handleIncrement(index, listIndex)}
+                      >
                         +
                       </button>
                       <button
                         className="bg-red-300 hover:bg-red-100 text-red-800 font-bold py-2 px-4 mx-1 rounded"
-                        onClick={() => handleDecrement(index, listIndex)}>
+                        onClick={() => handleDecrement(index, listIndex)}
+                      >
                         -
                       </button>
                     </p>
                     <p>{ingredient.measures[measureType].unitLong}</p>
                     <button
                       className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
-                      onClick={() => toggleChecked()}>
+                      onClick={() => toggleChecked()}
+                    >
                       Checked!
                     </button>
                   </div>
@@ -152,7 +160,8 @@ export const Shoppinglist = () => {
           </p>
           <Link
             to={"/login"}
-            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 ">
+            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 "
+          >
             Sign in
           </Link>
         </div>
