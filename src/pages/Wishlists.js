@@ -6,6 +6,8 @@ import {
   getAllWishlists,
   saveWishlist,
 } from "../components/wishlist/wishlists";
+import { AddButton } from "../components/AddButton";
+import { SearchIcon } from "../components/icons/SearchIcon";
 
 // Drag and drop
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -104,6 +106,8 @@ export const Wishlists = () => {
     saveWishlist({ wishLists: newWishlists });
   }
 
+  const handleButtonClick = () => setPopupOpen(true);
+
   return (
     <div className="mx-4 md:px-20 xl:px-60 min-h-full">
       {popupOpen && (
@@ -121,23 +125,10 @@ export const Wishlists = () => {
             >
               Your wishlists
             </h2>
-            <button
+            <AddButton
+              onClick={handleButtonClick}
               className="flex justify-center w-10 h-10 bg-violet-200 rounded-full font-bold text-gray-700"
-              onClick={() => setPopupOpen(true)}
-            >
-              <div className="self-center">
-                <svg
-                  className="text-gray-700 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
-                  />
-                </svg>
-              </div>
-            </button>
+            />
           </div>
 
           {/* Searchbar */}
@@ -147,14 +138,7 @@ export const Wishlists = () => {
               className="h-10 pl-2 bg-gray-50 flex border rounded-sm border-gray-300 text-gray-800 text-md w-full focus:outline-none focus:ring-2 focus:ring-violet-300"
             />
             <button className="absolute right-0 top-0 h-full px-3">
-              <div className="w-4 text-violet-400">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path
-                    fill="currentColor"
-                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-                  />
-                </svg>
-              </div>
+              <SearchIcon className="w-4 text-violet-400" />
             </button>
           </div>
         </div>
