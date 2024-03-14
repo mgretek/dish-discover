@@ -114,21 +114,23 @@ export const Shoppinglist = () => {
                 className="border border-pink-200 content-center p-3 m-3"
                 key={shoppinglist.id}
               >
-                <div className="flex ">
+                <div className="grid grid-cols-3">
                   <p className="font-bold items-baseline">{item.title}</p>
-                  <p className="ml-2">Quantity: {item.quantity}</p>
-                  <button
-                    className="bg-gray-300 px-2 rounded-md"
-                    onClick={() => decrementQuantity(listIndex)}
-                  >
-                    -
-                  </button>
-                  <button
-                    className="bg-gray-300 px-2 rounded-md"
-                    onClick={() => incrementQuantity(listIndex)}
-                  >
-                    +
-                  </button>
+                  <div class="flex gap-1">
+                    <p className="ml-2">Quantity: {item.quantity}</p>
+                    <button
+                      className="bg-gray-200 px-2 rounded-md "
+                      onClick={() => decrementQuantity(listIndex)}
+                    >
+                      -
+                    </button>
+                    <button
+                      className="bg-gray-200 px-2 rounded-md "
+                      onClick={() => incrementQuantity(listIndex)}
+                    >
+                      +
+                    </button>
+                  </div>
                   <button
                     className="text-red-600 ml-auto"
                     onClick={() => handleDeleteRecipe(item.id)}
