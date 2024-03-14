@@ -59,8 +59,15 @@ export const Shoppinglist = () => {
     setMeasureType(newMeasure);
   }
 
-  function toggleChecked() {
-    setIsChecked(!setIsChecked);
+  function toggleChecked(index, listIndex) {
+    const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
+    if (newShoppingList[listIndex].ingredients[index].isChecked) {
+      newShoppingList[listIndex].ingredients[index].isChecked = false;
+    } else {
+      newShoppingList[listIndex].ingredients[index].isChecked = true;
+    }
+    setShoppingList(newShoppingList);
+    saveShoppinglist(newShoppingList);
   }
 
   useEffect(() => {
@@ -108,7 +115,9 @@ export const Shoppinglist = () => {
                 {item.ingredients.map((ingredient, index, id) => (
                   <div
                     style={{
-                      textDecoration: isChecked ? "line-through" : "none",
+                      textDecoration: ingredient.isChecked
+                        ? "line-through"
+                        : "none",
                       textDecorationColor: "red",
                     }}
                     className="grid grid-cols-4 items-center border border-b-2 p-2 m-2 "
@@ -135,7 +144,7 @@ export const Shoppinglist = () => {
                     <p>{ingredient.measures[measureType].unitLong}</p>
                     <button
                       className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
-                      onClick={() => toggleChecked()}
+                      onClick={() => toggleChecked(index, listIndex)}
                     >
                       Checked!
                     </button>
