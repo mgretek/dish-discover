@@ -29,7 +29,7 @@ export const Wishlists = () => {
   useEffect(() => {
     if (user) {
       const userData = JSON.parse(JSON.stringify(user));
-      console.log("user uid is:", userData.uid);
+      // console.log("user uid is:", userData.uid);
       setUid(userData.uid);
     }
   }, [user]);
@@ -40,6 +40,7 @@ export const Wishlists = () => {
     async function fetchWishlists() {
       try {
         const allWishlists = await getAllWishlists(uid);
+        console.log("allwishlists are:", allWishlists);
         if (allWishlists) {
           setWishlists(allWishlists);
         } else {
@@ -51,7 +52,7 @@ export const Wishlists = () => {
     }
 
     fetchWishlists();
-  }, []);
+  }, [uid]);
 
   function addNewList({ title }) {
     const newId = uuidv4();

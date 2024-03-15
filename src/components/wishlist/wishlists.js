@@ -41,12 +41,12 @@ export async function removeFromWishlist(listId, recipe, uid) {
 
     const filteredArr = wishlistArr.filter((item) => item.id !== recipe.id);
 
-    await set(ref(db, `${uid}/wishlists/${listId}/recipes`), filteredArr);
+    await set(ref(db, `users/${uid}/wishlists/${listId}/recipes`), filteredArr);
 
-    console.log("Recipe added to wishlist:", recipe);
+    // console.log("Recipe added to wishlist:", recipe);
     return true;
   } catch (error) {
-    console.error("Error adding recipe to wishlist:", error);
+    // console.error("Error adding recipe to wishlist:", error);
     return false;
   }
 }
@@ -68,7 +68,7 @@ export async function addToWishlist(listId, recipe, uid) {
     wishlistArr.push(recipe);
 
     // Set the updated wishlist array back to the database
-    await set(ref(db, `users/${uid}/wishlists/recipes`), wishlistArr);
+    await set(ref(db, `users/${uid}/wishlists/${listId}/recipes`), wishlistArr);
 
     console.log("Recipe added to wishlist:", recipe);
     return true;

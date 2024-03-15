@@ -226,9 +226,9 @@ const recipeTemplate = {
 
 // const apiKey = "da2c9951c50f4074ad413ff879110743";
 // const apiKey = "33850490cff6451f9704d9b995785d53";
-// const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
+const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
 // const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
-const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
+// const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
 
 export const Recipe = () => {
   let { id } = useParams();
@@ -257,7 +257,7 @@ export const Recipe = () => {
       recipes: filteredRecipes,
     };
     setWishlists(updatedWishlists);
-    removeFromWishlist(listIndex, recipe);
+    removeFromWishlist(listIndex, recipe, uid);
   }
   function handleAddRecipe(listIndex, recipe) {
     const updatedWishlists = [...wishlists];
@@ -285,7 +285,7 @@ export const Recipe = () => {
   useEffect(() => {
     if (user) {
       const userData = JSON.parse(JSON.stringify(user));
-      console.log("user uid is:", userData.uid);
+      // console.log("user uid is:", userData.uid);
       setUid(userData.uid);
     }
   }, [user]);
@@ -295,10 +295,10 @@ export const Recipe = () => {
     async function fetchWishlists() {
       const allWishlists = await getAllWishlists(uid);
       setWishlists(allWishlists);
-      console.log(allWishlists);
+      // console.log(allWishlists);
     }
     fetchWishlists();
-  }, []);
+  }, [uid]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
