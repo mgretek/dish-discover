@@ -1,8 +1,9 @@
-export const DeleteIcon = ({ onClick }) => {
+export const DeleteIcon = ({ onClick, className }) => {
   return (
     <div className="flex cursor-pointer">
       <svg
         onClick={onClick}
+        className={className}
         xmlns="http://www.w3.org/2000/svg"
         class="ionicon"
         viewBox="0 0 512 512"

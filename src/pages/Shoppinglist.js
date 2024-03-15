@@ -9,6 +9,10 @@ import {
   saveShoppinglist,
 } from "../components/shoppinglist/shoppinglist";
 import { Toggle } from "../components/buttons/toggle/Toggle";
+import { DeleteIcon } from "../components/icons/DeleteIcon";
+import { Increase } from "../components/icons/Increase";
+import { Decrease } from "../components/icons/Decrease";
+import { AddedToCartIcon } from "../components/icons/AddedToCartIcon";
 
 export const Shoppinglist = () => {
   const [shoppinglist, setShoppingList] = useState([]);
@@ -102,77 +106,103 @@ export const Shoppinglist = () => {
     <div className="mx-4 md:px-20 xl:px-60 min-h-full">
       {user ? (
         <div className="">
-          <div className="flex">
-            <h1 className="text-5xl text-left font-bold text-gray-800 py-10">
-              Your Shopping List
-            </h1>
-            <button className="px-3" onClick={toggleMeasure}>
-              Unit<Toggle></Toggle>
-            </button>
+          <h1 className="text-3xl md:text-5xl text-left font-bold text-gray-800 pt-10 md:pt-12 pb-5 md:pb-3">
+            Your Shopping List
+          </h1>
+          <div className="flex self-center justify-end mb-1.5 md:mb-3 items-center">
+            <span className="text-gray-600 text-sm font-semibold">
+              Metric units
+            </span>
+            <span>
+              <button className="px-3" onClick={toggleMeasure}>
+                <Toggle />
+              </button>
+            </span>
           </div>
+
           {shoppinglist.map((item, listIndex) => (
             <>
               <div
-                className="border border-pink-200 content-center p-3 m-3"
-                key={shoppinglist.id}>
-                <div className="grid grid-cols-3">
-                  <p className="font-bold items-baseline">{item.title}</p>
-                  <div class="flex gap-1">
-                    <p className="ml-2">Quantity: {item.quantity}</p>
+                className="content-center px-3 pt-4 md:pt-8 pb-12"
+                key={shoppinglist.id}
+              >
+                <div className="flex mb-3 gap-x-2 justify-between">
+                  <p className="font-bold items-baseline self-center text-gray-800 text-lg">
+                    {item.title}
+                  </p>
+
+                  <div class="flex gap-x-4 items-center">
+                    <div className="">
+                      <div className="flex gap-x-3">
+                        <button onClick={() => decrementQuantity(listIndex)}>
+                          <Decrease className="w-5 text-violet-300" />
+                        </button>
+                        <div className="text-gray-600 font-semibold text-lg">
+                          {item.quantity}
+                        </div>
+                        <button onClick={() => incrementQuantity(listIndex)}>
+                          <Increase className="w-5 text-violet-300" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="border-l-2 border-gray-300 w-1 h-[75%]"></div>
                     <button
-                      className="bg-gray-200 px-2 rounded-md "
-                      onClick={() => decrementQuantity(listIndex)}>
-                      -
-                    </button>
-                    <button
-                      className="bg-gray-200 px-2 rounded-md "
-                      onClick={() => incrementQuantity(listIndex)}>
-                      +
+                      className="w-6 text-pink-600"
+                      onClick={() => handleDeleteRecipe(item.id)}
+                    >
+                      <DeleteIcon />
                     </button>
                   </div>
-                  <button
-                    className="text-red-600 ml-auto"
-                    onClick={() => handleDeleteRecipe(item.id)}>
-                    Delete
-                  </button>
                 </div>
+
+                <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-2"></div>
 
                 {item.ingredients.map((ingredient, index, id) => (
                   <div
                     style={{
-                      backgroundColor: ingredient.isChecked
-                        ? "#FECDD1"
-                        : "white",
                       textDecoration: ingredient.isChecked
-                        ? "line-through 3px red"
+                        ? "line-through 1px gray"
                         : "none",
-                      textDecorationColor: "red",
+                      textDecorationColor: "gray",
+                      fontStyle: ingredient.isChecked ? "italic" : "normal",
+                      color: ingredient.isChecked ? "gray" : "",
                     }}
-                    className="grid grid-cols-4 items-center border border-b-2 p-2 m-2 "
-                    key={ingredient.name}>
-                    <p className="">{ingredient.name}</p>
-                    <p className="grid grid-cols-3 justify-center items-baseline">
-                      <p className="text-right">
-                        {ingredient.measures[measureType].amount *
-                          item.quantity}
-                      </p>
-                      <button
-                        className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
-                        onClick={() => handleIncrement(index, listIndex)}>
-                        +
+                    className="flex justify-between gap-x-6 items-center border-bottom border-b-2 border-violet-100 py-3"
+                    key={ingredient.name}
+                  >
+                    <div className="flex gap-x-2">
+                      <div>
+                        <span className="font-semibold">
+                          {ingredient.measures[measureType].amount *
+                            item.quantity}{" "}
+                        </span>
+                        <span className="font-semibold">
+                          {ingredient.measures[measureType].unitLong}{" "}
+                        </span>
+                        {ingredient.name}
+                      </div>
+                    </div>
+
+                    <div className="flex justify-end gap-x-4 pr-1">
+                      <div className="flex items-center gap-x-4">
+                        <button
+                          onClick={() => handleIncrement(index, listIndex)}
+                        >
+                          <Increase className="w-5 text-violet-300" />
+                        </button>
+                        <button
+                          onClick={() => handleDecrement(index, listIndex)}
+                        >
+                          <Decrease className="w-5 text-violet-300" />
+                        </button>
+                      </div>
+
+                      <div className="border-l-2 border-gray-300 bg-gray-300 w-1 h-[75%]"></div>
+
+                      <button onClick={() => toggleChecked(index, listIndex)}>
+                        <AddedToCartIcon className="w-5 text-violet-400" />
                       </button>
-                      <button
-                        className="bg-red-300 hover:bg-red-100 text-red-800 font-bold py-2 px-4 mx-1 rounded"
-                        onClick={() => handleDecrement(index, listIndex)}>
-                        -
-                      </button>
-                    </p>
-                    <p>{ingredient.measures[measureType].unitLong}</p>
-                    <button
-                      className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
-                      onClick={() => toggleChecked(index, listIndex)}>
-                      &#10003;
-                    </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -194,7 +224,8 @@ export const Shoppinglist = () => {
           </p>
           <Link
             to={"/login"}
-            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 ">
+            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 "
+          >
             Sign in
           </Link>
         </div>
