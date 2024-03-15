@@ -131,7 +131,7 @@ export const Wishlists = () => {
     }
 
     setWishlists(newWishlists);
-    saveWishlist({ wishLists: newWishlists });
+    saveWishlist({ wishLists: newWishlists, uid: uid });
   }
 
   const handleButtonClick = () => setPopupOpen(true);
