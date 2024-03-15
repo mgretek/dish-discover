@@ -114,29 +114,25 @@ export const Shoppinglist = () => {
             <>
               <div
                 className="border border-pink-200 content-center p-3 m-3"
-                key={shoppinglist.id}
-              >
+                key={shoppinglist.id}>
                 <div className="grid grid-cols-3">
                   <p className="font-bold items-baseline">{item.title}</p>
                   <div class="flex gap-1">
                     <p className="ml-2">Quantity: {item.quantity}</p>
                     <button
                       className="bg-gray-200 px-2 rounded-md "
-                      onClick={() => decrementQuantity(listIndex)}
-                    >
+                      onClick={() => decrementQuantity(listIndex)}>
                       -
                     </button>
                     <button
                       className="bg-gray-200 px-2 rounded-md "
-                      onClick={() => incrementQuantity(listIndex)}
-                    >
+                      onClick={() => incrementQuantity(listIndex)}>
                       +
                     </button>
                   </div>
                   <button
                     className="text-red-600 ml-auto"
-                    onClick={() => handleDeleteRecipe(item.id)}
-                  >
+                    onClick={() => handleDeleteRecipe(item.id)}>
                     Delete
                   </button>
                 </div>
@@ -144,14 +140,16 @@ export const Shoppinglist = () => {
                 {item.ingredients.map((ingredient, index, id) => (
                   <div
                     style={{
+                      backgroundColor: ingredient.isChecked
+                        ? "#FECDD1"
+                        : "white",
                       textDecoration: ingredient.isChecked
-                        ? "line-through"
+                        ? "line-through 3px red"
                         : "none",
                       textDecorationColor: "red",
                     }}
                     className="grid grid-cols-4 items-center border border-b-2 p-2 m-2 "
-                    key={ingredient.name}
-                  >
+                    key={ingredient.name}>
                     <p className="">{ingredient.name}</p>
                     <p className="grid grid-cols-3 justify-center items-baseline">
                       <p className="text-right">
@@ -160,23 +158,20 @@ export const Shoppinglist = () => {
                       </p>
                       <button
                         className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
-                        onClick={() => handleIncrement(index, listIndex)}
-                      >
+                        onClick={() => handleIncrement(index, listIndex)}>
                         +
                       </button>
                       <button
                         className="bg-red-300 hover:bg-red-100 text-red-800 font-bold py-2 px-4 mx-1 rounded"
-                        onClick={() => handleDecrement(index, listIndex)}
-                      >
+                        onClick={() => handleDecrement(index, listIndex)}>
                         -
                       </button>
                     </p>
                     <p>{ingredient.measures[measureType].unitLong}</p>
                     <button
                       className="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 ml-3 rounded"
-                      onClick={() => toggleChecked(index, listIndex)}
-                    >
-                      Checked!
+                      onClick={() => toggleChecked(index, listIndex)}>
+                      &#10003;
                     </button>
                   </div>
                 ))}
@@ -199,8 +194,7 @@ export const Shoppinglist = () => {
           </p>
           <Link
             to={"/login"}
-            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 "
-          >
+            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 ">
             Sign in
           </Link>
         </div>
