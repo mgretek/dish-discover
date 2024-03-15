@@ -1,21 +1,22 @@
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import { database } from "../../config/firebase";
 
-export async function createWishlist() {}
-
-export async function getAllWishlists() {
+export async function getAllWishlists(uid) {
+  console.log("logging uid: ", uid);
   const dbRef = ref(database);
-  const snapshot = await get(child(dbRef, "wishlists"));
+  const snapshot = await get(child(dbRef, `users/${uid}/wishlists`));
+  console.log("logging snapshot", snapshot.val());
   if (snapshot) {
+    console.log("snapshot found here:", snapshot.val());
     return snapshot.val();
   } else {
     console.log("No lists found");
   }
 }
 
-export async function saveWishlist({ wishLists }) {
+export async function saveWishlist({ wishLists, uid }) {
   const db = getDatabase();
-  const dbRef = ref(db, `wishlists`);
+  const dbRef = ref(db, `users/${uid}/wishlists`);
 
   try {
     // Set the updated wishlist array back to the database
@@ -28,9 +29,9 @@ export async function saveWishlist({ wishLists }) {
     return false;
   }
 }
-export async function removeFromWishlist(listId, recipe) {
+export async function removeFromWishlist(listId, recipe, uid) {
   const db = getDatabase();
-  const dbRef = ref(db, `wishlists/${listId}/recipes`);
+  const dbRef = ref(db, `${uid}/wishlists/${listId}/recipes`);
 
   try {
     const wishlistSnapshot = await get(dbRef);
@@ -40,7 +41,7 @@ export async function removeFromWishlist(listId, recipe) {
 
     const filteredArr = wishlistArr.filter((item) => item.id !== recipe.id);
 
-    await set(ref(db, `wishlists/${listId}/recipes`), filteredArr);
+    await set(ref(db, `${uid}/wishlists/${listId}/recipes`), filteredArr);
 
     console.log("Recipe added to wishlist:", recipe);
     return true;
@@ -50,9 +51,10 @@ export async function removeFromWishlist(listId, recipe) {
   }
 }
 
-export async function addToWishlist(listId, recipe) {
+export async function addToWishlist(listId, recipe, uid) {
+  console.log("recievd userid:", uid);
   const db = getDatabase();
-  const dbRef = ref(db, `wishlists/${listId}/recipes`);
+  const dbRef = ref(db, `users/${uid}/wishlists/${listId}/recipes`);
 
   try {
     // Retrieve the wishlist object from the database
@@ -66,7 +68,7 @@ export async function addToWishlist(listId, recipe) {
     wishlistArr.push(recipe);
 
     // Set the updated wishlist array back to the database
-    await set(ref(db, `wishlists/${listId}/recipes`), wishlistArr);
+    await set(ref(db, `users/${uid}/wishlists/recipes`), wishlistArr);
 
     console.log("Recipe added to wishlist:", recipe);
     return true;
@@ -75,5 +77,3 @@ export async function addToWishlist(listId, recipe) {
     return false;
   }
 }
-
-export async function loadWishlists() {}
