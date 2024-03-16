@@ -365,9 +365,8 @@ export const Recipe = () => {
                   <div className="text-right text-xs md:text-md text-gray-500 italic">
                     Add to wishlist
                   </div>
-
-                  <div className="">
-                    <Popover className="">
+                  <div className="relative">
+                    <Popover>
                       {({ open }) => (
                         <>
                           <Popover.Button
@@ -397,17 +396,15 @@ export const Recipe = () => {
                             leaveFrom="opacity-100 translate-y-0"
                             leaveTo="opacity-0 translate-y-1"
                           >
-                            <Popover.Panel className="absolute right-1/2 z-10 mt-3 -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
+                            <Popover.Panel className="absolute left-0 bottom-0 translate-y-full z-10 transform w-64">
                               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
-                                <div className="relative grid bg-white px-2 pt-2">
+                                <div className="relative grid bg-white p-2">
                                   {user ? (
-                                    <div className="p-1.5 mx-1.5">
-                                      <div className="flex justify-start gap-x-2">
-                                        <div className="mb-0.5">
-                                          <CreateNewWishlist
-                                            addNewList={addNewList}
-                                          />
-                                        </div>
+                                    <div className="flex justify-start gap-x-2">
+                                      <div>
+                                        <CreateNewWishlist
+                                          addNewList={addNewList}
+                                        />
                                       </div>
                                     </div>
                                   ) : (
@@ -485,7 +482,7 @@ export const Recipe = () => {
                 </div>
               </div>
 
-              {/* Preptime, tags */}
+              {/* Preptime, score, tags */}
               <div>
                 <div className="flex gap-x-2 mb-1.5 text-gray-800">
                   <TimeIcon className="w-4 text-pink-300" />
@@ -495,6 +492,7 @@ export const Recipe = () => {
                   <ScoreIcon className="w-4 text-pink-300" />
                   {Number(recipe.spoonacularScore.toFixed(2))}
                 </div>
+
                 <div className="flex flex-wrap">
                   {Array.isArray(recipe.dishTypes) &&
                     recipe.dishTypes.map((type) => (
