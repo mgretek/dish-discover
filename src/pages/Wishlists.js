@@ -145,8 +145,8 @@ export const Wishlists = () => {
         />
       )}
       {user && (
-        <div className="py-12">
-          <div className="flex mb-6 justify-between items-center">
+        <div className="pt-16 pb-12">
+          <div className="flex mb-4 justify-between items-center">
             <h2
               className="text-5xl text-left font-bold text-gray-800"
               onClick={handleTitleEdit}
@@ -158,6 +158,7 @@ export const Wishlists = () => {
               className="flex justify-center w-10 h-10 bg-violet-200 rounded-full font-bold text-gray-700"
             />
           </div>
+          <div class="h-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-6"></div>
 
           {/* Searchbar */}
           <div className="relative self-center">
