@@ -614,7 +614,7 @@ export const RecipeSearch = () => {
 
   return (
     <div className="min-h-screen max-w-[576px] md:max-w-7xl mx-auto">
-      <div className="flex flex-wrap mx-2 md:mx-auto md:px-20">
+      <div className="flex flex-wrap mx-4  md:px-20">
         {/* Searchbar section */}
         <div className="xl:w-1/2 pt-12 pb-8 md:py-14 flex flex-col gap-4">
           <h1 className="text-5xl font-bold text-gray-800 text-left">
