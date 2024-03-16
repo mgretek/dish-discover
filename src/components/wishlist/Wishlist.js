@@ -5,6 +5,8 @@ import { ForwardArrow } from "../buttons/arrows/ForwardArrow";
 import { PencilIcon } from "../icons/PencilIcon";
 import { DeleteIcon } from "../icons/DeleteIcon";
 import { Link } from "react-router-dom";
+import { ScoreIcon } from "../icons/ScoreIcon";
+import { TimeIcon } from "../icons/TimeIcon";
 
 export const Wishlist = ({
   saveTitle,
@@ -29,18 +31,18 @@ export const Wishlist = ({
   }
   return (
     <div className="text-left mb-3">
-      <div className="flex bg-gradient-to-r from-pink-100 via-pink-200 to-indigo-200 rounded-full justify-between items-center px-4 py-3 mb-3">
-        <div
-          className="flex items-center"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+      <div
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="flex bg-gradient-to-r from-pink-100 via-pink-200 to-indigo-200 rounded-full justify-between items-center px-4 py-3 mb-3"
+      >
+        <div className="flex items-center gap-x-1">
           {!titleEditActive ? (
             <div class="flex">
-              <h1 className="text-xl flex-2 font-medium uppercase tracking-wider mr-2 text-gray-800">
+              <h1 className="text-xl flex-2 font-semibold uppercase tracking-wider mr-2 text-gray-700">
                 {listTitle}
               </h1>
-              <h1 className="text-sm flex-2 uppercase tracking-wider mr-2 text-gray-800">
+              <h1 className="text-sm flex-2 uppercase tracking-wider mr-2 text-gray-700">
                 {Array.isArray(list.recipes) > 0
                   ? `(${list.recipes.length})`
                   : "(0)"}
@@ -49,7 +51,7 @@ export const Wishlist = ({
           ) : (
             <div className="flex">
               <input
-                className="border rounded-sm"
+                className="border rounded-sm text-gray-800 pl-1"
                 value={listTitle}
                 onChange={(e) => setListTitle(e.target.value)}
               ></input>
@@ -62,7 +64,7 @@ export const Wishlist = ({
             </div>
           )}
           {isHovered && !titleEditActive && (
-            <div class="flex">
+            <div class="flex gap-x-2">
               <PencilIcon onClick={handleTitleEdit} />
               <DeleteIcon onClick={() => handleDeleteList(list)} />
             </div>
@@ -113,34 +115,41 @@ export const WishItem = ({
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <div className="flex items-center">
+          <div className="flex items-center mb-3">
             <Link to={`/recipe/${recipe.id}`}>
-              <h2 className="text-2xl mr-3">{recipe.title}</h2>
+              <div className="text-2xl mr-3 font-semibold text-gray-800">
+                {recipe.title}
+              </div>
             </Link>
             <button
-              className="ml-auto text-gray-500 font-semibold text-sm"
+              className="ml-auto text-pink-400 text-sm"
               onClick={() =>
                 handleDelete({ recipeId: recipe.id, listIndex: listIndex })
               }
             >
-              <div className="w-4">
-                <svg
-                  className="text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 384 512"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
-                  />
-                </svg>
-              </div>
+              <DeleteIcon className="text-pink-400" />
             </button>
           </div>
-          <div className="flex">
-            <p>Time: {recipe.readyInMinutes} min</p>
-            <p className="mx-3">|</p>
-            <h3>Ingredients: 4</h3>
+          <div className="flex mb-1.5">
+            <p className="text-gray-800 text-md">
+              <div className="flex gap-x-2 items-center">
+                <TimeIcon className="w-4 text-violet-400" />
+                {recipe.readyInMinutes} min
+              </div>
+            </p>
+            <p className="mx-3 text-gray-800">|</p>
+            <div className="flex items-center gap-x-2 text-gray-800">
+              <ScoreIcon className="w-4 text-violet-400" />
+              {Number(recipe.spoonacularScore.toFixed(2))}
+            </div>
+          </div>
+          <div className="text-gray-700 text-sm italic">
+            {recipe.dishTypes.map((type, index) => (
+              <React.Fragment key={index}>
+                {type}
+                {index !== recipe.dishTypes.length - 1 && ", "}
+              </React.Fragment>
+            ))}
           </div>
 
           <div className="aspect-square max-h-40 mt-4 overflow-hidden">
