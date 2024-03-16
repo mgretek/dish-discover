@@ -21,30 +21,50 @@ export const Wishlists = () => {
   const [popupOpen, setPopupOpen] = useState(true);
   const [wishlists, setWishlists] = useState([]);
   const [user] = useAuthState(auth);
+  const [uid, setUid] = useState("");
+
   const [titleEditActive, setTitleEditActive] = useState(false);
+
+  // get user id when logged in
+  useEffect(() => {
+    if (user) {
+      const userData = JSON.parse(JSON.stringify(user));
+      // console.log("user uid is:", userData.uid);
+      setUid(userData.uid);
+    }
+  }, [user]);
 
   useEffect(() => {
     setPopupOpen(false);
+
     async function fetchWishlists() {
-      const allWishlists = await getAllWishlists();
-      if (allWishlists) {
-        setWishlists(allWishlists);
+      try {
+        const allWishlists = await getAllWishlists(uid);
+        console.log("allwishlists are:", allWishlists);
+        if (allWishlists) {
+          setWishlists(allWishlists);
+        } else {
+          console.log("no snapshot");
+        }
+      } catch (error) {
+        console.error("Error fetching wishlists:", error);
       }
     }
+
     fetchWishlists();
-  }, []);
+  }, [uid]);
 
   function addNewList({ title }) {
     const newId = uuidv4();
     const newArr = [...wishlists, { title: title, recipes: [], id: newId }];
     setWishlists(newArr);
-    saveWishlist({ wishLists: newArr });
+    saveWishlist({ wishLists: newArr, uid: uid });
     setPopupOpen(false);
   }
   function handleDeleteList(listObj) {
     const newArr = [...wishlists];
     const filteredArr = newArr.filter((list) => list.id !== listObj.id);
-    saveWishlist({ wishLists: filteredArr });
+    saveWishlist({ wishLists: filteredArr, uid: uid });
     setWishlists(filteredArr);
   }
 
@@ -54,7 +74,7 @@ export const Wishlists = () => {
       (item) => item.id !== recipeId
     );
     setWishlists(newArr);
-    saveWishlist({ wishLists: newArr });
+    saveWishlist({ wishLists: newArr, uid: uid });
   }
 
   function handleTitleEdit() {
@@ -69,7 +89,7 @@ export const Wishlists = () => {
     };
     console.log(newArr);
     setWishlists(newArr);
-    saveWishlist({ wishLists: newArr });
+    saveWishlist({ wishLists: newArr, uid: uid });
   }
 
   function onDragEnd(result) {
@@ -111,7 +131,7 @@ export const Wishlists = () => {
     }
 
     setWishlists(newWishlists);
-    saveWishlist({ wishLists: newWishlists });
+    saveWishlist({ wishLists: newWishlists, uid: uid });
   }
 
   const handleButtonClick = () => setPopupOpen(true);

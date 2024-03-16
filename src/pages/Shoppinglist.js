@@ -18,14 +18,15 @@ export const Shoppinglist = () => {
   const [shoppinglist, setShoppingList] = useState([]);
   const [user] = useAuthState(auth);
   const [measureType, setMeasureType] = useState("us");
+  const [uid, setUid] = useState("");
 
   function handleDeleteRecipe(id) {
     // copy shoppinglist and filter deleted item out
     const newShoppingList = shoppinglist.filter((recipe) => recipe.id !== id);
     // update local state
-    setShoppingList(newShoppingList);
+    setShoppingList(newShoppingList, uid);
     // update firebase database
-    deleteRecipeById(0, id);
+    deleteRecipeById(0, id, uid);
   }
 
   function handleIncrement(index, listIndex) {
@@ -40,7 +41,7 @@ export const Shoppinglist = () => {
     // update local state
     setShoppingList(newShoppingList);
     // update firebase database
-    saveShoppinglist(newShoppingList);
+    saveShoppinglist({ shoppinglist: newShoppingList, uid: uid });
   }
   function handleDecrement(index, listIndex) {
     const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
@@ -54,7 +55,7 @@ export const Shoppinglist = () => {
     // update local state
     setShoppingList(newShoppingList);
     // update firebase database
-    saveShoppinglist(newShoppingList);
+    saveShoppinglist({ shoppinglist: newShoppingList, uid: uid });
   }
 
   function incrementQuantity(listIndex) {
@@ -63,7 +64,7 @@ export const Shoppinglist = () => {
     newShoppingList[listIndex].quantity += 1;
     // save to local state and database
     setShoppingList(newShoppingList);
-    saveShoppinglist(newShoppingList);
+    saveShoppinglist({ shoppinglist: newShoppingList, uid: uid });
   }
   function decrementQuantity(listIndex) {
     const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
@@ -71,7 +72,7 @@ export const Shoppinglist = () => {
       newShoppingList[listIndex].quantity -= 1;
     }
     setShoppingList(newShoppingList);
-    saveShoppinglist(newShoppingList);
+    saveShoppinglist({ shoppinglist: newShoppingList, uid: uid });
   }
 
   function toggleMeasure() {
@@ -87,12 +88,20 @@ export const Shoppinglist = () => {
       newShoppingList[listIndex].ingredients[index].isChecked = true;
     }
     setShoppingList(newShoppingList);
-    saveShoppinglist(newShoppingList);
+    saveShoppinglist({ shoppinglist: newShoppingList, uid: uid });
   }
+  // get user id when logged in
+  useEffect(() => {
+    if (user) {
+      const userData = JSON.parse(JSON.stringify(user));
+      // console.log("user uid is:", userData.uid);
+      setUid(userData.uid);
+    }
+  }, [user]);
 
   useEffect(() => {
     async function fetchShoppingList() {
-      const shoppinglistObj = await getShoppinglist();
+      const shoppinglistObj = await getShoppinglist(uid);
       if (shoppinglistObj) {
         setShoppingList(shoppinglistObj);
         console.log("shoppinglist import done:");
@@ -100,7 +109,7 @@ export const Shoppinglist = () => {
       }
     }
     fetchShoppingList();
-  }, []);
+  }, [uid]);
 
   return (
     <div className="mx-4 md:px-20 xl:px-60 min-h-full">

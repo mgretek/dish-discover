@@ -246,7 +246,7 @@ export const Recipe = () => {
     const newId = uuidv4();
     const newArr = [...wishlists, { title: title, recipes: [], id: newId }];
     setWishlists(newArr);
-    saveWishlist({ wishLists: newArr });
+    saveWishlist({ wishLists: newArr, uid: uid });
   }
   function handleRemoveRecipe(listIndex, recipe) {
     const filteredRecipes = wishlists[listIndex].recipes.filter(
@@ -258,7 +258,7 @@ export const Recipe = () => {
       recipes: filteredRecipes,
     };
     setWishlists(updatedWishlists);
-    removeFromWishlist(listIndex, recipe);
+    removeFromWishlist(listIndex, recipe, uid);
   }
   function handleAddRecipe(listIndex, recipe) {
     const updatedWishlists = [...wishlists];
@@ -274,7 +274,7 @@ export const Recipe = () => {
       };
     }
     setWishlists(updatedWishlists);
-    addToWishlist(listIndex, recipe);
+    addToWishlist(listIndex, recipe, uid);
   }
 
   function toggleMeasure() {
@@ -286,7 +286,7 @@ export const Recipe = () => {
   useEffect(() => {
     if (user) {
       const userData = JSON.parse(JSON.stringify(user));
-      console.log("user uid is:", userData.uid);
+      // console.log("user uid is:", userData.uid);
       setUid(userData.uid);
     }
   }, [user]);
@@ -294,12 +294,12 @@ export const Recipe = () => {
   // import wishlists from firebase for dropdown list display
   useEffect(() => {
     async function fetchWishlists() {
-      const allWishlists = await getAllWishlists();
+      const allWishlists = await getAllWishlists(uid);
       setWishlists(allWishlists);
-      console.log(allWishlists);
+      // console.log(allWishlists);
     }
     fetchWishlists();
-  }, []);
+  }, [uid]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -472,7 +472,7 @@ export const Recipe = () => {
                   </div>
                   <button
                     className="btn text-gray-600 rounded-md"
-                    onClick={() => addToShoppinglist(0, recipe, 1)}
+                    onClick={() => addToShoppinglist(0, recipe, 1, uid)}
                   >
                     <CartIcon />
                   </button>
