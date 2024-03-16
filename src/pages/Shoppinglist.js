@@ -37,7 +37,7 @@ export const Shoppinglist = () => {
     // update local state
     setShoppingList(newShoppingList);
     // update firebase database
-    saveShoppinglist(newShoppingList, uid);
+    saveShoppinglist({ shoppinglist: newShoppingList, uid: uid });
   }
   function handleDecrement(index, listIndex) {
     const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
@@ -51,7 +51,7 @@ export const Shoppinglist = () => {
     // update local state
     setShoppingList(newShoppingList);
     // update firebase database
-    saveShoppinglist(newShoppingList, uid);
+    saveShoppinglist({ shoppinglist: newShoppingList, uid: uid });
   }
 
   function incrementQuantity(listIndex) {
@@ -60,7 +60,7 @@ export const Shoppinglist = () => {
     newShoppingList[listIndex].quantity += 1;
     // save to local state and database
     setShoppingList(newShoppingList);
-    saveShoppinglist(newShoppingList, uid);
+    saveShoppinglist({ shoppinglist: newShoppingList, uid: uid });
   }
   function decrementQuantity(listIndex) {
     const newShoppingList = JSON.parse(JSON.stringify(shoppinglist));
@@ -68,7 +68,7 @@ export const Shoppinglist = () => {
       newShoppingList[listIndex].quantity -= 1;
     }
     setShoppingList(newShoppingList);
-    saveShoppinglist(newShoppingList, uid);
+    saveShoppinglist({ shoppinglist: newShoppingList, uid: uid });
   }
 
   function toggleMeasure() {
@@ -84,7 +84,7 @@ export const Shoppinglist = () => {
       newShoppingList[listIndex].ingredients[index].isChecked = true;
     }
     setShoppingList(newShoppingList);
-    saveShoppinglist(newShoppingList, uid);
+    saveShoppinglist({ shoppinglist: newShoppingList, uid: uid });
   }
   // get user id when logged in
   useEffect(() => {
