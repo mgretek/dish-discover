@@ -6,11 +6,7 @@ import { Loading } from "../components/loading/Loading";
 import { FilterButton } from "../components/recipesearch/FilterButton";
 import { SearchIcon } from "../components/icons/SearchIcon";
 
-// const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
-// const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
-// const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
-const apiKey = "da2c9951c50f4074ad413ff879110743";
-// const apiKey = "33850490cff6451f9704d9b995785d53";
+const apiKey = "d4743b46c8be46a4ae350870a07dd030";
 
 export const RecipeSearch = () => {
   const [filter, setFilter] = useState("both");
@@ -58,10 +54,10 @@ export const RecipeSearch = () => {
       const response = await fetch(
         `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${searchInput}&addRecipeInformation=true&fillIngredients&number=10&apiKey=${apiKey}`
       );
-      console.log(response);
+      // console.log(response);
 
       const json = await response.json();
-      console.log(json.results);
+      // console.log(json.results);
       setResults(json.results);
     } catch (error) {
       console.error(error);
@@ -144,8 +140,8 @@ export const RecipeSearch = () => {
                       <li>sugar</li>
                     </ul>
                     <div className="text-gray-400">
-                      {recipe.dishTypes.map((type) => (
-                        <span>#{type} </span>
+                      {recipe.dishTypes.map((type, index) => (
+                        <span key={"type" + index}>#{type} </span>
                       ))}
                     </div>
                   </div>

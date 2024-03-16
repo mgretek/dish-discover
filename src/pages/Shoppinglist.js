@@ -51,7 +51,7 @@ export const Shoppinglist = () => {
     newShoppingList[listIndex].ingredients[index].measures.us.amount -= 1;
     // Decrement general amount
     newShoppingList[listIndex].ingredients[index].amount -= 1;
-    console.log("decremented some");
+    // console.log("decremented some");
     // update local state
     setShoppingList(newShoppingList);
     // update firebase database
@@ -104,8 +104,8 @@ export const Shoppinglist = () => {
       const shoppinglistObj = await getShoppinglist(uid);
       if (shoppinglistObj) {
         setShoppingList(shoppinglistObj);
-        console.log("shoppinglist import done:");
-        console.log(shoppinglistObj);
+        // console.log("shoppinglist import done:");
+        // console.log(shoppinglistObj);
       }
     }
     fetchShoppingList();
@@ -118,7 +118,7 @@ export const Shoppinglist = () => {
           <h1 className="text-5xl text-left font-bold text-gray-800 pt-16 mb-4">
             Your Shopping List
           </h1>
-          <div class="h-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-6"></div>
+          <div className="h-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-6"></div>
 
           <div className="flex self-center justify-end mb-1.5 md:mb-3 items-center">
             <span className="text-gray-600 text-sm font-semibold">
@@ -132,99 +132,92 @@ export const Shoppinglist = () => {
           </div>
 
           {shoppinglist.map((item, listIndex) => (
-            <>
-              <div
-                className="content-center px-3 pt-4 md:pt-8 pb-12"
-                key={shoppinglist.id}
-              >
-                <div className="flex mb-3 gap-x-2 justify-between">
-                  <Link
-                    to={`/recipe/${item.id}`}
-                    className="font-bold items-baseline self-center text-gray-800 text-lg"
-                  >
-                    {item.title}
-                  </Link>
+            <div
+              className="content-center px-3 pt-4 md:pt-8 pb-12"
+              key={"shoppinglist" + listIndex}
+            >
+              <div className="flex mb-3 gap-x-2 justify-between">
+                <Link
+                  to={`/recipe/${item.id}`}
+                  className="font-bold items-baseline self-center text-gray-800 text-lg"
+                >
+                  {item.title}
+                </Link>
 
-                  <div class="flex gap-x-4 items-center">
-                    <div className="">
-                      <div className="flex gap-x-3">
-                        <button onClick={() => decrementQuantity(listIndex)}>
-                          <Decrease className="w-5 text-violet-300" />
-                        </button>
-                        <div className="text-gray-600 font-semibold text-lg">
-                          {item.quantity}
-                        </div>
-                        <button onClick={() => incrementQuantity(listIndex)}>
-                          <Increase className="w-5 text-violet-300" />
-                        </button>
+                <div className="flex gap-x-4 items-center">
+                  <div className="">
+                    <div className="flex gap-x-3">
+                      <button onClick={() => decrementQuantity(listIndex)}>
+                        <Decrease className="w-5 text-violet-300" />
+                      </button>
+                      <div className="text-gray-600 font-semibold text-lg">
+                        {item.quantity}
                       </div>
-                    </div>
-                    <div className="border-l-2 border-gray-300 w-1 h-[75%]"></div>
-                    <button
-                      className="w-6 text-pink-600"
-                      onClick={() => handleDeleteRecipe(item.id)}
-                    >
-                      <DeleteIcon />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-2"></div>
-
-                {item.ingredients.map((ingredient, index, id) => (
-                  <div
-                    style={{
-                      textDecoration: ingredient.isChecked
-                        ? "line-through 1px gray"
-                        : "none",
-                      textDecorationColor: "gray",
-                      fontStyle: ingredient.isChecked ? "italic" : "normal",
-                      color: ingredient.isChecked ? "gray" : "",
-                    }}
-                    className="flex justify-between gap-x-6 items-center border-bottom border-b-2 border-violet-100 py-3"
-                    key={ingredient.name}
-                  >
-                    <div className="flex gap-x-2">
-                      <div>
-                        <span className="font-semibold">
-                          {Number(
-                            (
-                              ingredient.measures[measureType].amount *
-                              item.quantity
-                            ).toFixed(1)
-                          )}{" "}
-                        </span>
-                        <span className="font-semibold">
-                          {ingredient.measures[measureType].unitLong}{" "}
-                        </span>
-                        {ingredient.name}
-                      </div>
-                    </div>
-
-                    <div className="flex justify-end gap-x-4 pr-1">
-                      <div className="flex items-center gap-x-4">
-                        <button
-                          onClick={() => handleIncrement(index, listIndex)}
-                        >
-                          <Increase className="w-5 text-violet-300" />
-                        </button>
-                        <button
-                          onClick={() => handleDecrement(index, listIndex)}
-                        >
-                          <Decrease className="w-5 text-violet-300" />
-                        </button>
-                      </div>
-
-                      <div className="border-l-2 border-gray-300 bg-gray-300 w-1 h-[75%]"></div>
-
-                      <button onClick={() => toggleChecked(index, listIndex)}>
-                        <AddedToCartIcon className="w-5 text-violet-400" />
+                      <button onClick={() => incrementQuantity(listIndex)}>
+                        <Increase className="w-5 text-violet-300" />
                       </button>
                     </div>
                   </div>
-                ))}
+                  <div className="border-l-2 border-gray-300 w-1 h-[75%]"></div>
+                  <button
+                    className="w-6 text-pink-600"
+                    onClick={() => handleDeleteRecipe(item.id)}
+                  >
+                    <DeleteIcon />
+                  </button>
+                </div>
               </div>
-            </>
+
+              <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-2"></div>
+
+              {item.ingredients.map((ingredient, index, id) => (
+                <div
+                  style={{
+                    textDecoration: ingredient.isChecked
+                      ? "line-through 1px gray"
+                      : "none",
+                    fontStyle: ingredient.isChecked ? "italic" : "normal",
+                    color: ingredient.isChecked ? "gray" : "",
+                  }}
+                  className="flex justify-between gap-x-6 items-center border-bottom border-b-2 border-violet-100 py-3"
+                  key={"ingredient_name" + index}
+                >
+                  <div className="flex gap-x-2">
+                    <div>
+                      <span className="font-semibold">
+                        {Number(
+                          (
+                            ingredient.measures[measureType].amount *
+                            item.quantity
+                          ).toFixed(1)
+                        )}{" "}
+                      </span>
+                      <span className="font-semibold">
+                        {ingredient.measures[measureType].unitLong}{" "}
+                      </span>
+                      {ingredient.name}
+                    </div>
+                  </div>
+
+                  <div className="flex justify-end gap-x-4 pr-1">
+                    <div className="flex items-center gap-x-4">
+                      <button onClick={() => handleIncrement(index, listIndex)}>
+                        <Increase className="w-5 text-violet-300" />
+                      </button>
+                      <button onClick={() => handleDecrement(index, listIndex)}>
+                        <Decrease className="w-5 text-violet-300" />
+                      </button>
+                    </div>
+
+                    <div className="border-l-2 border-gray-300 bg-gray-300 w-1 h-[75%]"></div>
+
+                    <button onClick={() => toggleChecked(index, listIndex)}>
+                      <AddedToCartIcon className="w-5 text-violet-400" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           ))}
         </div>
       ) : (

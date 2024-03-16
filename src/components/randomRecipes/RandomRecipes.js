@@ -15,10 +15,7 @@ function truncateString(str, maxLength) {
   return str;
 }
 
-// const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
-// const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
-// const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
-const apiKey = "abebc2e2899343ea9485cc2a513f6a4c"; //10minutemail.one
+const apiKey = "d4743b46c8be46a4ae350870a07dd030";
 
 export const RandomRecipes = () => {
   const [data, setData] = useState(null);
@@ -99,11 +96,8 @@ export const RandomRecipes = () => {
             <div className="min-h-0 min-w-0">
               <Slider {...settings}>
                 {data.recipes.map((recipe) => (
-                  <div className="pr-8">
-                    <div
-                      className="p-3 bg-gray-50 border border-gray-200 drop-shadow-md rounded-lg"
-                      key={recipe.id}
-                    >
+                  <div key={recipe.id} className="pr-8">
+                    <div className="p-3 bg-gray-50 border border-gray-200 drop-shadow-md rounded-lg">
                       <div>
                         <div className="aspect-w-4 aspect-h-3">
                           {recipe.image ? (
