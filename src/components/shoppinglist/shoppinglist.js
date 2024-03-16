@@ -2,9 +2,9 @@ import { getDatabase, ref, set, get, child } from "firebase/database";
 import { database } from "../../config/firebase";
 import { useLoaderData } from "react-router-dom";
 
-export async function getShoppinglist() {
+export async function getShoppinglist(uid) {
   const dbRef = ref(database);
-  const snapshot = await get(child(dbRef, "shoppinglists/0"));
+  const snapshot = await get(child(dbRef, `users/${uid}/shoppinglists/0`));
   if (snapshot) {
     console.log(snapshot.val());
     return snapshot.val();
@@ -13,18 +13,18 @@ export async function getShoppinglist() {
   }
 }
 
-export async function saveShoppinglist(shoppinglist) {
+export async function saveShoppinglist(shoppinglist, uid) {
   const db = getDatabase();
   const dbRef = ref(database);
-  const snapshot = await get(child(dbRef, `shoppinglists/0`));
+  const snapshot = await get(child(dbRef, `users/${uid}/shoppinglists/0`));
   try {
-    await set(ref(db, `shoppinglists/0`), shoppinglist);
+    await set(ref(db, `users/${uid}/shoppinglists/0`), shoppinglist);
   } catch (error) {}
 }
 
-export async function addToShoppinglist(listId, recipe, quantity) {
+export async function addToShoppinglist(listId, recipe, quantity, uid) {
   const db = getDatabase();
-  const dbRef = ref(db, `shoppinglists/${listId}`);
+  const dbRef = ref(db, `users/${uid}/shoppinglists/${listId}`);
 
   try {
     const shoppinglistSnapshot = await get(dbRef);
@@ -39,7 +39,7 @@ export async function addToShoppinglist(listId, recipe, quantity) {
       quantity: quantity,
     });
 
-    await set(ref(db, `shoppinglists/${listId}`), shoppinglistArr);
+    await set(ref(db, `users/${uid}/shoppinglists/${listId}`), shoppinglistArr);
 
     console.log("Recipe added to shoppinglist:", recipe);
     return true;
@@ -48,9 +48,9 @@ export async function addToShoppinglist(listId, recipe, quantity) {
     return false;
   }
 }
-export async function deleteRecipeById(listId, recipeId) {
+export async function deleteRecipeById(listId, recipeId, uid) {
   const db = getDatabase();
-  const dbRef = ref(db, `shoppinglists/${listId}`);
+  const dbRef = ref(db, `users/${uid}/shoppinglists/${listId}`);
 
   try {
     const shoppinglistSnapshot = await get(dbRef);
@@ -60,7 +60,7 @@ export async function deleteRecipeById(listId, recipeId) {
 
     const filteredArr = shoppinglistArr.filter((item) => item.id !== recipeId);
 
-    await set(ref(db, `shoppinglists/${listId}`), filteredArr);
+    await set(ref(db, `users/${uid}/shoppinglists/${listId}`), filteredArr);
 
     console.log(
       `Recipe with id ${recipeId} deleted from shoppinglist ${listId}`
