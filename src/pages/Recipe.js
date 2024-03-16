@@ -23,6 +23,7 @@ import { Fragment } from "react";
 import { CreateNewWishlist } from "../components/CreateNewWishlist";
 // import { HeartIcon } from "./icons/HeartIcon";
 // import { addToWishlist } from "../components/wishlist/wishlists";
+import { AddButton } from "../components/AddButton";
 
 // For WishListPopover
 const Wishlists = [
@@ -227,8 +228,8 @@ const recipeTemplate = {
 // const apiKey = "da2c9951c50f4074ad413ff879110743";
 // const apiKey = "33850490cff6451f9704d9b995785d53";
 // const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
-// const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
-const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
+const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
+// const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
 
 export const Recipe = () => {
   let { id } = useParams();
@@ -362,7 +363,10 @@ export const Recipe = () => {
                     <Popover className="">
                       {({ open }) => (
                         <>
-                          <Popover.Button className="btn text-gray-600 rounded-md">
+                          <Popover.Button
+                            className="btn text-gray-600 rounded-md"
+                            focusWithin={open ? "true" : undefined}
+                          >
                             {" "}
                             {user &&
                             wishlists &&
@@ -387,30 +391,16 @@ export const Recipe = () => {
                             leaveFrom="opacity-100 translate-y-0"
                             leaveTo="opacity-0 translate-y-1"
                           >
-                            <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-[50%] max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
+                            <Popover.Panel className="absolute right-1/2 z-10 mt-3 -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
                               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                                 <div className="relative grid bg-white px-2 pt-2">
                                   {user ? (
-                                    <div className="cursor-pointer p-1.5 mx-1.5 flow-root rounded-md transition duration-150 ease-in-out hover:bg-gray-100">
-                                      <div className="flex justify-end gap-x-2">
-                                        <div>
+                                    <div className="p-1.5 mx-1.5">
+                                      <div className="flex justify-start gap-x-2">
+                                        <div className="mb-0.5">
                                           <CreateNewWishlist
                                             addNewList={addNewList}
                                           />
-                                          <div className="flex justify-center w-6 h-6 bg-violet-100 rounded-full font-bold text-gray-700">
-                                            <div className="self-center">
-                                              <svg
-                                                className="text-gray-700 w-3"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512"
-                                              >
-                                                <path
-                                                  fill="currentColor"
-                                                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
-                                                />
-                                              </svg>
-                                            </div>
-                                          </div>
                                         </div>
                                       </div>
                                     </div>
