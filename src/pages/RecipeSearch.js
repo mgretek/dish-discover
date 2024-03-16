@@ -10,7 +10,7 @@ import { SearchIcon } from "../components/icons/SearchIcon";
 // const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
 // const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
 const apiKey = "da2c9951c50f4074ad413ff879110743";
-/* const apiKey = "33850490cff6451f9704d9b995785d53"; */
+// const apiKey = "33850490cff6451f9704d9b995785d53";
 
 export const RecipeSearch = () => {
   const [filter, setFilter] = useState("both");
@@ -94,7 +94,8 @@ export const RecipeSearch = () => {
             />
             <button
               className="absolute right-0 top-0 h-full px-3"
-              onClick={handleSearch}>
+              onClick={handleSearch}
+            >
               <SearchIcon className="w-4 text-violet-400" />
             </button>
           </div>

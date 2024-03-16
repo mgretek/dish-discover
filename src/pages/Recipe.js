@@ -227,11 +227,13 @@ const recipeTemplate = {
     "https://spoonacular.com/grilled-peach-melba-with-vanilla-bean-frozen-yogurt-716421",
 };
 
-/* const apiKey = "da2c9951c50f4074ad413ff879110743"; */
-/* const apiKey = "33850490cff6451f9704d9b995785d53"; */
-/* const apiKey = "3b6f5c130d8144cdbf343ff51431d254"; */
-/* const apiKey = "8c7408891f0843b7a5b62b8bd041580d"; */
-const apiKey = "abebc2e2899343ea9485cc2a513f6a4c";
+// const apiKey = "da2c9951c50f4074ad413ff879110743";
+// const apiKey = "33850490cff6451f9704d9b995785d53";
+// const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
+// const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
+const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
+// const apiKey = "abebc2e2899343ea9485cc2a513f6a4c";
+// const apiKey = "abebc2e2899343ea9485cc2a513f6a4c";
 
 export const Recipe = () => {
   let { id } = useParams();
@@ -342,7 +344,8 @@ export const Recipe = () => {
                     className="flex items-center justify-start w-full h-full bg-right bg-cover mb-2 rounded-lg"
                     style={{
                       backgroundImage: "url(/images/placeholder-min.jpg)",
-                    }}>
+                    }}
+                  >
                     <span className="text-xl md:text-xs font-semibold text-gray-500 w-2/3 pl-3 text-center">
                       Sorry, no image available
                     </span>
@@ -360,6 +363,7 @@ export const Recipe = () => {
                     {recipe.title}
                   </h1>
                 </div>
+
                 <div className="flex gap-1.5 items-center pr-2 flex-row-reverse">
                   <div className="text-right text-xs md:text-md text-gray-500 italic">
                     Add to wishlist
@@ -369,8 +373,9 @@ export const Recipe = () => {
                       {({ open }) => (
                         <>
                           <Popover.Button
-                            className="btn text-gray-600 rounded-md"
-                            focusWithin={open ? "true" : undefined}>
+                            className="btn text-pink-400 rounded-md"
+                            focusWithin={open ? "true" : undefined}
+                          >
                             {user &&
                             wishlists &&
                             wishlists.some(
@@ -392,7 +397,8 @@ export const Recipe = () => {
                             enterTo="opacity-100 translate-y-0"
                             leave="transition ease-in duration-150"
                             leaveFrom="opacity-100 translate-y-0"
-                            leaveTo="opacity-0 translate-y-1">
+                            leaveTo="opacity-0 translate-y-1"
+                          >
                             <Popover.Panel className="absolute left-0 bottom-0 translate-y-full z-10 transform w-64">
                               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                                 <div className="relative grid bg-white p-2">
@@ -427,11 +433,13 @@ export const Recipe = () => {
                                                   index,
                                                   recipe
                                                 )
-                                              }>
+                                              }
+                                            >
                                               <input
                                                 type="checkbox"
                                                 className="mr-2"
-                                                checked={true}></input>
+                                                checked={true}
+                                              ></input>
                                               <button className="flex items-center justify-between">
                                                 {item.title}
                                               </button>
@@ -441,10 +449,12 @@ export const Recipe = () => {
                                               className="flex"
                                               onClick={() =>
                                                 handleAddRecipe(index, recipe)
-                                              }>
+                                              }
+                                            >
                                               <input
                                                 type="checkbox"
-                                                className="mr-2"></input>
+                                                className="mr-2"
+                                              ></input>
                                               <button className="flex items-center justify-between">
                                                 {item.title}
                                               </button>
@@ -468,7 +478,8 @@ export const Recipe = () => {
                   </div>
                   <button
                     className="btn text-gray-600 rounded-md"
-                    onClick={() => addToShoppinglist(0, recipe, 1, uid)}>
+                    onClick={() => addToShoppinglist(0, recipe, 1, uid)}
+                  >
                     <CartIcon />
                   </button>
                 </div>
@@ -490,7 +501,8 @@ export const Recipe = () => {
                     recipe.dishTypes.map((type) => (
                       <div
                         key={type}
-                        className="text-gray-400 text-sm italic rounded mr-1.5">
+                        className="text-gray-400 text-sm italic rounded mr-1.5"
+                      >
                         #{type}
                       </div>
                     ))}
