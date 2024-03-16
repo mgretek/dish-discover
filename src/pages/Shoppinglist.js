@@ -135,12 +135,13 @@ export const Shoppinglist = () => {
             <>
               <div
                 className="content-center px-3 pt-4 md:pt-8 pb-12"
-                key={shoppinglist.id}
-              >
+                key={shoppinglist.id}>
                 <div className="flex mb-3 gap-x-2 justify-between">
-                  <p className="font-bold items-baseline self-center text-gray-800 text-lg">
+                  <Link
+                    to={`/recipe/${item.id}`}
+                    className="font-bold items-baseline self-center text-gray-800 text-lg">
                     {item.title}
-                  </p>
+                  </Link>
 
                   <div class="flex gap-x-4 items-center">
                     <div className="">
@@ -159,8 +160,7 @@ export const Shoppinglist = () => {
                     <div className="border-l-2 border-gray-300 w-1 h-[75%]"></div>
                     <button
                       className="w-6 text-pink-600"
-                      onClick={() => handleDeleteRecipe(item.id)}
-                    >
+                      onClick={() => handleDeleteRecipe(item.id)}>
                       <DeleteIcon />
                     </button>
                   </div>
@@ -179,8 +179,7 @@ export const Shoppinglist = () => {
                       color: ingredient.isChecked ? "gray" : "",
                     }}
                     className="flex justify-between gap-x-6 items-center border-bottom border-b-2 border-violet-100 py-3"
-                    key={ingredient.name}
-                  >
+                    key={ingredient.name}>
                     <div className="flex gap-x-2">
                       <div>
                         <span className="font-semibold">
@@ -197,13 +196,11 @@ export const Shoppinglist = () => {
                     <div className="flex justify-end gap-x-4 pr-1">
                       <div className="flex items-center gap-x-4">
                         <button
-                          onClick={() => handleIncrement(index, listIndex)}
-                        >
+                          onClick={() => handleIncrement(index, listIndex)}>
                           <Increase className="w-5 text-violet-300" />
                         </button>
                         <button
-                          onClick={() => handleDecrement(index, listIndex)}
-                        >
+                          onClick={() => handleDecrement(index, listIndex)}>
                           <Decrease className="w-5 text-violet-300" />
                         </button>
                       </div>
@@ -235,8 +232,7 @@ export const Shoppinglist = () => {
           </p>
           <Link
             to={"/login"}
-            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 "
-          >
+            className="flex self-center bg-gradient-to-r from-rose-200 to-violet-300 rounded m-2 px-5 py-2 drop-shadow-md	text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-rose-300 hover:to-violet-200 hover:text-gray-600 ">
             Sign in
           </Link>
         </div>
