@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -23,7 +24,7 @@ export const RecipeSearch = () => {
   useEffect(() => {
     setSearchInput("Avocado");
     handleSearch();
-  }, []);
+  }, [handleSearch]);
 
   // reset filter
   useEffect(() => {
@@ -94,8 +95,7 @@ export const RecipeSearch = () => {
             />
             <button
               className="absolute right-0 top-0 h-full px-3"
-              onClick={handleSearch}
-            >
+              onClick={handleSearch}>
               <SearchIcon className="w-4 text-violet-400" />
             </button>
           </div>

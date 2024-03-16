@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { CloseIcon } from "../icons/CloseIcon";
+/* import { v4 as uuidv4 } from "uuid";
+import { CloseIcon } from "../icons/CloseIcon"; */
 
 export const AddNewModal = ({ addNewList, onCancel }) => {
   const [newTitle, setNewTitle] = useState();
@@ -23,20 +23,17 @@ export const AddNewModal = ({ addNewList, onCancel }) => {
           <label className="text-gray-700">Title:</label>
           <input
             className="mb-4 border rounded pl-1"
-            onChange={(e) => setNewTitle(e.target.value)}
-          ></input>
+            onChange={(e) => setNewTitle(e.target.value)}></input>
         </div>
         <div>
           <button
             className="bg-violet-300 hover:bg-violet-400 text-white px-4 py-1.5 rounded-lg"
-            onClick={handleAdd}
-          >
+            onClick={handleAdd}>
             Add
           </button>
           <button
             className="bg-gray-500 hover:bg-red-600 text-white px-4 py-1.5 rounded-lg ml-3"
-            onClick={onCancel}
-          >
+            onClick={onCancel}>
             Cancel
           </button>
         </div>

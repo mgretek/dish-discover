@@ -1,6 +1,6 @@
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import { database } from "../../config/firebase";
-import { useLoaderData } from "react-router-dom";
+/* import { useLoaderData } from "react-router-dom"; */
 
 export async function getShoppinglist(uid) {
   const dbRef = ref(database);

@@ -25,10 +25,9 @@ import { Fragment } from "react";
 import { CreateNewWishlist } from "../components/CreateNewWishlist";
 // import { HeartIcon } from "./icons/HeartIcon";
 // import { addToWishlist } from "../components/wishlist/wishlists";
-import { AddButton } from "../components/AddButton";
 
 // For WishListPopover
-const Wishlists = [
+/* const Wishlists = [
   {
     title: "List 1",
     description: "Measure actions your users take",
@@ -44,7 +43,7 @@ const Wishlists = [
     description: "Keep track of your growth",
     href: "##",
   },
-];
+]; */
 
 const recipeTemplate = {
   vegetarian: true,
@@ -244,7 +243,7 @@ export const Recipe = () => {
   const [user] = useAuthState(auth);
   const [uid, setUid] = useState("");
 
-  const [newTitle, setNewTitle] = useState("");
+  /* const [newTitle, setNewTitle] = useState(""); */
 
   function addNewList({ title }) {
     const newId = uuidv4();
@@ -344,8 +343,7 @@ export const Recipe = () => {
                     className="flex items-center justify-start w-full h-full bg-right bg-cover mb-2 rounded-lg"
                     style={{
                       backgroundImage: "url(/images/placeholder-min.jpg)",
-                    }}
-                  >
+                    }}>
                     <span className="text-xl md:text-xs font-semibold text-gray-500 w-2/3 pl-3 text-center">
                       Sorry, no image available
                     </span>
@@ -374,8 +372,7 @@ export const Recipe = () => {
                         <>
                           <Popover.Button
                             className="btn text-pink-400 rounded-md"
-                            focusWithin={open ? "true" : undefined}
-                          >
+                            focusWithin={open ? "true" : undefined}>
                             {user &&
                             wishlists &&
                             wishlists.some(
@@ -397,8 +394,7 @@ export const Recipe = () => {
                             enterTo="opacity-100 translate-y-0"
                             leave="transition ease-in duration-150"
                             leaveFrom="opacity-100 translate-y-0"
-                            leaveTo="opacity-0 translate-y-1"
-                          >
+                            leaveTo="opacity-0 translate-y-1">
                             <Popover.Panel className="absolute left-0 bottom-0 translate-y-full z-10 transform w-64">
                               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                                 <div className="relative grid bg-white p-2">
@@ -424,7 +420,7 @@ export const Recipe = () => {
                                         <div className="text-sm font-medium text-gray-900 flex">
                                           {item.recipes &&
                                           item.recipes.some(
-                                            (recipe) => recipe.id == id
+                                            (recipe) => recipe.id === id
                                           ) ? (
                                             <div
                                               className="flex"
@@ -433,13 +429,11 @@ export const Recipe = () => {
                                                   index,
                                                   recipe
                                                 )
-                                              }
-                                            >
+                                              }>
                                               <input
                                                 type="checkbox"
                                                 className="mr-2"
-                                                checked={true}
-                                              ></input>
+                                                checked={true}></input>
                                               <button className="flex items-center justify-between">
                                                 {item.title}
                                               </button>
@@ -449,12 +443,10 @@ export const Recipe = () => {
                                               className="flex"
                                               onClick={() =>
                                                 handleAddRecipe(index, recipe)
-                                              }
-                                            >
+                                              }>
                                               <input
                                                 type="checkbox"
-                                                className="mr-2"
-                                              ></input>
+                                                className="mr-2"></input>
                                               <button className="flex items-center justify-between">
                                                 {item.title}
                                               </button>
@@ -478,8 +470,7 @@ export const Recipe = () => {
                   </div>
                   <button
                     className="btn text-gray-600 rounded-md"
-                    onClick={() => addToShoppinglist(0, recipe, 1, uid)}
-                  >
+                    onClick={() => addToShoppinglist(0, recipe, 1, uid)}>
                     <CartIcon />
                   </button>
                 </div>
@@ -501,8 +492,7 @@ export const Recipe = () => {
                     recipe.dishTypes.map((type) => (
                       <div
                         key={type}
-                        className="text-gray-400 text-sm italic rounded mr-1.5"
-                      >
+                        className="text-gray-400 text-sm italic rounded mr-1.5">
                         #{type}
                       </div>
                     ))}
