@@ -145,7 +145,7 @@ export const Wishlists = () => {
         />
       )}
       {user && (
-        <div className="py-12">
+        <div className="pt-16 pb-12">
           <div className="flex mb-4 justify-between items-center">
             <h2
               className="text-5xl text-left font-bold text-gray-800"

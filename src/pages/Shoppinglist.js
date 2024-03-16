@@ -114,8 +114,8 @@ export const Shoppinglist = () => {
   return (
     <div className="mx-4 md:px-20 xl:px-60 min-h-full">
       {user ? (
-        <div className="">
-          <h1 className="text-3xl md:text-5xl text-left font-bold text-gray-800 pt-10 md:pt-12 mb-4">
+        <div>
+          <h1 className="text-5xl text-left font-bold text-gray-800 pt-16 mb-4">
             Your Shopping List
           </h1>
           <div class="h-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-6"></div>
