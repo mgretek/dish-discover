@@ -226,9 +226,9 @@ const recipeTemplate = {
 };
 
 // const apiKey = "da2c9951c50f4074ad413ff879110743";
-// const apiKey = "33850490cff6451f9704d9b995785d53";
+const apiKey = "33850490cff6451f9704d9b995785d53";
 // const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
-const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
+// const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
 // const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
 
 export const Recipe = () => {
@@ -340,7 +340,8 @@ export const Recipe = () => {
                     className="flex items-center justify-start w-full h-full bg-right bg-cover mb-2 rounded-lg"
                     style={{
                       backgroundImage: "url(/images/placeholder-min.jpg)",
-                    }}>
+                    }}
+                  >
                     <span className="text-xl md:text-xs font-semibold text-gray-500 w-2/3 pl-3 text-center">
                       Sorry, no image available
                     </span>
@@ -368,7 +369,8 @@ export const Recipe = () => {
                         <>
                           <Popover.Button
                             className="btn text-gray-600 rounded-md"
-                            focusWithin={open ? "true" : undefined}>
+                            focusWithin={open ? "true" : undefined}
+                          >
                             {user &&
                             wishlists &&
                             wishlists.some(
@@ -390,7 +392,8 @@ export const Recipe = () => {
                             enterTo="opacity-100 translate-y-0"
                             leave="transition ease-in duration-150"
                             leaveFrom="opacity-100 translate-y-0"
-                            leaveTo="opacity-0 translate-y-1">
+                            leaveTo="opacity-0 translate-y-1"
+                          >
                             <Popover.Panel className="absolute right-1/2 z-10 mt-3 -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
                               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                                 <div className="relative grid bg-white px-2 pt-2">
@@ -427,11 +430,13 @@ export const Recipe = () => {
                                                   index,
                                                   recipe
                                                 )
-                                              }>
+                                              }
+                                            >
                                               <input
                                                 type="checkbox"
                                                 className="mr-2"
-                                                checked={true}></input>
+                                                checked={true}
+                                              ></input>
                                               <button className="flex items-center justify-between">
                                                 {item.title}
                                               </button>
@@ -441,10 +446,12 @@ export const Recipe = () => {
                                               className="flex"
                                               onClick={() =>
                                                 handleAddRecipe(index, recipe)
-                                              }>
+                                              }
+                                            >
                                               <input
                                                 type="checkbox"
-                                                className="mr-2"></input>
+                                                className="mr-2"
+                                              ></input>
                                               <button className="flex items-center justify-between">
                                                 {item.title}
                                               </button>
@@ -468,7 +475,8 @@ export const Recipe = () => {
                   </div>
                   <button
                     className="btn text-gray-600 rounded-md"
-                    onClick={() => addToShoppinglist(0, recipe, 1, uid)}>
+                    onClick={() => addToShoppinglist(0, recipe, 1, uid)}
+                  >
                     <CartIcon />
                   </button>
                 </div>
@@ -485,7 +493,8 @@ export const Recipe = () => {
                     recipe.dishTypes.map((type) => (
                       <button
                         key={type}
-                        className="mr-2 mb-2   text-gray-400 rounded">
+                        className="mr-2 mb-2   text-gray-400 rounded"
+                      >
                         #{type}
                       </button>
                     ))}
