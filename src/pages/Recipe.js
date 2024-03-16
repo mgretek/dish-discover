@@ -244,7 +244,11 @@ export const Recipe = () => {
 
   function addNewList({ title }) {
     const newId = uuidv4();
-    const newArr = [...wishlists, { title: title, recipes: [], id: newId }];
+    const newArr = [
+      ...(wishlists || []),
+      { title: title, recipes: [], id: newId },
+    ];
+
     setWishlists(newArr);
     saveWishlist({ wishLists: newArr, uid: uid });
   }
@@ -412,7 +416,7 @@ export const Recipe = () => {
                                   <div className="h-1 ml-1.5 mb-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white"></div>
 
                                   {uid &&
-                                    wishlists &&
+                                    Array.isArray(wishlists) &&
                                     wishlists.map((item, index) => (
                                       <div className="mb-1.5 mt-1.5 flex items-center rounded-lg px-1.5 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50">
                                         <div className="text-sm font-medium text-gray-900 flex">

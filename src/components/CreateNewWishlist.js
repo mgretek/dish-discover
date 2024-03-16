@@ -10,6 +10,7 @@ export const CreateNewWishlist = ({ addNewList }) => {
   }
   function handleSubmit() {
     addNewList({ title: userInput });
+    toggleInput();
     setUserInput("");
   }
 
