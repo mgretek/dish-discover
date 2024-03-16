@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-/* import { loadWishlists } from "../components/wishlist/wishlists"; */
+
+//components
 import { Loading } from "../components/loading/Loading";
+import { FilterButton } from "../components/recipesearch/FilterButton";
 import { SearchIcon } from "../components/icons/SearchIcon";
 
-const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
+// const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
 // const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
-// const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
+const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
 
 export const RecipeSearch = () => {
-  const [searchType, setSearchType] = useState("name");
   const [filter, setFilter] = useState("both");
   const [searchInput, setSearchInput] = useState("");
   const [results, setResults] = useState([]);
@@ -22,6 +23,7 @@ export const RecipeSearch = () => {
     handleSearch();
   }, []);
 
+  // reset filter
   useEffect(() => {
     setFilter("both");
   }, []);
@@ -99,38 +101,24 @@ export const RecipeSearch = () => {
           <div className="flex text-gray-700 gap-x-6 flex-wrap">
             <div className="flex items-center mb-2 md:mb-1">
               <p className="pr-1 text-gray-700 font-semibold">Filter</p>
-
-              <button
-                className={`btn ${
-                  filter === "meals"
-                    ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
-                    : "text-gray-500"
-                }`}
+              <FilterButton
+                globalFilter={filter}
+                filterName={"meals"}
+                buttonTitle={"meals"}
                 onClick={() => handleFilter("meals")}
-              >
-                <span className="px-2 py-1">Meals</span>
-              </button>
-
-              <button
-                className={`btn ${
-                  filter === "drink"
-                    ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
-                    : "text-gray-500"
-                }`}
+              />
+              <FilterButton
+                globalFilter={filter}
+                filterName={"drink"}
+                buttonTitle={"drinks"}
                 onClick={() => handleFilter("drink")}
-              >
-                <span className="px-2">Drinks</span>
-              </button>
-              <button
-                className={`btn ${
-                  filter === "both"
-                    ? "border-2 rounded-xl border-violet-400 text-violet-400 font-semibold"
-                    : "text-gray-500"
-                }`}
+              />
+              <FilterButton
+                globalFilter={filter}
+                filterName={"both"}
+                buttonTitle={"both"}
                 onClick={() => handleFilter("both")}
-              >
-                <span className="px-2">Both</span>
-              </button>
+              />
             </div>
           </div>
         </div>
