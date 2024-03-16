@@ -363,6 +363,7 @@ export const Recipe = () => {
                     {recipe.title}
                   </h1>
                 </div>
+
                 <div className="flex gap-1.5 items-center pr-2 flex-row-reverse">
                   <div className="text-right text-xs md:text-md text-gray-500 italic">
                     Add to wishlist
@@ -372,7 +373,7 @@ export const Recipe = () => {
                       {({ open }) => (
                         <>
                           <Popover.Button
-                            className="btn text-gray-600 rounded-md"
+                            className="btn text-pink-400 rounded-md"
                             focusWithin={open ? "true" : undefined}
                           >
                             {user &&
