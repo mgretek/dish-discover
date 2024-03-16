@@ -30,12 +30,11 @@ export const Footer = () => {
               </Link>
             </div>
             <div>
-              <div className="font-extrabold mb-2">Useful</div>
+              <div className="font-extrabold mb-2">Other</div>
               <div className="truncate text-sm mb-2 hover:text-gray-800">
-                Terms & Conditions
-              </div>
-              <div className="truncate text-sm mb-2 hover:text-gray-800">
-                Links to GitHub orsmth
+                <a href="https://www.termsandconditionsgenerator.com/live.php?token=tEm9xoy12Vpd60VY5S6BKTn80FRt1VZn">
+                  Terms & Conditions
+                </a>
               </div>
             </div>
           </div>
