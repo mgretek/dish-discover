@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AddButton } from "./AddButton";
+import { AddIcon } from "./icons/AddIcon";
 
 export const CreateNewWishlist = ({ addNewList }) => {
   const [userInput, setUserInput] = useState("");
@@ -17,22 +18,22 @@ export const CreateNewWishlist = ({ addNewList }) => {
   return (
     <div>
       {inputVisible ? (
-        <div class="flex">
+        <div class="flex gap-x-2 p-2">
           <input
-            className="border border-lg pl-1 text-md rounded-md"
+            className="border border-lg pl-1 text-sm rounded-md"
             placeholder="New title..."
             onChange={(e) => setUserInput(e.target.value)}
           ></input>
           <button
-            className="bg-violet-200 rounded-md text-gray-700 font-semibold px-3 ml-1.5"
+            className="flex self-center p-1.5 bg-violet-200 rounded-md text-gray-700 font-semibold"
             onClick={handleSubmit}
           >
-            Create
+            <AddIcon className="w-3" />
           </button>
         </div>
       ) : (
         <div
-          className="flex gap-x-2 px-2 py-1 cursor-pointer"
+          className="flex gap-x-2 p-2.5 cursor-pointer"
           onClick={toggleInput}
         >
           <div className="text-sm font-medium self-center text-gray-700">
