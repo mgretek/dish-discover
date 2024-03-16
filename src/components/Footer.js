@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const termsConditionsLink =
+  "https://www.termsandconditionsgenerator.com/live.php?token=tEm9xoy12Vpd60VY5S6BKTn80FRt1VZn";
+
 export const Footer = () => {
   return (
     <div className="mt-8 pt-6 pb-6 w-full bg-gradient-to-b from-violet-200 to-pink-200 overflow-hidden">
@@ -30,12 +33,9 @@ export const Footer = () => {
               </Link>
             </div>
             <div>
-              <div className="font-extrabold mb-2">Useful</div>
+              <div className="font-extrabold mb-2">Other</div>
               <div className="truncate text-sm mb-2 hover:text-gray-800">
-                Terms & Conditions
-              </div>
-              <div className="truncate text-sm mb-2 hover:text-gray-800">
-                Links to GitHub orsmth
+                <a href={termsConditionsLink}>Terms & Conditions</a>
               </div>
             </div>
           </div>

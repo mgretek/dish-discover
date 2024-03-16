@@ -16,6 +16,8 @@ import { RecipeSteps } from "../components/RecipeSteps";
 import { Toggle } from "../components/buttons/toggle/Toggle";
 import { addToShoppinglist } from "../components/shoppinglist/shoppinglist";
 import { CartIcon } from "../components/icons/CartIcon";
+import { TimeIcon } from "../components/icons/TimeIcon";
+import { ScoreIcon } from "../components/icons/ScoreIcon";
 
 // For WishListPopover
 import { Popover, Transition } from "@headlessui/react";
@@ -226,10 +228,10 @@ const recipeTemplate = {
 };
 
 // const apiKey = "da2c9951c50f4074ad413ff879110743";
-const apiKey = "33850490cff6451f9704d9b995785d53";
+// const apiKey = "33850490cff6451f9704d9b995785d53";
 // const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
 // const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
-// const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
+const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
 
 export const Recipe = () => {
   let { id } = useParams();
@@ -353,8 +355,8 @@ export const Recipe = () => {
             {/* TITLE & DESCRIPTION */}
             <div className="mb-6 w-full md:mb-0">
               {/* Title + "Add to wishlist" button */}
-              <div className="flex flex-wrap xl:flex-nowrap my-4 items-center justify-between gap-x-4 gap-y-3 xl:gap-y-0 md:mt-2 md:mb-4">
-                <div>
+              <div className="flex flex-wrap my-4 items-center justify-between gap-x-4 gap-y-3 xl:gap-y-0 md:mt-2 md:mb-3">
+                <div className="basis-full mb-4">
                   <h1 className="text-3xl font-bold md:text-5xl text-gray-800">
                     {recipe.title}
                   </h1>
@@ -363,6 +365,7 @@ export const Recipe = () => {
                   <div className="text-right text-xs md:text-md text-gray-500 italic">
                     Add to wishlist
                   </div>
+
                   <div className="">
                     <Popover className="">
                       {({ open }) => (
@@ -484,19 +487,23 @@ export const Recipe = () => {
 
               {/* Preptime, tags */}
               <div>
-                <h2 className="mb-1.5 text-gray-800">
-                  Time: {recipe.readyInMinutes} minutes
-                </h2>
+                <div className="flex gap-x-2 mb-1.5 text-gray-800">
+                  <TimeIcon className="w-4 text-pink-300" />
+                  {recipe.readyInMinutes} minutes
+                </div>
+                <div className="flex items-center gap-x-2 text-gray-800 mb-3">
+                  <ScoreIcon className="w-4 text-pink-300" />
+                  {Number(recipe.spoonacularScore.toFixed(2))}
+                </div>
                 <div className="flex flex-wrap">
-                  <p className="pr-2 text-gray-800">Tags:</p>
                   {Array.isArray(recipe.dishTypes) &&
                     recipe.dishTypes.map((type) => (
-                      <button
+                      <div
                         key={type}
-                        className="mr-2 mb-2   text-gray-400 rounded"
+                        className="text-gray-400 text-sm italic rounded mr-1.5"
                       >
                         #{type}
-                      </button>
+                      </div>
                     ))}
                 </div>
               </div>
