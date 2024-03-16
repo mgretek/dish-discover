@@ -89,7 +89,7 @@ export const Wishlists = () => {
     };
     console.log(newArr);
     setWishlists(newArr);
-    saveWishlist({ wishLists: newArr });
+    saveWishlist({ wishLists: newArr, uid: uid });
   }
 
   function onDragEnd(result) {
