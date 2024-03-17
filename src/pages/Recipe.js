@@ -23,28 +23,6 @@ import { ScoreIcon } from "../components/icons/ScoreIcon";
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { CreateNewWishlist } from "../components/CreateNewWishlist";
-// import { HeartIcon } from "./icons/HeartIcon";
-// import { addToWishlist } from "../components/wishlist/wishlists";
-import { AddButton } from "../components/AddButton";
-
-// For WishListPopover
-const Wishlists = [
-  {
-    title: "List 1",
-    description: "Measure actions your users take",
-    href: "##",
-  },
-  {
-    title: "List 2",
-    description: "Create your own targeted content",
-    href: "##",
-  },
-  {
-    title: "List 3",
-    description: "Keep track of your growth",
-    href: "##",
-  },
-];
 
 const recipeTemplate = {
   vegetarian: true,
@@ -227,13 +205,7 @@ const recipeTemplate = {
     "https://spoonacular.com/grilled-peach-melba-with-vanilla-bean-frozen-yogurt-716421",
 };
 
-// const apiKey = "da2c9951c50f4074ad413ff879110743";
-// const apiKey = "33850490cff6451f9704d9b995785d53";
-// const apiKey = "3b6f5c130d8144cdbf343ff51431d254";
-// const apiKey = "8c7408891f0843b7a5b62b8bd041580d";
-const apiKey = "ce8f62b9c28943eeb68a1f734847059a";
-// const apiKey = "abebc2e2899343ea9485cc2a513f6a4c";
-// const apiKey = "abebc2e2899343ea9485cc2a513f6a4c";
+const apiKey = "d4743b46c8be46a4ae350870a07dd030";
 
 export const Recipe = () => {
   let { id } = useParams();
@@ -243,8 +215,6 @@ export const Recipe = () => {
   const [wishlists, setWishlists] = useState([]);
   const [user] = useAuthState(auth);
   const [uid, setUid] = useState("");
-
-  const [newTitle, setNewTitle] = useState("");
 
   function addNewList({ title }) {
     const newId = uuidv4();
@@ -373,8 +343,8 @@ export const Recipe = () => {
                       {({ open }) => (
                         <>
                           <Popover.Button
-                            className="btn text-pink-400 rounded-md"
-                            focusWithin={open ? "true" : undefined}
+                            className="btn text-pink-400 rounded-md outline-none"
+                            focuswithin={open ? "true" : undefined}
                           >
                             {user &&
                             wishlists &&
@@ -387,7 +357,7 @@ export const Recipe = () => {
                             ) ? (
                               <HeartIcon fill="currentColor" />
                             ) : (
-                              <HeartIcon />
+                              <HeartIcon stroke="#6b7280" />
                             )}
                           </Popover.Button>
                           <Transition
@@ -420,11 +390,14 @@ export const Recipe = () => {
                                   {uid &&
                                     Array.isArray(wishlists) &&
                                     wishlists.map((item, index) => (
-                                      <div className="mb-1.5 mt-1.5 flex items-center rounded-lg px-1.5 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50">
+                                      <div
+                                        key={"wishlist" + index}
+                                        className="mb-1.5 mt-1.5 flex items-center rounded-lg px-1.5 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
+                                      >
                                         <div className="text-sm font-medium text-gray-900 flex">
                                           {item.recipes &&
                                           item.recipes.some(
-                                            (recipe) => recipe.id == id
+                                            (recipe) => recipe.id === id
                                           ) ? (
                                             <div
                                               className="flex"
@@ -438,7 +411,7 @@ export const Recipe = () => {
                                               <input
                                                 type="checkbox"
                                                 className="mr-2"
-                                                checked={true}
+                                                defaultChecked={true}
                                               ></input>
                                               <button className="flex items-center justify-between">
                                                 {item.title}
@@ -487,20 +460,20 @@ export const Recipe = () => {
 
               {/* Preptime, score, tags */}
               <div>
-                <div className="flex gap-x-2 mb-1.5 text-gray-800">
+                <div className="flex gap-x-2 mb-1.5 text-gray-700">
                   <TimeIcon className="w-4 text-pink-300" />
                   {recipe.readyInMinutes} minutes
                 </div>
-                <div className="flex items-center gap-x-2 text-gray-800 mb-3">
+                <div className="flex items-center gap-x-2 text-gray-700 mb-3">
                   <ScoreIcon className="w-4 text-pink-300" />
-                  {Number(recipe.spoonacularScore.toFixed(2))}
+                  {Number(recipe.spoonacularScore.toFixed(2))} / 100
                 </div>
 
                 <div className="flex flex-wrap">
                   {Array.isArray(recipe.dishTypes) &&
-                    recipe.dishTypes.map((type) => (
+                    recipe.dishTypes.map((type, index) => (
                       <div
-                        key={type}
+                        key={"type" + index}
                         className="text-gray-400 text-sm italic rounded mr-1.5"
                       >
                         #{type}
@@ -528,10 +501,10 @@ export const Recipe = () => {
               <div className="h-1 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-4"></div>
 
               <ul>
-                {recipe.extendedIngredients.map((item) => (
-                  <li key={item.id} className="mb-1.5 text-left">
+                {recipe.extendedIngredients.map((item, index) => (
+                  <li key={"item" + index} className="mb-1.5 text-left">
                     <span className="text-gray-800 font-semibold">
-                      {item.measures[measureType].amount}{" "}
+                      {Number(item.measures[measureType].amount.toFixed(2))}{" "}
                       {item.measures[measureType].unitShort}
                     </span>
                     <span className="text-gray-800"> {item.name}</span>

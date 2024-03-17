@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DownArrow } from "../buttons/arrows/DownArrow";
 import { Draggable } from "react-beautiful-dnd";
 import { ForwardArrow } from "../buttons/arrows/ForwardArrow";
@@ -38,7 +38,7 @@ export const Wishlist = ({
       >
         <div className="flex items-center gap-x-1">
           {!titleEditActive ? (
-            <div class="flex">
+            <div className="flex">
               <h1 className="text-xl flex-2 font-semibold uppercase tracking-wider mr-2 text-gray-700">
                 {listTitle}
               </h1>
@@ -64,7 +64,7 @@ export const Wishlist = ({
             </div>
           )}
           {isHovered && !titleEditActive && (
-            <div class="flex gap-x-2">
+            <div className="flex gap-x-2">
               <PencilIcon onClick={handleTitleEdit} />
               <DeleteIcon onClick={() => handleDeleteList(list)} />
             </div>
@@ -84,6 +84,7 @@ export const Wishlist = ({
             list.recipes.map((recipe, itemIndex) => (
               <WishItem
                 id={recipe.id}
+                key={"wishlist_recipe" + itemIndex}
                 recipe={recipe}
                 listIndex={listIndex}
                 itemIndex={itemIndex}
@@ -131,12 +132,12 @@ export const WishItem = ({
             </button>
           </div>
           <div className="flex mb-1.5">
-            <p className="text-gray-800 text-md">
+            <div className="text-gray-800 text-md">
               <div className="flex gap-x-2 items-center">
                 <TimeIcon className="w-4 text-violet-400" />
                 {recipe.readyInMinutes} min
               </div>
-            </p>
+            </div>
             <p className="mx-3 text-gray-800">|</p>
             <div className="flex items-center gap-x-2 text-gray-800">
               <ScoreIcon className="w-4 text-violet-400" />
@@ -144,12 +145,13 @@ export const WishItem = ({
             </div>
           </div>
           <div className="text-gray-700 text-sm italic">
-            {recipe.dishTypes.map((type, index) => (
-              <React.Fragment key={index}>
-                {type}
-                {index !== recipe.dishTypes.length - 1 && ", "}
-              </React.Fragment>
-            ))}
+            {recipe.dishTypes &&
+              recipe.dishTypes.map((type, index) => (
+                <React.Fragment key={"type" + index}>
+                  {type}
+                  {index !== recipe.dishTypes.length - 1 && ", "}
+                </React.Fragment>
+              ))}
           </div>
 
           <div className="aspect-square max-h-40 mt-4 overflow-hidden">

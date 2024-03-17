@@ -13,7 +13,8 @@ export const Toggle = () => {
       } items-center rounded-full p-0.5 cursor-pointer transition-all duration-300 ${
         isOn ? "bg-pink-400" : ""
       }`}
-      isOn={isOn}
+      // isOn={isOn}
+      ison={isOn.toString()}
       onClick={toggleSwitch}
     >
       <motion.div

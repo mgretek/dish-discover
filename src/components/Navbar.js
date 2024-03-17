@@ -54,9 +54,9 @@ export const Navbar = () => {
           </div>
 
           <div className="mb-1.5 md:mb-0 pl-4 md:pl-0">
-            <Link className="text-lg md:text-md text-gray-600 font-semibold">
+            <span className="text-lg md:text-md text-gray-600 font-semibold">
               <Settings />
-            </Link>
+            </span>
           </div>
         </ul>
       </div>

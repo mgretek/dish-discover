@@ -18,7 +18,7 @@ export const CreateNewWishlist = ({ addNewList }) => {
   return (
     <div>
       {inputVisible ? (
-        <div class="flex gap-x-2 p-2">
+        <div className="flex gap-x-2 p-2">
           <input
             className="border border-lg pl-1 text-sm rounded-md"
             placeholder="New title..."

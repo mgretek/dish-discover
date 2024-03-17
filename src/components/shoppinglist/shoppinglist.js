@@ -1,22 +1,21 @@
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import { database } from "../../config/firebase";
-import { useLoaderData } from "react-router-dom";
 
 export async function getShoppinglist(uid) {
   const dbRef = ref(database);
   const snapshot = await get(child(dbRef, `users/${uid}/shoppinglists/0`));
   if (snapshot) {
-    console.log(snapshot.val());
+    // console.log(snapshot.val());
     return snapshot.val();
   } else {
-    console.log("No lists found");
+    // console.log("No lists found");
   }
 }
 
 export async function saveShoppinglist({ shoppinglist, uid }) {
   const db = getDatabase();
   const dbRef = ref(database);
-  const snapshot = await get(child(dbRef, `users/${uid}/shoppinglists/0`));
+  // const snapshot = await get(child(dbRef, `users/${uid}/shoppinglists/0`));
   try {
     await set(ref(db, `users/${uid}/shoppinglists/0`), shoppinglist);
   } catch (error) {}
@@ -41,10 +40,10 @@ export async function addToShoppinglist(listId, recipe, quantity, uid) {
 
     await set(ref(db, `users/${uid}/shoppinglists/${listId}`), shoppinglistArr);
 
-    console.log("Recipe added to shoppinglist:", recipe);
+    // console.log("Recipe added to shoppinglist:", recipe);
     return true;
   } catch (error) {
-    console.error("Error adding recipe to shoppinglist:", error);
+    // console.error("Error adding recipe to shoppinglist:", error);
     return false;
   }
 }
@@ -62,9 +61,9 @@ export async function deleteRecipeById(listId, recipeId, uid) {
 
     await set(ref(db, `users/${uid}/shoppinglists/${listId}`), filteredArr);
 
-    console.log(
-      `Recipe with id ${recipeId} deleted from shoppinglist ${listId}`
-    );
+    // console.log(
+    //   `Recipe with id ${recipeId} deleted from shoppinglist ${listId}`
+    // );
     return true;
   } catch (error) {
     console.error("Error deleting recipe with id", recipeId);

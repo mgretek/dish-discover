@@ -40,11 +40,11 @@ export const Wishlists = () => {
     async function fetchWishlists() {
       try {
         const allWishlists = await getAllWishlists(uid);
-        console.log("allwishlists are:", allWishlists);
+        // console.log("allwishlists are:", allWishlists);
         if (allWishlists) {
           setWishlists(allWishlists);
         } else {
-          console.log("no snapshot");
+          // console.log("no snapshot");
         }
       } catch (error) {
         console.error("Error fetching wishlists:", error);
@@ -87,7 +87,7 @@ export const Wishlists = () => {
       ...newArr[listIndex],
       title: newTitle,
     };
-    console.log(newArr);
+    // console.log(newArr);
     setWishlists(newArr);
     saveWishlist({ wishLists: newArr, uid: uid });
   }
@@ -158,7 +158,7 @@ export const Wishlists = () => {
               className="flex justify-center w-10 h-10 bg-violet-200 rounded-full font-bold text-gray-700"
             />
           </div>
-          <div class="h-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-6"></div>
+          <div className="h-1.5 bg-gradient-to-r from-violet-300 via-pink-200 to-white pl-1 mb-6"></div>
 
           {/* Searchbar */}
           <div className="relative self-center">
