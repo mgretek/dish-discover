@@ -216,8 +216,6 @@ export const Recipe = () => {
   const [user] = useAuthState(auth);
   const [uid, setUid] = useState("");
 
-  const [newTitle, setNewTitle] = useState("");
-
   function addNewList({ title }) {
     const newId = uuidv4();
     const newArr = [
@@ -399,7 +397,7 @@ export const Recipe = () => {
                                         <div className="text-sm font-medium text-gray-900 flex">
                                           {item.recipes &&
                                           item.recipes.some(
-                                            (recipe) => recipe.id == id
+                                            (recipe) => recipe.id === id
                                           ) ? (
                                             <div
                                               className="flex"

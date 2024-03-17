@@ -5,16 +5,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-//Only for development – using dummy data instead of API
-import dummydata from "../../config/dummydata/dummydata-meals.js";
-
-function truncateString(str, maxLength) {
-  if (str.length > maxLength) {
-    return str.slice(0, maxLength) + "...";
-  }
-  return str;
-}
-
 const apiKey = "d4743b46c8be46a4ae350870a07dd030";
 
 export const RandomRecipes = () => {
@@ -38,11 +28,6 @@ export const RandomRecipes = () => {
   if (data) {
     sessionStorage.setItem("randomRecipes", JSON.stringify(data));
   }
-
-  // //Only for development – using dummy data instead of API
-  // useEffect(() => {
-  //   setData(dummydata());
-  // }, []);
 
   //Slider config
   var settings = {
@@ -123,7 +108,6 @@ export const RandomRecipes = () => {
 
                         <Link to={`/recipe/${recipe.id}`}>
                           <div className="mb-1 text-md md:text-lg text-gray-800 font-semibold h-[45px] sm:h-[70px] mt-4">
-                            {/* {truncateString(recipe.title, 45)} */}
                             {recipe.title}
                           </div>
                         </Link>

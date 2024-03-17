@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DownArrow } from "../buttons/arrows/DownArrow";
 import { Draggable } from "react-beautiful-dnd";
 import { ForwardArrow } from "../buttons/arrows/ForwardArrow";

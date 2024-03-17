@@ -24,6 +24,7 @@ export const RecipeSearch = () => {
   // reset filter
   useEffect(() => {
     setFilter("both");
+    handleSearch();
   }, []);
 
   useEffect(() => {
@@ -134,11 +135,6 @@ export const RecipeSearch = () => {
                         {recipe.title}
                       </h2>
                     </Link>
-                    <ul className="flex gap-2">
-                      <li>Egg</li>
-                      <li>Flour</li>
-                      <li>sugar</li>
-                    </ul>
                     <div className="text-gray-400">
                       {recipe.dishTypes.map((type, index) => (
                         <span key={"type" + index}>#{type} </span>

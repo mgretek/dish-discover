@@ -1,6 +1,5 @@
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import { database } from "../../config/firebase";
-import { useLoaderData } from "react-router-dom";
 
 export async function getShoppinglist(uid) {
   const dbRef = ref(database);
@@ -16,7 +15,7 @@ export async function getShoppinglist(uid) {
 export async function saveShoppinglist({ shoppinglist, uid }) {
   const db = getDatabase();
   const dbRef = ref(database);
-  const snapshot = await get(child(dbRef, `users/${uid}/shoppinglists/0`));
+  // const snapshot = await get(child(dbRef, `users/${uid}/shoppinglists/0`));
   try {
     await set(ref(db, `users/${uid}/shoppinglists/0`), shoppinglist);
   } catch (error) {}
