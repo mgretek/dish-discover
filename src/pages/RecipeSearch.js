@@ -19,12 +19,14 @@ export const RecipeSearch = () => {
   useEffect(() => {
     setSearchInput("Avocado");
     handleSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // reset filter
   useEffect(() => {
     setFilter("both");
     handleSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
